@@ -1,14 +1,13 @@
 
 package microspaceempire;
 
-import model.Game;
-import ui_text.TextUserInterface;
+import ui.UI;
 
 public class MicroSpaceEmpire {
 
     public static void main(String[] args) {
-        TextUserInterface ui = new TextUserInterface(new Game());
-        ui.run();
+        UI ui = new UI(args);
+        ui.verifyArgsFromCommandLine();
     }
 
 }

@@ -1,5 +1,5 @@
 
-package ui_text;
+package ui.ui_text;
 
 import java.util.Scanner;
 import model.Game;
@@ -9,8 +9,8 @@ public class TextUserInterface {
     private Game game;
     private Scanner s;
 
-    public TextUserInterface(Game game) {
-        this.game = game;
+    public TextUserInterface() {
+        this.game = new Game();
         s = new Scanner(System.in);
     }
 
