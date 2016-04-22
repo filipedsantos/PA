@@ -1,6 +1,6 @@
 
 package model.states;
 
-public class StateAdapter implements IState{
+public class StatesAdapter implements IStates{
     
 }
