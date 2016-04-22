@@ -11,6 +11,5 @@ public interface IStates {
     IStates buildMilitary();
     IStates discoverTechnology();
     IStates newTurn();
-    IStates gameOver();   
-    
+    IStates gameOver();    
 }
