@@ -1,30 +1,34 @@
 package model.states;
 
+import model.data.DataGame;
+
 
 public class AwaitOption extends StateAdapter{
 
-    public AwaitOption() {
-         
+    public AwaitOption(DataGame dataGame) {
+         super(dataGame);
     }
     
+    
+    //Estados Seguintes
     @Override
     public IStates pass(){
-        return new Collecting();
+        return new Collecting(getDataGame());
     }
     
     @Override
     public IStates conquer(){
-        return new Collecting();
+        return new Collecting(getDataGame());
     }
     
     @Override
     public IStates exploreAttack(){
-        return new Collecting();
+        return new Collecting(getDataGame());
     }
     
     @Override
     public IStates gameOver(){
-        return new Ending();
+        return new Ending(getDataGame());
     }
     
 }

@@ -1,8 +1,25 @@
 
 package model.states;
+import model.data.DataGame;
 
 public class StateAdapter implements IStates{
   
+   //dados de jogo 
+   private DataGame dataGame;
+
+    public StateAdapter(DataGame dataGame) {
+        this.dataGame = dataGame;
+    }
+
+    public DataGame getDataGame() {
+        return dataGame;
+    }
+
+    public void setDataGame(DataGame dataGame) {
+        this.dataGame = dataGame;
+    } 
+   
+   //acções que disparam os eventos
    @Override
    public IStates start() {
        return this;
