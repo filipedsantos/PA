@@ -4,6 +4,7 @@ import model.data.DataGame;
 
 
 public class Upgrading extends StateAdapter{
+    
     boolean military;
     boolean technology;
     
