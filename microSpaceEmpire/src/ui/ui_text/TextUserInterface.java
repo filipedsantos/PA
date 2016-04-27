@@ -41,7 +41,12 @@ public class TextUserInterface {
     
     //incompleto 
     public void getUserInputWhileAwaitingBeginning(){
+        
+        // Teste classes cartas
+        System.out.println(game.getDataGame().getEmpire());
+        
         System.out.println("estive no primeiro estado vou sair para o proximo");
+        
         game.start();
     }
     

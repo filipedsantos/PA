@@ -16,6 +16,7 @@ import model.data.Cards.EventCard.EventCard;
 import model.data.Cards.SystemCard.DistantSystem;
 import model.data.Cards.SystemCard.NearSystem;
 import model.data.Cards.SystemCard.StartingSystem;
+import model.data.Cards.SystemCard.SystemCard;
 import model.data.Cards.SystemCard.SystemType;
 
 
@@ -27,22 +28,97 @@ public class DataGame implements Constants{
     int militaryStrenght;
     
     // Arraylists to save card games
-    private List<EventCard> events;
     private List<NearSystem> nearSystems;
     private List<DistantSystem> distantSystems;
-    private StartingSystem startingSystem;
+    private List<SystemCard> empire;
+    private List<SystemCard> unalignedSystems;
+    private List<EventCard> events;
     
-    public DataGame(){
-        this.events = new ArrayList<>();
+    public DataGame() throws IOException{
         this.nearSystems = new ArrayList<>();
         this.distantSystems = new ArrayList<>();
-        this.startingSystem = new StartingSystem();
+        this.empire = new ArrayList<>();
+        this.unalignedSystems = new ArrayList<>();
+        this.events = new ArrayList<>();
         
-        try {
-            buildStartingSystemFromFile(STARTING_SYSTEM_FILE);
-        } catch (IOException ex) {}
+        
+        buildStartingSystemFromFile(STARTING_SYSTEM_FILE);
         
         turn=1;
+    }
+    
+    /**
+     * 
+     * Gets and Sets
+     * 
+     */
+
+    public int getMetalStorage() {
+        return metalStorage;
+    }
+
+    public void setMetalStorage(int metalStorage) {
+        this.metalStorage = metalStorage;
+    }
+
+    public int getWalthStorage() {
+        return walthStorage;
+    }
+
+    public void setWalthStorage(int walthStorage) {
+        this.walthStorage = walthStorage;
+    }
+
+    public int getMilitaryStrenght() {
+        return militaryStrenght;
+    }
+
+    public void setMilitaryStrenght(int militaryStrenght) {
+        this.militaryStrenght = militaryStrenght;
+    }
+
+    public List<NearSystem> getNearSystems() {
+        return nearSystems;
+    }
+
+    public void setNearSystems(List<NearSystem> nearSystems) {
+        this.nearSystems = nearSystems;
+    }
+
+    public List<DistantSystem> getDistantSystems() {
+        return distantSystems;
+    }
+
+    public void setDistantSystems(List<DistantSystem> distantSystems) {
+        this.distantSystems = distantSystems;
+    }
+
+    public List<SystemCard> getEmpire() {
+        return empire;
+    }
+
+    public void setEmpire(List<SystemCard> empire) {
+        this.empire = empire;
+    }
+    
+    public boolean addEmpire(SystemCard c){
+        return empire.add(c);
+    }
+
+    public List<SystemCard> getUnalignedSystems() {
+        return unalignedSystems;
+    }
+
+    public void setUnalignedSystems(List<SystemCard> unalignedSystems) {
+        this.unalignedSystems = unalignedSystems;
+    }
+
+    public List<EventCard> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<EventCard> events) {
+        this.events = events;
     }
     
     public void countTurn(){
@@ -52,31 +128,23 @@ public class DataGame implements Constants{
     public int getTurn(){
         return this.turn;
     }
-
-    public StartingSystem getStartingSystem() {
-        return startingSystem;
-    }
-
-    public void setStartingSystem(StartingSystem startingSystem) {
-        this.startingSystem = (StartingSystem)startingSystem;
-    }
+    
+    /**
+     * 
+     * Functions 
+     *  
+     */
     
     public void buildStartingSystemFromFile(String fileName) throws FileNotFoundException, IOException{
         
-        System.out.println(">> buildStartingSystemFromFile");
-        
         FileInputStream fin = new FileInputStream(new File(fileName));
-        
         BufferedReader br = new BufferedReader(new InputStreamReader(fin));
-        String line = "";
+        String line = null;
         
       
         while( ( line = br.readLine() ) != null){
             Scanner s = new Scanner(line);
             s.useDelimiter("\"");
-            
-            System.out.println(">> " + line);
-            System.out.println();
             
             String cardName = s.next().trim();
             int cardType = Integer.parseInt( s.next().trim() );
@@ -87,8 +155,8 @@ public class DataGame implements Constants{
             int points = Integer.parseInt( s.next().trim() );
             
             Card card = CardFactory.buildCardSystem(SystemType.STARTING_SYSTEM, cardName, cardType, systemType, resistance, metalProdution, wealthProduction, points);
-            System.out.println(card.toString());            
-            //setStartingSystem(CardFactory.buildCardSystem(SystemType.STARTING_SYSTEM));
+            //System.out.print(card.toString());
+            this.addEmpire((SystemCard)card);
         }
         
         br.close();

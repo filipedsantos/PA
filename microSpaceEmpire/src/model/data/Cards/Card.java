@@ -14,6 +14,11 @@ public abstract class Card {
         this.cardType = cardType;
         this.name = cardName;
     }
+    
+    /**
+     * 
+     * Gets and Sets 
+     */
 
     public CardType getCardType() {
         return cardType;
@@ -23,9 +28,27 @@ public abstract class Card {
         this.cardType = cardType;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    /**
+     * 
+     * To String 
+     */
+
     @Override
     public String toString() {
-        return "Card{" + "cardType=" + cardType + ", name=" + name + '}';
+        String s;
+        
+        s = "Card: " + this.getName();
+        s+= "\n\tType card: " + this.getCardType();
+        
+        return s;
     }
  
 }

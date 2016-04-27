@@ -26,6 +26,43 @@ public abstract class SystemCard extends Card{
         this.wealthProdution = wealthProduction;
         this.points = points;
     }
+     
+     /**
+      * 
+      * Gets and Sets 
+      */
+
+    public int getResistance() {
+        return resistance;
+    }
+
+    public void setResistance(int resistance) {
+        this.resistance = resistance;
+    }
+
+    public int getMetalProdution() {
+        return metalProdution;
+    }
+
+    public void setMetalProdution(int metalProdution) {
+        this.metalProdution = metalProdution;
+    }
+
+    public int getWealthProdution() {
+        return wealthProdution;
+    }
+
+    public void setWealthProdution(int wealthProdution) {
+        this.wealthProdution = wealthProdution;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }    
 
     public SystemType getSystemType() {
         return systemType;
@@ -34,10 +71,23 @@ public abstract class SystemCard extends Card{
     public void setSystemType(SystemType systemType) {
         this.systemType = systemType;
     }
+    
+    /**
+     * 
+     * ToString 
+     */
 
     @Override
     public String toString() {
-        return super.toString() + " SystemCard{" + "resistance=" + resistance + ", metalProdution=" + metalProdution + ", wealthProdution=" + wealthProdution + ", points=" + points + ", systemType=" + systemType + '}';
+        String s;
+        s = super.toString();
+        s += "\n\tType System: " + this.getSystemType();
+        s += "\n\tResistance: " + this.getResistance();
+        s += "\n\tMetal prodution: " + this.getMetalProdution();
+        s += "\n\tWealth prodution: " + this.getWealthProdution();
+        s += "\n\tPoints: " + this.getPoints();
+        
+        return s;
     }
     
     
