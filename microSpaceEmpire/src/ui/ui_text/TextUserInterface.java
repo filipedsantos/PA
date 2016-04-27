@@ -56,6 +56,7 @@ public class TextUserInterface {
         System.out.println("1 - Explore-Attack");
         System.out.println("2 - Conquer");
         System.out.println("3 - Pass");
+        System.out.println("0 - Quit");
         System.out.print(">> ");
         
         opt = s.nextInt();
@@ -67,6 +68,8 @@ public class TextUserInterface {
                 game.conquer();
             if(opt == 3)
                 game.pass();
+            if(opt == 0)
+                game.gameOver();
         /*****
           restantes submenus aqui
         *****/
@@ -92,6 +95,7 @@ public class TextUserInterface {
             System.out.println("2 - Discover Technology");
         
         System.out.println("3 - Pass");
+        System.out.println("0 - Exit");
         System.out.print(">> ");
         
         opt = s.nextInt();
@@ -102,14 +106,18 @@ public class TextUserInterface {
                 u.setMilitary(false);
                 game.buildMilitary();
             }
-            else if(opt ==2 && t == true){
+            else if(opt == 2 && t == true){
                 u.setTechnology(false);
                 game.discoverTechnology();
             }
-            else{
+            else if(opt == 3){
+                u.setMilitary(true);
+                u.setTechnology(true);
                 game.newTurn();
                 game.getDataGame().countTurn();
             }
+            else
+                game.gameOver();
         
     }
         
