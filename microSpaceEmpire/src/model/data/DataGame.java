@@ -10,10 +10,13 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import model.data.Cards.Card;
+import model.data.Cards.CardFactory;
 import model.data.Cards.EventCard.EventCard;
 import model.data.Cards.SystemCard.DistantSystem;
 import model.data.Cards.SystemCard.NearSystem;
 import model.data.Cards.SystemCard.StartingSystem;
+import model.data.Cards.SystemCard.SystemType;
 
 
 public class DataGame implements Constants{
@@ -76,10 +79,16 @@ public class DataGame implements Constants{
             
             System.out.println(">> " + line);
             System.out.println();
-           
-//            System.out.println(s.next());
-//            System.out.println(s.next());
-//            System.out.println(s.next());
+            
+            String cardName = s.next().trim();
+            int cardType = Integer.parseInt( s.next().trim() );
+            int systemType = Integer.parseInt( s.next().trim() );
+            int resistance = Integer.parseInt( s.next().trim() );
+            int metalProdution = Integer.parseInt( s.next().trim() );
+            int wealthProduction = Integer.parseInt( s.next().trim() );
+            int points = Integer.parseInt( s.next().trim() );
+            
+            Card card = CardFactory.buildCardSystem(SystemType.STARTING_SYSTEM, cardName, cardType, systemType, resistance, metalProdution, wealthProduction, points);
            
             System.out.println();
             

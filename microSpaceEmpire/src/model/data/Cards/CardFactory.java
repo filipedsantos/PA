@@ -35,5 +35,25 @@ public class CardFactory {
 
         return card;
     }
+
+    public static Card buildCardSystem(SystemType systemType, String cardName, int cardType, int sType, int resistance, int metalProdution, int wealthProduction, int points) {
+        Card card = null;
+
+        switch (systemType) {
+            case STARTING_SYSTEM:
+                card = new StartingSystem(cardName, cardType, sType, resistance, metalProdution, wealthProduction, points);
+                break;
+            case NEAR_SYSTEM:
+                card = new NearSystem();
+                break;
+            case DISTANT_SYSTEM:
+                card = new DistantSystem();
+                break;
+            default:
+                break;
+        }
+
+        return card;
+    }
     
 }
