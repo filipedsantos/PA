@@ -47,7 +47,6 @@ public class Game {
         setState(getState().pass());
     }
    
-   
    public void conquer() {
        setState(getState().conquer());
    }
@@ -55,8 +54,7 @@ public class Game {
    public void exploreAttack() {
        setState(getState().exploreAttack());
    }
-   
-   
+  
    public void change() {
        setState(getState().change());
    }
@@ -75,7 +73,7 @@ public class Game {
    
    public void gameOver() {
        setState(getState().gameOver());
-   }   
+   }
     
    //-------------------------------------
    //Metodos de acesso aos dados de jogo |

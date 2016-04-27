@@ -78,12 +78,6 @@ public class UI {
         System.out.println(" /G  Start game with graphic mode..");
         System.out.println(" /H  Show help..");
     }
-    
-    public void clearScreen(){
-        for (int i = 0; i < 25; i++) {
-            System.out.println();
-        }
-    }
 
     private void textMode() {
         this.ui_text = new TextUserInterface();

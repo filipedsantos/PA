@@ -8,7 +8,6 @@ import model.states.AwaitOption;
 import model.states.Collecting;
 import model.states.Ending;
 import model.states.Upgrading;
-import ui.UI;
 
 public class TextUserInterface {
     
@@ -29,8 +28,10 @@ public class TextUserInterface {
                 getUserInputWhileAwaitingOption();
             if(game.getState() instanceof Collecting)
                 getUserInputWhileCollecting();
-            if(game.getState() instanceof Upgrading)
-                getUserInputWhileUpgrading();
+            if(game.getState() instanceof Upgrading){
+                Upgrading u = (Upgrading)game.getState();
+                getUserInputWhileUpgrading(u);
+            }
         }
         
         System.out.println("");
@@ -59,10 +60,13 @@ public class TextUserInterface {
         
         opt = s.nextInt();
         clearScreen();
-             
-        if(opt == 3){
-            game.pass();
-        }
+        
+            if(opt == 1)
+                game.exploreAttack();
+            if(opt == 2)
+                game.conquer();
+            if(opt == 3)
+                game.pass();
         /*****
           restantes submenus aqui
         *****/
@@ -72,28 +76,41 @@ public class TextUserInterface {
         game.pass();
     }
     
-    public void getUserInputWhileUpgrading(){
+    public void getUserInputWhileUpgrading(Upgrading u){
         int opt;
+        
+        boolean m = u.getMilitary();
+        boolean t = u.getTechnology();
         
         System.out.println("");
         System.out.println("Build Military e Discover Technology phase");
         System.out.println("");
         
-        System.out.println("1 - Build Military");
-        System.out.println("2 - Discover Technology");
+        if( m == true)
+            System.out.println("1 - Build Military");
+        if (t == true)
+            System.out.println("2 - Discover Technology");
+        
         System.out.println("3 - Pass");
         System.out.print(">> ");
+        
         opt = s.nextInt();
         clearScreen();
         
-        if(opt == 1)
-            game.buildMilitary();
-        else if(opt ==2)
-            game.discoverTechnology();
-        else{
-            game.newTurn();
-            game.getDataGame().countTurn();
-        }
+        
+            if(opt == 1 && m == true){
+                u.setMilitary(false);
+                game.buildMilitary();
+            }
+            else if(opt ==2 && t == true){
+                u.setTechnology(false);
+                game.discoverTechnology();
+            }
+            else{
+                game.newTurn();
+                game.getDataGame().countTurn();
+            }
+        
     }
         
     public void clearScreen(){
