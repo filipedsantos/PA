@@ -58,8 +58,6 @@ public class DataGame implements Constants{
         this.startingSystem = (StartingSystem)startingSystem;
     }
     
-    
-    
     public void buildStartingSystemFromFile(String fileName) throws FileNotFoundException, IOException{
         
         System.out.println(">> buildStartingSystemFromFile");
