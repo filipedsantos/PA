@@ -21,6 +21,7 @@ public class TextUserInterface {
 
     public void run() {
         
+        clearScreen();
         while(!(game.getState() instanceof Ending)){
             if(game.getState() instanceof AwaitBeginning)
                 getUserInputWhileAwaitingBeginning();
@@ -38,7 +39,7 @@ public class TextUserInterface {
         System.out.println("Game Over");
     }
     
-    //incompleto
+    //incompleto 
     public void getUserInputWhileAwaitingBeginning(){
         System.out.println("estive no primeiro estado vou sair para o proximo");
         game.start();
@@ -50,7 +51,7 @@ public class TextUserInterface {
         
         System.out.println("");
         System.out.println(game.getDataGame().getTurn() +" Turn");
-        System.out.println("Explore-Attack, Bide Time/ Conquer phase");
+        System.out.println("Explore-Attack/ Bide Time/ Conquer phase");
         System.out.println("");
         
         System.out.println("1 - Explore-Attack");
