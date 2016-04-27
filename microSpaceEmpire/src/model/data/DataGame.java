@@ -87,9 +87,7 @@ public class DataGame implements Constants{
             int points = Integer.parseInt( s.next().trim() );
             
             Card card = CardFactory.buildCardSystem(SystemType.STARTING_SYSTEM, cardName, cardType, systemType, resistance, metalProdution, wealthProduction, points);
-           
-            System.out.println();
-            
+            System.out.println(card.toString());            
             //setStartingSystem(CardFactory.buildCardSystem(SystemType.STARTING_SYSTEM));
         }
         

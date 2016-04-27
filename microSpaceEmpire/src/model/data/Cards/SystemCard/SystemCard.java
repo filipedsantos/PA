@@ -19,7 +19,7 @@ public abstract class SystemCard extends Card{
     }
     
      public SystemCard(SystemType type, String cardName, int cardType, int sType, int resistance, int metalProdution, int wealthProduction, int points) {
-        super(CardType.SYSTEM);
+        super(CardType.SYSTEM, cardName);
         this.systemType = type;
         this.resistance = resistance;
         this.metalProdution = metalProdution;
@@ -34,5 +34,12 @@ public abstract class SystemCard extends Card{
     public void setSystemType(SystemType systemType) {
         this.systemType = systemType;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " SystemCard{" + "resistance=" + resistance + ", metalProdution=" + metalProdution + ", wealthProdution=" + wealthProdution + ", points=" + points + ", systemType=" + systemType + '}';
+    }
+    
+    
     
 }
