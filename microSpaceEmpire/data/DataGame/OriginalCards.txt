@@ -1,0 +1,35 @@
+// Name - TypeCard - TypeSystem - Resistance - MetalProduction - WealthProduction - Points 
+
+// System
+
+// HomeWorld
+
+"Home World" 		1 0 0 	1 1 0
+
+// NearSystems
+
+"Wolf 359"			1 1 5 	1 0 1
+"Proxima" 			1 1 6 	1 0 1
+"Epsilon Eridani" 	1 1 8 	0 0 1 
+"Cygnus" 			1 1 5 	0 1 1
+"Tau Ceti" 			1 1 4 	0 0 1
+"Procyon" 			1 1 7 	0 1 1
+
+// FarSystems
+
+"Canopus" 			1 2 9 	0 1 2
+"Polaris" 			1 2 9 	1 0 2
+"Galaxy's Edge" 	1 2 10 	0 0 3
+"Sirius" 			1 2 6 	0 0 1
+
+// Events
+// Name - TypeCard - Year1 - Year2
+
+"Asteroid" 0
+"Strike" 0
+"Derelict Ship" 0
+"Revolt" 0
+"Small Invasion Force" 0
+"Peace & Quiet" 0
+"Large Invasion Force" 0
+"Revolt" 0
