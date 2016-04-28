@@ -12,17 +12,21 @@ import java.util.List;
 import java.util.Scanner;
 import model.data.Cards.Card;
 import model.data.Cards.CardFactory;
+import model.data.Cards.EventCard.Asteroid;
+import model.data.Cards.EventCard.DerelictShip;
 import model.data.Cards.EventCard.EventCard;
+import model.data.Cards.EventCard.LargeInvasionForce;
+import model.data.Cards.EventCard.PeaceAndQuiet;
+import model.data.Cards.EventCard.Revolt;
+import model.data.Cards.EventCard.SmallInvasionForce;
+import model.data.Cards.EventCard.Strike;
 import model.data.Cards.SystemCard.DistantSystem;
 import model.data.Cards.SystemCard.NearSystem;
-import model.data.Cards.SystemCard.StartingSystem;
 import model.data.Cards.SystemCard.SystemCard;
 import model.data.Cards.SystemCard.SystemType;
 
 public class DataGame implements Constants {
 
-    static int turn;
-    
     //Board Game iNFO
     int metalStorage;
     int wealthStorage;
@@ -30,12 +34,16 @@ public class DataGame implements Constants {
     int metalProduction;
     int wealthProduction;
 
+    //Technologies
+    Technology [][] technology;
+    
     // Arraylists to save card games
     private List<NearSystem> nearSystems;
     private List<DistantSystem> distantSystems;
     private List<SystemCard> empire;
     private List<SystemCard> unalignedSystems;
     private List<EventCard> events;
+    
 
     public DataGame() throws IOException {
         this.nearSystems = new ArrayList<>();
@@ -50,25 +58,32 @@ public class DataGame implements Constants {
         buildDistantSystemsFromFile(this, DISTANT_SYSTEMS_FILE);
         
         // Read Event Cards 
+        createEventCards(this);
         
         // Shuffle cards
         Collections.shuffle(nearSystems);
         Collections.shuffle(distantSystems);
         Collections.shuffle(events);
 
-        turn = 1;
+        //Board info
         this.metalProduction=1;
         this.wealthProduction=1;
         this.metalStorage=0;
         this.wealthStorage=0;
         this.militaryStrenght=0;
+        
+        this.technology = createTechnologies();
     }
+ 
 
     /**
-     *
      * Gets and Sets
-     *
      */
+    
+    public Technology[][] getTechnology() {
+        return technology;
+    }
+    
     public int getMetalProduction() {
         return metalProduction;
     }
@@ -181,14 +196,35 @@ public class DataGame implements Constants {
         this.events = events;
     }
 
-    public void countTurn() {
-        this.turn++;
+    public boolean addEvent(EventCard e){
+        return this.events.add(e);
+    }
+    
+    public int getEventsSize(){
+        return this.events.size();
     }
 
-    public int getTurn() {
-        return this.turn;
+    /**
+     * ToString
+     */
+    
+    @Override
+    public String toString() {
+        String s;
+        
+        s = "Info:\n";
+        s += "\nMetal Storage: " + getMetalStorage();
+        s += "\nWealth Storage: " + getWealthStorage();
+        s += "\nMilitary Strength: " + getMilitaryStrenght();
+        s += "\nMetal Production: +" + getMetalProduction();
+        s += "\nWealth Production: +" + getWealthProduction();
+        s += "\n\nNear systems: " + getNearSystemsSize();
+        s += "\nDistant systems: " + getDistantSystemsSize();
+        s += "\nUnaligned systems: " + getUnalignedSystemsSize();
+        s += "\n\nEvents: " + getEventsSize();
+        return s;
     }
-
+    
     /**
      *
      * Functions
@@ -270,23 +306,29 @@ public class DataGame implements Constants {
         br.close();
     }
 
-    
-    /**
-     * ToString
-     */
-    
-    @Override
-    public String toString() {
-        String s;
+    private Technology[][] createTechnologies() {
+        Technology [][] tec = new Technology[4][2];
         
-        s = "Metal Storage: " + getMetalStorage();
-        s += "\nWealth Storage: " + getWealthStorage();
-        s += "\nMilitary Strength: " + getMilitaryStrenght();
-        s += "\n\nNear systems: " + getNearSystemsSize();
-        s += "\nDistant systems: " + getDistantSystemsSize();
-        s += "\nUnaligned systems: " + getUnalignedSystemsSize();
-        
-        return s;
+        tec[0][0] = new Technology("Capital Ships", 3, "Advance beyond military strength 3.");
+        tec[0][1] = new Technology("Forward Starbases", 4, "Required to explore distant systems.");
+        tec[1][0] = new Technology("Robot Workers", 2, "Recive 1/2 production during strike.");
+        tec[1][1] = new Technology("Planetary Defenses", 4, "+1 to resistance during invasion.");
+        tec[2][0] = new Technology("Hyper Television", 3, "+1 resistence during revolt.");
+        tec[2][1] = new Technology("Interstaller Diplomacy", 5, "Next planet is conquered for free.");
+        tec[3][0] = new Technology("Interspecies Commerce", 2, "Exchange 2 of one resource for 1 of the other.");
+        tec[3][1] = new Technology("Interstellar Banking", 3, "Advance beyond storage value 3.");
+       
+        return tec;
+    }
+
+    private void createEventCards(DataGame dataGame) {
+        this.addEvent(new Asteroid(dataGame));
+        this.addEvent(new DerelictShip(dataGame));
+        this.addEvent(new LargeInvasionForce(dataGame));
+        this.addEvent(new PeaceAndQuiet(dataGame));
+        this.addEvent(new Revolt(dataGame));
+        this.addEvent(new SmallInvasionForce(dataGame));
+        this.addEvent(new Strike(dataGame));
     }
 
 }

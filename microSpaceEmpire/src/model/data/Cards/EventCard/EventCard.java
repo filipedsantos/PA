@@ -11,6 +11,7 @@ public abstract class EventCard extends Card{
         super(CardType.EVENT, d);
     }
     
+    
     /**
      * Gets and Sets
      */
@@ -20,8 +21,11 @@ public abstract class EventCard extends Card{
     /**
      * Functions
      */
-    public abstract void makeEventAction();
+    
+    public abstract void makeEventActionYear1();
 
+    public abstract void makeEventActionYear2();
+    
     @Override
     public String toString() {
         return "E";

@@ -42,16 +42,7 @@ public class TextUserInterface {
     
     //incompleto 
     public void getUserInputWhileAwaitingBeginning(){
-        
-        // Teste classes cartas
-        System.out.println(game.getDataGame().getEmpire());
-        System.out.println();
-        System.out.println(game.getDataGame().getNearSystems());
-        System.out.println();
-        System.out.println(game.getDataGame().getDistantSystems());
-        
-        System.out.println("estive no primeiro estado vou sair para o proximo");
-        
+        showGame();
         game.start();
     }
     
@@ -119,22 +110,49 @@ public class TextUserInterface {
             }
             else if(opt == 2 && t == true){
                 u.setTechnology(false);
+                showTechnologies();
                 game.discoverTechnology();
             }
             else if(opt == 3){
                 u.setMilitary(true);
                 u.setTechnology(true);
+                eventphase();
                 game.newTurn();
-                game.getDataGame().countTurn();
             }
             else
                 game.gameOver();
         
     }
+    
+    /**
+    *functions
+    */
+    
+    public void showGame(){
+        System.out.println(game);
+    }
+    
+    public void showTechnologies(){
         
+        for(int i = 0; i<4; i++){
+            for(int j = 0; j<2; j++){
+                
+                System.out.println(game.getDataGame().getTechnology()[i][j]);
+                
+            }
+        }
+    }
+    
     public void clearScreen(){
         for (int i = 0; i < 25; i++) {
             System.out.println();
         }
     }    
+
+    //processamento da fase de eventos
+    private void eventphase() {
+        
+    }
+    
+     
 }
