@@ -21,9 +21,13 @@ import model.data.Cards.SystemCard.SystemType;
 public class DataGame implements Constants {
 
     static int turn;
+    
+    //Board Game iNFO
     int metalStorage;
-    int walthStorage;
+    int wealthStorage;
     int militaryStrenght;
+    int metalProduction;
+    int wealthProduction;
 
     // Arraylists to save card games
     private List<NearSystem> nearSystems;
@@ -44,6 +48,11 @@ public class DataGame implements Constants {
         buildDistantSystemsFromFile(DISTANT_SYSTEMS_FILE);
 
         turn = 1;
+        this.metalProduction=1;
+        this.wealthProduction=1;
+        this.metalStorage=0;
+        this.wealthStorage=0;
+        this.militaryStrenght=0;
     }
 
     /**
@@ -51,6 +60,14 @@ public class DataGame implements Constants {
      * Gets and Sets
      *
      */
+    public int getMetalProduction() {
+        return metalProduction;
+    }
+    
+    public void setMetalProduction(int metalP) {
+        this.metalProduction = metalP;
+    }
+    
     public int getMetalStorage() {
         return metalStorage;
     }
@@ -59,12 +76,20 @@ public class DataGame implements Constants {
         this.metalStorage = metalStorage;
     }
 
-    public int getWalthStorage() {
-        return walthStorage;
+     public int getWalthProduction() {
+        return wealthProduction;
     }
 
-    public void setWalthStorage(int walthStorage) {
-        this.walthStorage = walthStorage;
+    public void setWalthProduction(int wealthP) {
+        this.wealthProduction = wealthP;
+    }
+    
+    public int getWalthStorage() {
+        return wealthStorage;
+    }
+
+    public void setWalthStorage(int wealthStorage) {
+        this.wealthStorage = wealthStorage;
     }
 
     public int getMilitaryStrenght() {

@@ -1,6 +1,7 @@
 
 package ui;
 
+import java.io.IOException;
 import java.util.Scanner;
 import ui.ui_text.TextUserInterface;
 
@@ -10,7 +11,7 @@ public class UI {
     private TextUserInterface ui_text = null;
     //private GraphicUserInterface ui_graphic = null;
 
-    public UI(String args[]) {
+    public UI(String args[]) throws IOException{
         this.args = args;
         this.s = new Scanner(System.in);
         this.ui_text = null;
@@ -18,7 +19,7 @@ public class UI {
     }
     
     // Option to choose wich interface user wants to run
-    public void chooseUserInterface(){
+    public void chooseUserInterface() throws IOException{
         System.out.println("###################################################");
         System.out.println("#                                                 #");
         System.out.println("#  Micro space empire                             #");
@@ -55,7 +56,7 @@ public class UI {
     }
     
     // Start new game with console or run from IDE
-    public void verifyArgsFromCommandLine(){
+    public void verifyArgsFromCommandLine() throws IOException{
         if(this.args.length > 0){
             if(this.args[0].toUpperCase().equals("/T") == true) // Start game in text mode
                 this.textMode();
@@ -79,7 +80,7 @@ public class UI {
         System.out.println(" /H  Show help..");
     }
 
-    private void textMode() {
+    private void textMode() throws IOException {
         this.ui_text = new TextUserInterface();
         this.ui_text.run();
     }
