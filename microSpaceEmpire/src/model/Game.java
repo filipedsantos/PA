@@ -83,4 +83,15 @@ public class Game {
    /*
         ...
    */
+   
+   /**
+    * ToString
+    */
+   
+   @Override
+    public String toString() {
+        return dataGame.toString();
+    }
+   
+   
 }

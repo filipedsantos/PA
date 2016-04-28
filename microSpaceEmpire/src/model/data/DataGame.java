@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import model.data.Cards.Card;
@@ -42,10 +43,18 @@ public class DataGame implements Constants {
         this.empire = new ArrayList<>();
         this.unalignedSystems = new ArrayList<>();
         this.events = new ArrayList<>();
-
+        
+        // Read System Cards from files
         buildStartingSystemFromFile(this, STARTING_SYSTEM_FILE);
         buildNearSystemsFromFile(this, NEAR_SYSTEMS_FILE);
         buildDistantSystemsFromFile(this, DISTANT_SYSTEMS_FILE);
+        
+        // Read Event Cards 
+        
+        // Shuffle cards
+        Collections.shuffle(nearSystems);
+        Collections.shuffle(distantSystems);
+        Collections.shuffle(events);
 
         turn = 1;
         this.metalProduction=1;
@@ -76,19 +85,19 @@ public class DataGame implements Constants {
         this.metalStorage = metalStorage;
     }
 
-     public int getWalthProduction() {
+     public int getWealthProduction() {
         return wealthProduction;
     }
 
-    public void setWalthProduction(int wealthP) {
+    public void setWealthProduction(int wealthP) {
         this.wealthProduction = wealthP;
     }
     
-    public int getWalthStorage() {
+    public int getWealthStorage() {
         return wealthStorage;
     }
 
-    public void setWalthStorage(int wealthStorage) {
+    public void setWealthStorage(int wealthStorage) {
         this.wealthStorage = wealthStorage;
     }
 
@@ -111,6 +120,10 @@ public class DataGame implements Constants {
     private boolean addNearSystems(NearSystem n) {
         return nearSystems.add(n);
     }
+    
+    public int getNearSystemsSize(){
+        return nearSystems.size();
+    }
 
     public List<DistantSystem> getDistantSystems() {
         return distantSystems;
@@ -122,6 +135,10 @@ public class DataGame implements Constants {
 
     private boolean addDistantSystems(DistantSystem n) {
         return distantSystems.add(n);
+    }
+    
+    public int getDistantSystemsSize(){
+        return distantSystems.size();
     }
 
     public List<SystemCard> getEmpire() {
@@ -135,6 +152,10 @@ public class DataGame implements Constants {
     public boolean addEmpire(SystemCard c) {
         return empire.add(c);
     }
+    
+    public int getEmpireSize(){
+        return empire.size();
+    }
 
     public List<SystemCard> getUnalignedSystems() {
         return unalignedSystems;
@@ -142,6 +163,14 @@ public class DataGame implements Constants {
 
     public void setUnalignedSystems(List<SystemCard> unalignedSystems) {
         this.unalignedSystems = unalignedSystems;
+    }
+    
+    public boolean addUnalignedSystems(SystemCard c){
+        return this.unalignedSystems.add(c);
+    }
+    
+    public int getUnalignedSystemsSize() {
+        return this.unalignedSystems.size();
     }
 
     public List<EventCard> getEvents() {
@@ -239,6 +268,25 @@ public class DataGame implements Constants {
             this.addDistantSystems((DistantSystem) card);
         }
         br.close();
+    }
+
+    
+    /**
+     * ToString
+     */
+    
+    @Override
+    public String toString() {
+        String s;
+        
+        s = "Metal Storage: " + getMetalStorage();
+        s += "\nWealth Storage: " + getWealthStorage();
+        s += "\nMilitary Strength: " + getMilitaryStrenght();
+        s += "\n\nNear systems: " + getNearSystemsSize();
+        s += "\nDistant systems: " + getDistantSystemsSize();
+        s += "\nUnaligned systems: " + getUnalignedSystemsSize();
+        
+        return s;
     }
 
 }
