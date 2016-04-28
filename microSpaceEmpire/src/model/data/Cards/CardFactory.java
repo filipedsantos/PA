@@ -9,6 +9,7 @@ import model.data.Cards.SystemCard.SystemType;
 import static model.data.Cards.SystemCard.SystemType.DISTANT_SYSTEM;
 import static model.data.Cards.SystemCard.SystemType.NEAR_SYSTEM;
 import static model.data.Cards.SystemCard.SystemType.STARTING_SYSTEM;
+import model.data.DataGame;
 
 public class CardFactory {
     
@@ -16,38 +17,18 @@ public class CardFactory {
 //        return new EventCard();
 //    }
 
-    public static Card buildCardSystem(SystemType systemType) {
+    public static Card buildCardSystem(DataGame d, SystemType systemType, String cardName, int cardType, int sType, int resistance, int metalProdution, int wealthProduction, int points) {
         Card card = null;
 
         switch (systemType) {
             case STARTING_SYSTEM:
-                card = new StartingSystem();
+                card = new StartingSystem(d, cardName, cardType, sType, resistance, metalProdution, wealthProduction, points);
                 break;
             case NEAR_SYSTEM:
-                card = new NearSystem();
+                card = new NearSystem(d, cardName, cardType, sType, resistance, metalProdution, wealthProduction, points);
                 break;
             case DISTANT_SYSTEM:
-                card = new DistantSystem();
-                break;
-            default:
-                break;
-        }
-
-        return card;
-    }
-
-    public static Card buildCardSystem(SystemType systemType, String cardName, int cardType, int sType, int resistance, int metalProdution, int wealthProduction, int points) {
-        Card card = null;
-
-        switch (systemType) {
-            case STARTING_SYSTEM:
-                card = new StartingSystem(cardName, cardType, sType, resistance, metalProdution, wealthProduction, points);
-                break;
-            case NEAR_SYSTEM:
-                card = new NearSystem(cardName, cardType, sType, resistance, metalProdution, wealthProduction, points);
-                break;
-            case DISTANT_SYSTEM:
-                card = new DistantSystem(cardName, cardType, sType, resistance, metalProdution, wealthProduction, points);
+                card = new DistantSystem(d, cardName, cardType, sType, resistance, metalProdution, wealthProduction, points);
                 break;
             default:
                 break;

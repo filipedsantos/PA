@@ -3,6 +3,7 @@ package model.data.Cards.SystemCard;
 
 import model.data.Cards.Card;
 import model.data.Cards.CardType;
+import model.data.DataGame;
 
 public abstract class SystemCard extends Card{
     
@@ -13,13 +14,13 @@ public abstract class SystemCard extends Card{
     
     private SystemType systemType = null;
 
-    public SystemCard(SystemType type) {
-        super(CardType.SYSTEM);
+    public SystemCard(SystemType type, DataGame d) {
+        super(CardType.SYSTEM, d);
         this.systemType = type;
     }
     
-     public SystemCard(SystemType type, String cardName, int cardType, int sType, int resistance, int metalProdution, int wealthProduction, int points) {
-        super(CardType.SYSTEM, cardName);
+     public SystemCard(DataGame d, SystemType type, String cardName, int cardType, int sType, int resistance, int metalProdution, int wealthProduction, int points) {
+        super(CardType.SYSTEM, cardName, d);
         this.systemType = type;
         this.resistance = resistance;
         this.metalProdution = metalProdution;

@@ -43,9 +43,9 @@ public class DataGame implements Constants {
         this.unalignedSystems = new ArrayList<>();
         this.events = new ArrayList<>();
 
-        buildStartingSystemFromFile(STARTING_SYSTEM_FILE);
-        buildNearSystemsFromFile(NEAR_SYSTEMS_FILE);
-        buildDistantSystemsFromFile(DISTANT_SYSTEMS_FILE);
+        buildStartingSystemFromFile(this, STARTING_SYSTEM_FILE);
+        buildNearSystemsFromFile(this, NEAR_SYSTEMS_FILE);
+        buildDistantSystemsFromFile(this, DISTANT_SYSTEMS_FILE);
 
         turn = 1;
         this.metalProduction=1;
@@ -165,7 +165,7 @@ public class DataGame implements Constants {
      * Functions
      *
      */
-    public void buildStartingSystemFromFile(String fileName) throws FileNotFoundException, IOException {
+    public void buildStartingSystemFromFile(DataGame d, String fileName) throws FileNotFoundException, IOException {
 
         FileInputStream fin = new FileInputStream(new File(fileName));
         BufferedReader br = new BufferedReader(new InputStreamReader(fin));
@@ -183,7 +183,7 @@ public class DataGame implements Constants {
             int wealthProduction = Integer.parseInt(s.next().trim());
             int points = Integer.parseInt(s.next().trim());
 
-            Card card = CardFactory.buildCardSystem(SystemType.STARTING_SYSTEM, cardName, cardType, systemType, resistance, metalProdution, wealthProduction, points);
+            Card card = CardFactory.buildCardSystem(d, SystemType.STARTING_SYSTEM, cardName, cardType, systemType, resistance, metalProdution, wealthProduction, points);
             //System.out.print(card.toString());
             this.addEmpire((SystemCard) card);
         }
@@ -191,7 +191,7 @@ public class DataGame implements Constants {
         br.close();
     }
 
-    private void buildNearSystemsFromFile(String fileName) throws FileNotFoundException, IOException {
+    private void buildNearSystemsFromFile(DataGame d, String fileName) throws FileNotFoundException, IOException {
 
         FileInputStream fin = new FileInputStream(new File(fileName));
         BufferedReader br = new BufferedReader(new InputStreamReader(fin));
@@ -209,14 +209,14 @@ public class DataGame implements Constants {
             int wealthProduction = Integer.parseInt(s.next().trim());
             int points = Integer.parseInt(s.next().trim());
 
-            Card card = CardFactory.buildCardSystem(SystemType.NEAR_SYSTEM, cardName, cardType, cardType, resistance, metalProdution, wealthProduction, points);
+            Card card = CardFactory.buildCardSystem(d, SystemType.NEAR_SYSTEM, cardName, cardType, cardType, resistance, metalProdution, wealthProduction, points);
             //System.out.println(card.toString());
             this.addNearSystems((NearSystem) card);
         }
         br.close();
     }
 
-    private void buildDistantSystemsFromFile(String fileName) throws FileNotFoundException, IOException {
+    private void buildDistantSystemsFromFile(DataGame d, String fileName) throws FileNotFoundException, IOException {
 
         FileInputStream fin = new FileInputStream(new File(fileName));
         BufferedReader br = new BufferedReader(new InputStreamReader(fin));
@@ -234,7 +234,7 @@ public class DataGame implements Constants {
             int wealthProduction = Integer.parseInt(s.next().trim());
             int points = Integer.parseInt(s.next().trim());
 
-            Card card = CardFactory.buildCardSystem(SystemType.DISTANT_SYSTEM, cardName, cardType, cardType, resistance, metalProdution, wealthProduction, points);
+            Card card = CardFactory.buildCardSystem(d, SystemType.DISTANT_SYSTEM, cardName, cardType, cardType, resistance, metalProdution, wealthProduction, points);
             //System.out.println(card.toString());
             this.addDistantSystems((DistantSystem) card);
         }
