@@ -44,10 +44,10 @@ public class CardFactory {
                 card = new StartingSystem(cardName, cardType, sType, resistance, metalProdution, wealthProduction, points);
                 break;
             case NEAR_SYSTEM:
-                card = new NearSystem();
+                card = new NearSystem(cardName, cardType, sType, resistance, metalProdution, wealthProduction, points);
                 break;
             case DISTANT_SYSTEM:
-                card = new DistantSystem();
+                card = new DistantSystem(cardName, cardType, sType, resistance, metalProdution, wealthProduction, points);
                 break;
             default:
                 break;

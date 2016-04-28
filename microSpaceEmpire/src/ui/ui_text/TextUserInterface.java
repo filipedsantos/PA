@@ -1,6 +1,7 @@
 
 package ui.ui_text;
 
+import java.io.IOException;
 import java.util.Scanner;
 import model.Game;
 import model.states.AwaitBeginning;
@@ -14,7 +15,7 @@ public class TextUserInterface {
     private Game game;
     private Scanner s;
 
-    public TextUserInterface() {
+    public TextUserInterface() throws IOException {
         this.game = new Game();
         s = new Scanner(System.in);
     }
@@ -44,6 +45,10 @@ public class TextUserInterface {
         
         // Teste classes cartas
         System.out.println(game.getDataGame().getEmpire());
+        System.out.println();
+        System.out.println(game.getDataGame().getNearSystems());
+        System.out.println();
+        System.out.println(game.getDataGame().getDistantSystems());
         
         System.out.println("estive no primeiro estado vou sair para o proximo");
         

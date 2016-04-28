@@ -80,7 +80,7 @@ public abstract class SystemCard extends Card{
     @Override
     public String toString() {
         String s;
-        s = super.toString();
+        s = "\n" + super.toString();
         s += "\n\tType System: " + this.getSystemType();
         s += "\n\tResistance: " + this.getResistance();
         s += "\n\tMetal prodution: " + this.getMetalProdution();

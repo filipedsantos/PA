@@ -1,0 +1,6 @@
+Wolf 359"			1" 1" 5" 	1" 0" 1"
+Proxima" 			1" 1" 6" 	1" 0" 1"
+Epsilon Eridani" 	1" 1" 8" 	0" 0" 1" 
+Cygnus" 			1" 1" 5" 	0" 1" 1"
+Tau Ceti" 			1" 1" 4" 	0" 0" 1"
+Procyon" 			1" 1" 7" 	0" 1" 1"

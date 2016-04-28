@@ -7,9 +7,8 @@ public class NearSystem extends SystemCard{
         super(SystemType.NEAR_SYSTEM);
     }
     
-    @Override
-    public String toString() {
-        return "N";
+    public NearSystem(String cardName, int cardType, int sType, int resistance, int metalProdution, int wealthProduction, int points) {
+        super(SystemType.NEAR_SYSTEM, cardName, cardType, sType, resistance, metalProdution, wealthProduction, points);
     }
     
 }

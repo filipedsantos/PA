@@ -1,6 +1,7 @@
 
 package model;
 
+import java.io.IOException;
 import model.data.DataGame;
 import model.states.AwaitBeginning;
 import model.states.IStates;
@@ -9,7 +10,7 @@ public class Game {
     private DataGame dataGame;
     private IStates state;
     
-    public Game() {
+    public Game() throws IOException {
         dataGame = new DataGame();
         state = new AwaitBeginning(dataGame);
     }
