@@ -51,7 +51,6 @@ public class TextUserInterface {
         int opt;
         
         System.out.println("");
-        System.out.println(game.getDataGame().getTurn() +" Turn");
         System.out.println("Explore-Attack/ Bide Time/ Conquer phase");
         System.out.println("");
         
@@ -103,7 +102,6 @@ public class TextUserInterface {
         opt = s.nextInt();
         clearScreen();
         
-        
             if(opt == 1 && m == true){
                 u.setMilitary(false);
                 game.buildMilitary();
@@ -120,8 +118,7 @@ public class TextUserInterface {
                 game.newTurn();
             }
             else
-                game.gameOver();
-        
+                game.gameOver(); 
     }
     
     /**
@@ -134,6 +131,7 @@ public class TextUserInterface {
     
     public void showTechnologies(){
         
+        System.out.println("technologies:\n");
         for(int i = 0; i<4; i++){
             for(int j = 0; j<2; j++){
                 
@@ -151,8 +149,8 @@ public class TextUserInterface {
 
     //processamento da fase de eventos
     private void eventphase() {
-        
+        //rever
+        System.out.println(game.getDataGame().getEvents().get(1));
     }
-    
-     
+        
 }

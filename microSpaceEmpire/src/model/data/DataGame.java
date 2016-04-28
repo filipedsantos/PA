@@ -212,7 +212,7 @@ public class DataGame implements Constants {
     public String toString() {
         String s;
         
-        s = "Info:\n";
+        s = "Info:";
         s += "\nMetal Storage: " + getMetalStorage();
         s += "\nWealth Storage: " + getWealthStorage();
         s += "\nMilitary Strength: " + getMilitaryStrenght();
