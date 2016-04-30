@@ -13,4 +13,18 @@ public class DistantSystem extends SystemCard{
         super(d, SystemType.DISTANT_SYSTEM, cardName, cardType, sType, resistance, metalProdution, wealthProduction, points);
     }
     
+    @Override
+    public String toString() {
+        String s;
+        
+        
+        s = "\nDistant system: " + super.getName();
+        s += "\n\t\tResistance: " + this.getResistance();
+        s += "\n\t\tMetal prodution: " + this.getMetalProdution();
+        s += "\n\t\tWealth prodution: " + this.getWealthProdution();
+        s += "\n\t\tPoints: " + this.getPoints();
+        
+        return s;
+    }
+    
 }

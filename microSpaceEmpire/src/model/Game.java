@@ -2,9 +2,11 @@
 package model;
 
 import java.io.IOException;
+import model.data.Cards.SystemCard.NearSystem;
 import model.data.Cards.SystemCard.SystemCard;
 import model.data.Cards.SystemCard.SystemType;
 import model.data.DataGame;
+import model.data.EmptyException;
 import model.states.AwaitBeginning;
 import model.states.IStates;
 
@@ -54,8 +56,8 @@ public class Game {
        setState(getState().conquer());
    }
    
-   public void exploreAttack(SystemType s) {
-       setState(getState().exploreAttack(s));
+   public void exploreAttack(SystemCard s, int militaryForce) {
+       setState(getState().exploreAttack(s, militaryForce));
    }
   
    public void change() {
@@ -93,6 +95,18 @@ public class Game {
    @Override
     public String toString() {
         return dataGame.toString();
+    }
+
+    public NearSystem getNearSystem() throws EmptyException{
+        return getDataGame().getNearSystems(0);
+    }
+
+    public int getDiceNumber() {
+        return (int)(Math.random() * 6) + 1;
+    }
+
+    public int getActualForce() {
+        return getDataGame().getMilitaryStrenght();
     }
    
    

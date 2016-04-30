@@ -1,8 +1,6 @@
 package model.states;
 
-import model.data.Cards.SystemCard.DistantSystem;
-import model.data.Cards.SystemCard.NearSystem;
-import model.data.Cards.SystemCard.SystemType;
+import model.data.Cards.SystemCard.SystemCard;
 import model.data.DataGame;
 
 
@@ -25,16 +23,21 @@ public class AwaitOption extends StateAdapter{
     }
     
     @Override
-    public IStates exploreAttack(SystemType s){
+    public IStates exploreAttack(SystemCard s, int militaryForce){
         
-        // Verify type of System card to explore/attack
-       if(s == SystemType.NEAR_SYSTEM){
-       }
-       else if( s == SystemType.DISTANT_SYSTEM){
-       }
-       else{
-           return this;
-       }
+        if(militaryForce >= s.getResistance()){
+            
+            getDataGame().addEmpire(s);
+            getDataGame().adjustResources(s); // Update metal and welth production with planet s
+            getDataGame().getNearSystems().remove(0); // Remove NearSystem from arraylist because was added to empire
+        }
+        else{
+            getDataGame().addUnalignedSystems(s);
+            getDataGame().reduceMilitaryForceOneunit(); // Reduce MilitaryForce 1 unit because achievement attempt failed
+            getDataGame().getNearSystems().remove(0); // Remove NearSystem from arraylist because was added to unalignedSystems
+        }
+        
+        
         
         
         return new Collecting(getDataGame());

@@ -218,6 +218,7 @@ public class DataGame implements Constants {
         s += "\nMilitary Strength: " + getMilitaryStrenght();
         s += "\nMetal Production: +" + getMetalProduction();
         s += "\nWealth Production: +" + getWealthProduction();
+        s += "\nEmpire: " + getEmpireSize();
         s += "\n\nNear systems: " + getNearSystemsSize();
         s += "\nDistant systems: " + getDistantSystemsSize();
         s += "\nUnaligned systems: " + getUnalignedSystemsSize();
@@ -329,6 +330,23 @@ public class DataGame implements Constants {
         this.addEvent(new Revolt(dataGame));
         this.addEvent(new SmallInvasionForce(dataGame));
         this.addEvent(new Strike(dataGame));
+    }
+
+    public NearSystem getNearSystems(int i) throws EmptyException{
+        if(nearSystems.isEmpty())
+            throw new EmptyException("Near system");
+        
+        return nearSystems.get(i);
+    }
+
+    public void adjustResources(SystemCard s) {
+        this.metalProduction += s.getMetalProdution();
+        this.wealthProduction += s.getWealthProdution();
+    }
+
+    public void reduceMilitaryForceOneunit() {
+        if(militaryStrenght > 0)
+            this.militaryStrenght--;
     }
 
 }

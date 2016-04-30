@@ -54,14 +54,17 @@ public abstract class Card {
      * To String 
      */
 
-    @Override
-    public String toString() {
-        String s;
-        
-        s = "Card: " + this.getName();
-        s+= "\n\tType card: " + this.getCardType();
-        
-        return s;
-    }
+//    @Override
+//    public String toString() {
+//        String s;
+//        
+////        s = "Card: " + this.getName();
+////        s+= "\n\tType card: " + this.getCardType();
+//        
+////        s = "" + this.getCardType() + ": ";
+////        s += this.getName();
+//        
+//        return s;
+//    }
  
 }

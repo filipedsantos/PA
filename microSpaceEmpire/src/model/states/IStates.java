@@ -1,14 +1,14 @@
 
 package model.states;
 
-import model.data.Cards.SystemCard.SystemType;
+import model.data.Cards.SystemCard.SystemCard;
 
 public interface IStates {
     IStates start();
     IStates end();
     IStates pass();
     IStates conquer();
-    IStates exploreAttack(SystemType s);
+    IStates exploreAttack(SystemCard s, int militaryForce);
     IStates change();
     IStates buildMilitary();
     IStates discoverTechnology();

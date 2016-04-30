@@ -78,18 +78,19 @@ public abstract class SystemCard extends Card{
      * ToString 
      */
 
-    @Override
-    public String toString() {
-        String s;
-        s = "\n" + super.toString();
-        s += "\n\tType System: " + this.getSystemType();
-        s += "\n\tResistance: " + this.getResistance();
-        s += "\n\tMetal prodution: " + this.getMetalProdution();
-        s += "\n\tWealth prodution: " + this.getWealthProdution();
-        s += "\n\tPoints: " + this.getPoints();
-        
-        return s;
-    }
+//    @Override
+//    public String toString() {
+//        String s;
+//        
+//        
+//        s = "\nNear system: " + super.getName();
+//        s += "\n\t\tResistance: " + this.getResistance();
+//        s += "\n\t\tMetal prodution: " + this.getMetalProdution();
+//        s += "\n\t\tWealth prodution: " + this.getWealthProdution();
+//        s += "\n\t\tPoints: " + this.getPoints();
+//        
+//        return s;
+//    }
     
     
     

@@ -1,6 +1,6 @@
 
 package model.states;
-import model.data.Cards.SystemCard.SystemType;
+import model.data.Cards.SystemCard.SystemCard;
 import model.data.DataGame;
 
 public class StateAdapter implements IStates{
@@ -42,7 +42,7 @@ public class StateAdapter implements IStates{
    }
    
    @Override
-   public IStates exploreAttack(SystemType s) {
+   public IStates exploreAttack(SystemCard s, int militaryForce) {
        return this;
    }
    
