@@ -7,7 +7,7 @@ public interface IStates {
     IStates start();
     IStates end();
     IStates pass();
-    IStates conquer();
+    IStates conquer(SystemCard s, int militaryForce);
     IStates exploreAttack(SystemCard s, int militaryForce);
     IStates change(int o);
     IStates buildMilitary();

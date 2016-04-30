@@ -53,8 +53,8 @@ public class Game {
         setState(getState().pass());
     }
    
-   public void conquer() {
-       setState(getState().conquer());
+   public void conquer(SystemCard s, int militaryForce) {
+       setState(getState().conquer(s, militaryForce));
    }
    
    public void exploreAttack(SystemCard s, int militaryForce) {
@@ -102,6 +102,10 @@ public class Game {
         return getDataGame().getNearSystems(0);
     }
     
+    public SystemCard getUnaligedNearSystemCard(int i) throws ArrayIndexOutOfBoundsException{
+        return getDataGame().getUnalignedSystemsCard(i);
+    }
+    
     public DistantSystem getDistantSystem() throws EmptyException {
         return getDataGame().getDistantSystems(0);
     }
@@ -138,7 +142,8 @@ public class Game {
         getDataGame().collectResources();
     }
 
-    
-   
-   
+    public SystemType getUnalignedSystemCardType(int i) {
+        return getDataGame().getUnalignedSystems().get(i).getSystemType();
+    }
+ 
 }

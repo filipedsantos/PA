@@ -37,7 +37,7 @@ public class StateAdapter implements IStates{
    }
    
    @Override
-   public IStates conquer() {
+   public IStates conquer(SystemCard s, int militaryForce) {
        return this;
    }
    

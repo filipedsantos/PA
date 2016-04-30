@@ -76,7 +76,6 @@ public class TextUserInterface {
             System.out.print("\n>> ");
 
             int sc = s.nextInt();
-
             this.clearScreen();
 
             if (sc == 1) //game.exploreAttack(SystemType.NEAR_SYSTEM);
@@ -87,20 +86,38 @@ public class TextUserInterface {
             }
         }
         if (opt == 2) {
-            game.conquer();
+            
+            if(game.getDataGame().getUnalignedSystems().size() != 0){
+                    System.out.println("You want try conquer a near system (1) or distant system (2)?");
+                    System.out.print("\n>> ");
+
+                    int sc = s.nextInt();
+                    this.clearScreen();
+
+                    if(sc == 1)
+                        this.uiConquer(SystemType.NEAR_SYSTEM);
+                    else{
+                        if(game.getDataGame().checkUnalignedDistantSystems(SystemType.DISTANT_SYSTEM) == true)
+                        this.uiConquer(SystemType.DISTANT_SYSTEM);
+                    }
+            }else{
+                System.out.println("NOTHING TO CONQUER!!!\n");
+            }
+            
         }
-        if (opt == 3) {
+        
+        if (opt == 3) 
             game.pass();
-        }
-        if (opt == 0) {
+        
+        if (opt == 0) 
             game.gameOver();
-        }
-        /**
-         * ***
-         * restantes submenus aqui ***
-         */
+        
     }
 
+    /*
+    *     
+    **/
+    
     private void uiExploreAttack(SystemType s) {
 
         if (s == SystemType.NEAR_SYSTEM) {
@@ -138,6 +155,43 @@ public class TextUserInterface {
         }
     }
 
+    private void uiConquer(SystemType s){
+        
+        for(int i=0; i< game.getDataGame().getUnalignedSystemsSize(); i++){
+            
+            
+            if(s == game.getUnalignedSystemCardType(i)){
+
+                System.out.println(i+1 +" - " + game.getDataGame().getUnalignedSystems().get(i).getName()+ 
+                         ", Resistence: " +  game.getDataGame().getUnalignedSystems().get(i).getResistance());
+            }
+        }   
+            
+        System.out.println("What is the planet you want to conquer?");
+        System.out.println(">> ");
+            
+        int opt = this.s.nextInt()-1;
+                
+        if (s == game.getUnalignedSystemCardType(opt)) {
+            try {
+                System.out.println("\nActual militar stregth: "+ game.getActualForce());
+                
+                SystemCard ns = game.getUnaligedNearSystemCard(opt);
+                int randomForce = game.getDiceNumber();
+                int actualForce = game.getActualForce() + randomForce;
+                System.out.println("\nMilitary force (actual): " + actualForce);
+                game.conquer(ns, actualForce);
+            }catch(ArrayIndexOutOfBoundsException e){
+                
+            }
+        }
+    }
+    
+    
+    /**
+    *
+    */
+    
     public void getUserInputWhileCollecting() {
 
         game.collectResources();

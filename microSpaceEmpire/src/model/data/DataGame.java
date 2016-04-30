@@ -70,7 +70,7 @@ public class DataGame implements Constants {
         this.wealthProduction=1;
         this.metalStorage=0;
         this.wealthStorage=0;
-        this.militaryStrenght=5;
+        this.militaryStrenght=0;
         
         this.technology = createTechnologies();
     }
@@ -347,7 +347,7 @@ public class DataGame implements Constants {
         
         return nearSystems.get(i);
     }
-    
+      
     public DistantSystem getDistantSystems(int i) throws EmptyException{
         if(distantSystems.isEmpty())
             throw new EmptyException("Distant system");
@@ -411,6 +411,21 @@ public class DataGame implements Constants {
             this.metalStorage--;
             this.wealthStorage += 2;
         }
+    }
+
+    public SystemCard getUnalignedSystemsCard(int i) throws ArrayIndexOutOfBoundsException {
+        if(unalignedSystems.isEmpty())
+            throw new ArrayIndexOutOfBoundsException();
+        
+        return unalignedSystems.get(i);
+    }
+
+    public boolean checkUnalignedDistantSystems(SystemType sysType) {
+        for (SystemCard a:unalignedSystems) {
+            if(a.getSystemType() == sysType)
+                return true;
+	}
+        return false;
     }
 
 }
