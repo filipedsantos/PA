@@ -47,7 +47,7 @@ public class StateAdapter implements IStates{
    }
    
    @Override
-   public IStates change() {
+   public IStates change(int o) {
        return this;
    }
    

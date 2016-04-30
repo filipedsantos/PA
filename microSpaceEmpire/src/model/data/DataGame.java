@@ -70,7 +70,7 @@ public class DataGame implements Constants {
         this.wealthProduction=1;
         this.metalStorage=0;
         this.wealthStorage=0;
-        this.militaryStrenght=0;
+        this.militaryStrenght=5;
         
         this.technology = createTechnologies();
     }
@@ -99,6 +99,10 @@ public class DataGame implements Constants {
     public void setMetalStorage(int metalStorage) {
         this.metalStorage = metalStorage;
     }
+    
+    public void addMetalStorage(int m){
+        this.metalStorage += m;
+    }
 
      public int getWealthProduction() {
         return wealthProduction;
@@ -108,12 +112,17 @@ public class DataGame implements Constants {
         this.wealthProduction = wealthP;
     }
     
+    
     public int getWealthStorage() {
         return wealthStorage;
     }
 
     public void setWealthStorage(int wealthStorage) {
         this.wealthStorage = wealthStorage;
+    }
+    
+    public void addWealthStorage(int w) {
+        this.wealthStorage += w;
     }
 
     public int getMilitaryStrenght() {
@@ -338,6 +347,13 @@ public class DataGame implements Constants {
         
         return nearSystems.get(i);
     }
+    
+    public DistantSystem getDistantSystems(int i) throws EmptyException{
+        if(distantSystems.isEmpty())
+            throw new EmptyException("Distant system");
+        
+        return distantSystems.get(i);
+    }
 
     public void adjustResources(SystemCard s) {
         this.metalProduction += s.getMetalProdution();
@@ -347,6 +363,54 @@ public class DataGame implements Constants {
     public void reduceMilitaryForceOneunit() {
         if(militaryStrenght > 0)
             this.militaryStrenght--;
+    }
+
+    public boolean verifyNearSystemsOnUnalignedSystems() {
+        for (int i = 0; i < getUnalignedSystemsSize(); i++) {
+            if(getUnalignedSystems().get(i) instanceof NearSystem)
+                return false;
+        }
+        
+        return true;
+    }
+
+    public boolean isTechnologyPurchased(String name) {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 2; j++) {
+                if( getTechnology()[i][j].getName().equals(name)){
+                    return getTechnology()[i][j].isBought();
+                }
+            }
+        }
+        return false;
+    }
+
+    public void upgradeStocklimits() {
+        this.setMetalStorage(METAL_STOCk_UPGRADED_LIMIT);
+        this.setWealthStorage(WEALTH_STOCK_UPGRADED_LIMIT);
+    }
+
+    public void addProductionToStock() {
+        this.metalStorage += getMetalProduction();
+        this.wealthStorage += getWealthProduction();
+    }
+
+    public void collectResources() {
+        if(isTechnologyPurchased("Interstellar Banking")){
+            upgradeStocklimits();
+        }
+        addProductionToStock();
+    }
+
+    public void swapResources(int i) {
+        if(i == 1){
+            this.metalStorage += 2;
+            this.wealthStorage--;
+        }
+        else{
+            this.metalStorage--;
+            this.wealthStorage += 2;
+        }
     }
 
 }

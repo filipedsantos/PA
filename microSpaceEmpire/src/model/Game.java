@@ -2,6 +2,7 @@
 package model;
 
 import java.io.IOException;
+import model.data.Cards.SystemCard.DistantSystem;
 import model.data.Cards.SystemCard.NearSystem;
 import model.data.Cards.SystemCard.SystemCard;
 import model.data.Cards.SystemCard.SystemType;
@@ -60,8 +61,8 @@ public class Game {
        setState(getState().exploreAttack(s, militaryForce));
    }
   
-   public void change() {
-       setState(getState().change());
+   public void change(int o) {
+       setState(getState().change(o));
    }
    
    public void buildMilitary() {
@@ -100,6 +101,10 @@ public class Game {
     public NearSystem getNearSystem() throws EmptyException{
         return getDataGame().getNearSystems(0);
     }
+    
+    public DistantSystem getDistantSystem() throws EmptyException {
+        return getDataGame().getDistantSystems(0);
+    }
 
     public int getDiceNumber() {
         return (int)(Math.random() * 6) + 1;
@@ -108,6 +113,32 @@ public class Game {
     public int getActualForce() {
         return getDataGame().getMilitaryStrenght();
     }
+
+    public boolean getTechnologyBought(String forwardStarbases) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public boolean verifyNearSystemsOnUnalignedSystems() {
+        return getDataGame().verifyNearSystemsOnUnalignedSystems();
+    }
+
+    public boolean isTechnologyPurchased(String name) {
+        return getDataGame().isTechnologyPurchased(name);
+    }
+
+    public void upgradeStocklimits() {
+        getDataGame().upgradeStocklimits();
+    }
+
+    public void addProductionToStock() {
+        getDataGame().addProductionToStock();
+    }
+
+    public void collectResources() {
+        getDataGame().collectResources();
+    }
+
+    
    
    
 }

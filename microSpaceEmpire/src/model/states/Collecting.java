@@ -20,11 +20,19 @@ public class Collecting extends StateAdapter{
     
     @Override
     public IStates pass(){
+                        
         return new Upgrading(getDataGame());
     }
     
     @Override
-    public IStates change(){
+    public IStates change(int o){        
+        if(o == 1){
+            getDataGame().swapResources(1);
+        }
+        else{
+            getDataGame().swapResources(2);
+        }
+        
         return new Upgrading(getDataGame());
     }
     

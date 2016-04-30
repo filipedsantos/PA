@@ -9,7 +9,7 @@ public interface IStates {
     IStates pass();
     IStates conquer();
     IStates exploreAttack(SystemCard s, int militaryForce);
-    IStates change();
+    IStates change(int o);
     IStates buildMilitary();
     IStates discoverTechnology();
     IStates newTurn();
