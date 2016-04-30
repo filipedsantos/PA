@@ -221,7 +221,7 @@ public class DataGame implements Constants {
         s += "\n\nNear systems: " + getNearSystemsSize();
         s += "\nDistant systems: " + getDistantSystemsSize();
         s += "\nUnaligned systems: " + getUnalignedSystemsSize();
-        s += "\n\nEvents: " + getEventsSize();
+        s += "\nEvents: " + getEventsSize();
         return s;
     }
     

@@ -2,6 +2,7 @@
 package model;
 
 import java.io.IOException;
+import model.data.Cards.SystemCard.SystemCard;
 import model.data.DataGame;
 import model.states.AwaitBeginning;
 import model.states.IStates;
@@ -52,8 +53,8 @@ public class Game {
        setState(getState().conquer());
    }
    
-   public void exploreAttack() {
-       setState(getState().exploreAttack());
+   public void exploreAttack(SystemCard s) {
+       setState(getState().exploreAttack(s));
    }
   
    public void change() {

@@ -4,6 +4,9 @@ package ui.ui_text;
 import java.io.IOException;
 import java.util.Scanner;
 import model.Game;
+import model.data.Cards.CardType;
+import model.data.Cards.SystemCard.NearSystem;
+import model.data.Cards.SystemCard.SystemType;
 import model.states.AwaitBeginning;
 import model.states.AwaitOption;
 import model.states.Collecting;
@@ -58,17 +61,28 @@ public class TextUserInterface {
         System.out.println("2 - Conquer");
         System.out.println("3 - Pass");
         System.out.println("0 - Quit");
-        System.out.print(">> ");
+        System.out.print("\n>> ");
         
         opt = s.nextInt();
         clearScreen();
         
-            if(opt == 1)
-                game.exploreAttack();
-            if(opt == 2)
+            if(opt == 1){
+                System.out.println("Explore near system (1) or distant system (2) ?");
+                System.out.print("\n>> ");
+                
+                int sc = s.nextInt();
+                
+                if(sc == 1)
+                    game.exploreAttack(SystemType.NEAR_SYSTEM);
+                else
+                    game.exploreAttack(SystemType.DISTANT_SYSTEM);
+            }
+            if(opt == 2){
                 game.conquer();
-            if(opt == 3)
+            }
+            if(opt == 3){
                 game.pass();
+            }
             if(opt == 0)
                 game.gameOver();
         /*****
@@ -97,7 +111,7 @@ public class TextUserInterface {
         
         System.out.println("3 - Pass");
         System.out.println("0 - Exit");
-        System.out.print(">> ");
+        System.out.print("\n>> ");
         
         opt = s.nextInt();
         clearScreen();
@@ -134,7 +148,6 @@ public class TextUserInterface {
         System.out.println("technologies:\n");
         for(int i = 0; i<4; i++){
             for(int j = 0; j<2; j++){
-                
                 System.out.println(game.getDataGame().getTechnology()[i][j]);
                 
             }
@@ -142,7 +155,7 @@ public class TextUserInterface {
     }
     
     public void clearScreen(){
-        for (int i = 0; i < 25; i++) {
+        for (int i = 0; i < 50; i++) {
             System.out.println();
         }
     }    
@@ -150,7 +163,7 @@ public class TextUserInterface {
     //processamento da fase de eventos
     private void eventphase() {
         //rever
-        System.out.println(game.getDataGame().getEvents().get(1));
+        System.out.println(game.getDataGame().getEvents().get(0));
     }
         
 }
