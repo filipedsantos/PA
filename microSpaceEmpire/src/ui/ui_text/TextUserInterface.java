@@ -6,6 +6,7 @@ import java.util.Scanner;
 import model.Game;
 import model.data.Cards.CardType;
 import model.data.Cards.SystemCard.NearSystem;
+import model.data.Cards.SystemCard.SystemCard;
 import model.data.Cards.SystemCard.SystemType;
 import model.states.AwaitBeginning;
 import model.states.AwaitOption;

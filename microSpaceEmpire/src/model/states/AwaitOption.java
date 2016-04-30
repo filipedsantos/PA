@@ -1,5 +1,6 @@
 package model.states;
 
+import model.data.Cards.SystemCard.DistantSystem;
 import model.data.Cards.SystemCard.NearSystem;
 import model.data.Cards.SystemCard.SystemType;
 import model.data.DataGame;
@@ -24,10 +25,16 @@ public class AwaitOption extends StateAdapter{
     }
     
     @Override
-    public IStates exploreAttack(SystemCard s){
+    public IStates exploreAttack(SystemType s){
         
-        // Verify type of System card
-       
+        // Verify type of System card to explore/attack
+       if(s == SystemType.NEAR_SYSTEM){
+       }
+       else if( s == SystemType.DISTANT_SYSTEM){
+       }
+       else{
+           return this;
+       }
         
         
         return new Collecting(getDataGame());
