@@ -412,6 +412,12 @@ public class DataGame implements Constants {
             this.wealthStorage += 2;
         }
     }
+    
+    public void swapResourcesForMilitary(){
+        this.metalStorage--;
+        this.wealthStorage--;
+        this.militaryStrenght++;
+    }
 
     public SystemCard getUnalignedSystemsCard(int i) throws ArrayIndexOutOfBoundsException {
         if(unalignedSystems.isEmpty())

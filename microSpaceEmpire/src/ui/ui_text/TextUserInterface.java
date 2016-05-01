@@ -29,17 +29,17 @@ public class TextUserInterface {
         clearScreen();
         while (!(game.getState() instanceof Ending)) {
             if (game.getState() instanceof AwaitBeginning) {
-                getUserInputWhileAwaitingBeginning();
+                WhileAwaitingBeginning();
             }
             if (game.getState() instanceof AwaitOption) {
-                getUserInputWhileAwaitingOption();
+                WhileAwaitingOption();
             }
             if (game.getState() instanceof Collecting) {
-                getUserInputWhileCollecting();
+                WhileCollecting();
             }
             if (game.getState() instanceof Upgrading) {
                 Upgrading u = (Upgrading) game.getState();
-                getUserInputWhileUpgrading(u);
+                WhileUpgrading(u);
             }
         }
 
@@ -48,13 +48,13 @@ public class TextUserInterface {
     }
 
     //incompleto 
-    public void getUserInputWhileAwaitingBeginning() {
+    public void WhileAwaitingBeginning() {
         //showGame();
         game.start();
     }
 
     //incompleto
-    public void getUserInputWhileAwaitingOption() {
+    public void WhileAwaitingOption() {
         int opt;
         this.showGame();
 
@@ -192,7 +192,7 @@ public class TextUserInterface {
     *
     */
     
-    public void getUserInputWhileCollecting() {
+    public void WhileCollecting() {
 
         game.collectResources();
 
@@ -219,7 +219,7 @@ public class TextUserInterface {
 
     }
 
-    public void getUserInputWhileUpgrading(Upgrading u) {
+    public void WhileUpgrading(Upgrading u) {
         int opt;
 
         boolean m = u.getMilitary();
@@ -245,7 +245,7 @@ public class TextUserInterface {
 
         if (opt == 1 && m == true) {
             u.setMilitary(false);
-            game.buildMilitary();
+            this.upgradeMilitary();
         } else if (opt == 2 && t == true) {
             u.setTechnology(false);
             showTechnologies();
@@ -288,6 +288,11 @@ public class TextUserInterface {
     private void eventphase() {
         //rever
         System.out.println(game.getDataGame().getEvents().get(0));
+    }
+
+    private void upgradeMilitary() {
+        game.getDataGame().swapResourcesForMilitary();
+        game.buildMilitary();    
     }
 
 }
