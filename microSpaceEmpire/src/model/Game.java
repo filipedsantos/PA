@@ -57,7 +57,7 @@ public class Game {
        setState(getState().conquer(i));
    }
    
-   public void exploreAttack(SystemCard s) {
+   public void exploreAttack(SystemType s) {
        setState(getState().exploreAttack(s));
    }
   

@@ -110,21 +110,12 @@ public class TextUserInterface {
     private void uiExploreAttack(SystemType s) {
 
         if (s == SystemType.NEAR_SYSTEM) {
-            try {
-                game.exploreAttack(s);
-            } catch (EmptyException e) {
-                System.err.println(e);
-            }
+
+            game.exploreAttack(s);
 
         } else if (s == SystemType.DISTANT_SYSTEM) {
             if (game.verifyNearSystemsOnUnalignedSystems() && game.isTechnologyPurchased("Forward Starbases")) {
-                try {
-                    game.exploreAttack(s);
-
-                } catch (EmptyException e) {
-                    System.err.println(e);
-                }
-
+                game.exploreAttack(s);
             } else {
                 System.out.println("Not possible explore Distant Systems yet!\n\n");
             }

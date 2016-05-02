@@ -5,6 +5,7 @@ import model.data.Cards.SystemCard.NearSystem;
 import model.data.Cards.SystemCard.SystemCard;
 import model.data.Cards.SystemCard.SystemType;
 import model.data.DataGame;
+import model.data.EmptyException;
 
 public class AwaitOption extends StateAdapter {
 
@@ -19,16 +20,22 @@ public class AwaitOption extends StateAdapter {
     }
 
     @Override
-    public IStates conquer(int opt) {       
-   
+    public IStates conquer(int opt) {
+
         attacking(getDataGame().getUnalignedSystemsCard(opt), true);
         return new Collecting(getDataGame());
     }
 
     @Override
     public IStates exploreAttack(SystemType s) {
-         
-        attacking(s, false);
+
+        try {
+            NearSystem card = getDataGame().getNearSystems(0);
+            attacking(card, false);
+        } catch (EmptyException e) {
+            System.err.println("Near System");
+        }
+
         return new Collecting(getDataGame());
     }
 
@@ -40,7 +47,7 @@ public class AwaitOption extends StateAdapter {
     private void attacking(SystemCard s, boolean conquer) {
 
         int militaryForce = getDataGame().getDiceNumber() + getDataGame().getMilitaryStrenght();
-        
+
         if (s instanceof NearSystem) {
             if (militaryForce >= s.getResistance()) {
                 getDataGame().addEmpire(s);
