@@ -253,6 +253,8 @@ public class TextUserInterface {
     private void eventphase() {
         //rever
         System.out.println(game.getDataGame().getEvents().get(0));
-        System.out.println("teste para arrebentar");
+
+        System.out.println("cenas cenas cenas -- ");
+
     }
 }
