@@ -3,6 +3,7 @@ package model.states;
 import model.data.Cards.SystemCard.DistantSystem;
 import model.data.Cards.SystemCard.NearSystem;
 import model.data.Cards.SystemCard.SystemCard;
+import model.data.Cards.SystemCard.SystemType;
 import model.data.DataGame;
 
 public class AwaitOption extends StateAdapter {
@@ -18,16 +19,16 @@ public class AwaitOption extends StateAdapter {
     }
 
     @Override
-    public IStates conquer(SystemCard s, int militaryForce) {
-
-        attacking(s, militaryForce, true);
+    public IStates conquer(int opt) {       
+   
+        attacking(getDataGame().getUnalignedSystemsCard(opt), true);
         return new Collecting(getDataGame());
     }
 
     @Override
-    public IStates exploreAttack(SystemCard s, int militaryForce) {
-
-        attacking(s, militaryForce, false);
+    public IStates exploreAttack(SystemType s) {
+         
+        attacking(s, false);
         return new Collecting(getDataGame());
     }
 
@@ -36,13 +37,16 @@ public class AwaitOption extends StateAdapter {
         return new Ending(getDataGame());
     }
 
-    private void attacking(SystemCard s, int militaryForce, boolean conquer) {
+    private void attacking(SystemCard s, boolean conquer) {
 
+        int militaryForce = getDataGame().getDiceNumber() + getDataGame().getMilitaryStrenght();
+        
         if (s instanceof NearSystem) {
             if (militaryForce >= s.getResistance()) {
                 getDataGame().addEmpire(s);
                 getDataGame().adjustResources(s); // Update metal and wealth production with planet s
                 getDataGame().getNearSystems().remove(0); // Remove NearSystem from arraylist because was added to empire
+                getDataGame().setLog("");
                 if (conquer) {
                     getDataGame().getUnalignedSystems().remove(s);
                 }

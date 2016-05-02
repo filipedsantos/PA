@@ -86,48 +86,32 @@ public class TextUserInterface {
             }
         }
         if (opt == 2) {
-            
-            if(game.getDataGame().getUnalignedSystems().size() != 0){
-                    System.out.println("You want try conquer a near system (1) or distant system (2)?");
-                    System.out.print("\n>> ");
 
-                    int sc = s.nextInt();
-                    this.clearScreen();
-
-                    if(sc == 1)
-                        this.uiConquer(SystemType.NEAR_SYSTEM);
-                    else{
-                        if(game.getDataGame().checkUnalignedDistantSystems(SystemType.DISTANT_SYSTEM) == true)
-                        this.uiConquer(SystemType.DISTANT_SYSTEM);
-                    }
-            }else{
-                System.out.println("NOTHING TO CONQUER!!!\n");
+            if (game.getDataGame().getUnalignedSystems().size() != 0) {
+                this.uiConquer();
+            } else {
+                System.err.println("NOTHING TO CONQUER!!!\n");
             }
-            
         }
-        
-        if (opt == 3) 
+
+        if (opt == 3) {
             game.pass();
-        
-        if (opt == 0) 
+        }
+
+        if (opt == 0) {
             game.gameOver();
-        
+        }
+
     }
 
     /*
-    *     
-    **/
-    
+     *     
+     **/
     private void uiExploreAttack(SystemType s) {
 
         if (s == SystemType.NEAR_SYSTEM) {
             try {
-                NearSystem ns = game.getNearSystem();
-                System.out.println(ns);
-                int randomForce = game.getDiceNumber();
-                int actualForce = game.getActualForce() + randomForce;
-                System.out.println("\nMilitary force (actual): " + actualForce);
-                game.exploreAttack(ns, actualForce);
+                game.exploreAttack(s);
             } catch (EmptyException e) {
                 System.err.println(e);
             }
@@ -135,12 +119,7 @@ public class TextUserInterface {
         } else if (s == SystemType.DISTANT_SYSTEM) {
             if (game.verifyNearSystemsOnUnalignedSystems() && game.isTechnologyPurchased("Forward Starbases")) {
                 try {
-                    DistantSystem ds = game.getDistantSystem();
-                    System.out.println(ds);
-                    int randomForce = game.getDiceNumber();
-                    int actualForce = game.getActualForce() + randomForce;
-                    System.out.println("\nMilitary force (actual): " + actualForce);
-                    game.exploreAttack(ds, actualForce);
+                    game.exploreAttack(s);
 
                 } catch (EmptyException e) {
                     System.err.println(e);
@@ -155,51 +134,40 @@ public class TextUserInterface {
         }
     }
 
-    private void uiConquer(SystemType s){
-        
-        for(int i=0; i< game.getDataGame().getUnalignedSystemsSize(); i++){
-            
-            
-            if(s == game.getUnalignedSystemCardType(i)){
+    private void uiConquer() {
 
-                System.out.println(i+1 +" - " + game.getDataGame().getUnalignedSystems().get(i).getName()+ 
-                         ", Resistence: " +  game.getDataGame().getUnalignedSystems().get(i).getResistance());
-            }
-        }   
-            
+        for (int i = 0; i < game.getDataGame().getUnalignedSystemsSize(); i++) {
+            System.out.println(i + 1 + " - " + game.getDataGame().getUnalignedSystems().get(i).getName()
+                    + ", Resistence: " + game.getDataGame().getUnalignedSystems().get(i).getResistance());
+        }
+
         System.out.println("What is the planet you want to conquer?");
         System.out.println(">> ");
-            
-        int opt = this.s.nextInt()-1;
-                
-        if (s == game.getUnalignedSystemCardType(opt)) {
-            try {
-                System.out.println("\nActual militar stregth: "+ game.getActualForce());
-                
-                SystemCard ns = game.getUnaligedNearSystemCard(opt);
-                int randomForce = game.getDiceNumber();
-                int actualForce = game.getActualForce() + randomForce;
-                System.out.println("\nMilitary force (actual): " + actualForce);
-                game.conquer(ns, actualForce);
-            }catch(ArrayIndexOutOfBoundsException e){
-                
-            }
+
+        int opt = this.s.nextInt() - 1;
+
+        try {
+            System.out.println("\nActual militar stregth: " + game.getActualForce());
+
+            game.conquer(opt);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            clearScreen();
+            System.err.printf("Opção Inválida!\n");
         }
+
     }
-    
-    
+
     /**
-    *
-    */
-    
+     *
+     */
     public void WhileCollecting() {
 
         game.collectResources();
 
         if (game.isTechnologyPurchased("Interspecies Commerce")) {
-            
+
             showGame();
-            
+
             System.out.println("Exchange 2 units for 1 of: ");
             System.out.println("1 - Metal for wealth");
             System.out.println("2 - Wealth for metal");
@@ -209,9 +177,10 @@ public class TextUserInterface {
                 s.next();
             }
             int opt = s.nextInt();
-            
-            if(opt == 3)
+
+            if (opt == 3) {
                 game.pass();
+            }
 
             game.change(opt);
         }
@@ -290,10 +259,4 @@ public class TextUserInterface {
         //rever
         System.out.println(game.getDataGame().getEvents().get(0));
     }
-
-//    private void upgradeMilitary() {
-//        game.getDataGame().swapResourcesForMilitary();
-//        game.buildMilitary();    
-//    }
-
 }

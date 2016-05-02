@@ -33,21 +33,18 @@ public class DataGame implements Constants {
     private int militaryStrenght;
     private int metalProduction;
     private int wealthProduction;
-    
+
     private String log; // String to save information processed in states
-    
-    
 
     //Technologies
-    Technology [][] technology;
-    
+    Technology[][] technology;
+
     // Arraylists to save card games
     private List<NearSystem> nearSystems;
     private List<DistantSystem> distantSystems;
     private List<SystemCard> empire;
     private List<SystemCard> unalignedSystems;
     private List<EventCard> events;
-    
 
     public DataGame() throws IOException {
         this.nearSystems = new ArrayList<>();
@@ -56,35 +53,33 @@ public class DataGame implements Constants {
         this.unalignedSystems = new ArrayList<>();
         this.events = new ArrayList<>();
         this.log = "";
-        
+
         // Read System Cards from files
         buildStartingSystemFromFile(this, STARTING_SYSTEM_FILE);
         buildNearSystemsFromFile(this, NEAR_SYSTEMS_FILE);
         buildDistantSystemsFromFile(this, DISTANT_SYSTEMS_FILE);
-        
+
         // Shuffle cards
         Collections.shuffle(nearSystems);
         Collections.shuffle(distantSystems);
         Collections.shuffle(events);
 
         //Board info
-        this.metalProduction=1;
-        this.wealthProduction=1;
-        this.metalStorage=0;
-        this.wealthStorage=0;
-        this.militaryStrenght=0;
-        
+        this.metalProduction = 1;
+        this.wealthProduction = 1;
+        this.metalStorage = 0;
+        this.wealthStorage = 0;
+        this.militaryStrenght = 0;
+
         // Create technologies
         this.technology = createTechnologies();
         // Create Event Cards 
         createEventCards(this);
     }
- 
 
     /**
      * Gets and Sets
      */
-    
     public String getLog() {
         return log;
     }
@@ -92,19 +87,19 @@ public class DataGame implements Constants {
     public void setLog(String log) {
         this.log = log;
     }
-    
+
     public Technology[][] getTechnology() {
         return technology;
     }
-    
+
     public int getMetalProduction() {
         return metalProduction;
     }
-    
+
     public void setMetalProduction(int metalP) {
         this.metalProduction = metalP;
     }
-    
+
     public int getMetalStorage() {
         return metalStorage;
     }
@@ -112,20 +107,19 @@ public class DataGame implements Constants {
     public void setMetalStorage(int metalStorage) {
         this.metalStorage = metalStorage;
     }
-    
-    public void addMetalStorage(int m){
+
+    public void addMetalStorage(int m) {
         this.metalStorage += m;
     }
 
-     public int getWealthProduction() {
+    public int getWealthProduction() {
         return wealthProduction;
     }
 
     public void setWealthProduction(int wealthP) {
         this.wealthProduction = wealthP;
     }
-    
-    
+
     public int getWealthStorage() {
         return wealthStorage;
     }
@@ -133,7 +127,7 @@ public class DataGame implements Constants {
     public void setWealthStorage(int wealthStorage) {
         this.wealthStorage = wealthStorage;
     }
-    
+
     public void addWealthStorage(int w) {
         this.wealthStorage += w;
     }
@@ -157,8 +151,8 @@ public class DataGame implements Constants {
     private boolean addNearSystems(NearSystem n) {
         return nearSystems.add(n);
     }
-    
-    public int getNearSystemsSize(){
+
+    public int getNearSystemsSize() {
         return nearSystems.size();
     }
 
@@ -173,8 +167,8 @@ public class DataGame implements Constants {
     private boolean addDistantSystems(DistantSystem n) {
         return distantSystems.add(n);
     }
-    
-    public int getDistantSystemsSize(){
+
+    public int getDistantSystemsSize() {
         return distantSystems.size();
     }
 
@@ -189,8 +183,8 @@ public class DataGame implements Constants {
     public boolean addEmpire(SystemCard c) {
         return empire.add(c);
     }
-    
-    public int getEmpireSize(){
+
+    public int getEmpireSize() {
         return empire.size();
     }
 
@@ -201,11 +195,11 @@ public class DataGame implements Constants {
     public void setUnalignedSystems(List<SystemCard> unalignedSystems) {
         this.unalignedSystems = unalignedSystems;
     }
-    
-    public boolean addUnalignedSystems(SystemCard c){
+
+    public boolean addUnalignedSystems(SystemCard c) {
         return this.unalignedSystems.add(c);
     }
-    
+
     public int getUnalignedSystemsSize() {
         return this.unalignedSystems.size();
     }
@@ -218,22 +212,21 @@ public class DataGame implements Constants {
         this.events = events;
     }
 
-    public boolean addEvent(EventCard e){
+    public boolean addEvent(EventCard e) {
         return this.events.add(e);
     }
-    
-    public int getEventsSize(){
+
+    public int getEventsSize() {
         return this.events.size();
     }
 
     /**
      * ToString
      */
-    
     @Override
     public String toString() {
         String s;
-        
+
         s = "Info:";
         s += "\nMetal Storage: " + getMetalStorage();
         s += "\nWealth Storage: " + getWealthStorage();
@@ -247,7 +240,7 @@ public class DataGame implements Constants {
         s += "\nEvents: " + getEventsSize();
         return s;
     }
-    
+
     /**
      *
      * Functions
@@ -330,8 +323,8 @@ public class DataGame implements Constants {
     }
 
     private Technology[][] createTechnologies() {
-        Technology [][] tec = new Technology[4][2];
-        
+        Technology[][] tec = new Technology[4][2];
+
         tec[0][0] = new Technology("Capital Ships", 3, "Advance beyond military strength 3.");
         tec[0][1] = new Technology("Forward Starbases", 4, "Required to explore distant systems.");
         tec[1][0] = new Technology("Robot Workers", 2, "Recive 1/2 production during strike.");
@@ -340,7 +333,7 @@ public class DataGame implements Constants {
         tec[2][1] = new Technology("Interstaller Diplomacy", 5, "Next planet is conquered for free.");
         tec[3][0] = new Technology("Interspecies Commerce", 2, "Exchange 2 of one resource for 1 of the other.");
         tec[3][1] = new Technology("Interstellar Banking", 3, "Advance beyond storage value 3.");
-       
+
         return tec;
     }
 
@@ -354,17 +347,19 @@ public class DataGame implements Constants {
         this.addEvent(new Strike(dataGame));
     }
 
-    public NearSystem getNearSystems(int i) throws EmptyException{
-        if(nearSystems.isEmpty())
+    public NearSystem getNearSystems(int i) throws EmptyException {
+        if (nearSystems.isEmpty()) {
             throw new EmptyException("Near system");
-        
+        }
+
         return nearSystems.get(i);
     }
-      
-    public DistantSystem getDistantSystems(int i) throws EmptyException{
-        if(distantSystems.isEmpty())
+
+    public DistantSystem getDistantSystems(int i) throws EmptyException {
+        if (distantSystems.isEmpty()) {
             throw new EmptyException("Distant system");
-        
+        }
+
         return distantSystems.get(i);
     }
 
@@ -374,23 +369,25 @@ public class DataGame implements Constants {
     }
 
     public void reduceMilitaryForceOneunit() {
-        if(militaryStrenght > 0)
+        if (militaryStrenght > 0) {
             this.militaryStrenght--;
+        }
     }
 
     public boolean verifyNearSystemsOnUnalignedSystems() {
         for (int i = 0; i < getUnalignedSystemsSize(); i++) {
-            if(getUnalignedSystems().get(i) instanceof NearSystem)
+            if (getUnalignedSystems().get(i) instanceof NearSystem) {
                 return false;
+            }
         }
-        
+
         return true;
     }
 
     public boolean isTechnologyPurchased(String name) {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 2; j++) {
-                if( getTechnology()[i][j].getName().equals(name)){
+                if (getTechnology()[i][j].getName().equals(name)) {
                     return getTechnology()[i][j].isBought();
                 }
             }
@@ -409,41 +406,46 @@ public class DataGame implements Constants {
     }
 
     public void collectResources() {
-        if(isTechnologyPurchased("Interstellar Banking")){
+        if (isTechnologyPurchased("Interstellar Banking")) {
             upgradeStocklimits();
         }
         addProductionToStock();
     }
 
     public void swapResources(int i) {
-        if(i == 1){
+        if (i == 1) {
             this.metalStorage += 2;
             this.wealthStorage--;
-        }
-        else{
+        } else {
             this.metalStorage--;
             this.wealthStorage += 2;
         }
     }
-    
-    public void swapResourcesForMilitary(){
+
+    public int getDiceNumber() {
+        return (int) (Math.random() * 6) + 1;
+    }
+
+    public void swapResourcesForMilitary() {
         this.metalStorage--;
         this.wealthStorage--;
         this.militaryStrenght++;
     }
 
     public SystemCard getUnalignedSystemsCard(int i) throws ArrayIndexOutOfBoundsException {
-        if(unalignedSystems.isEmpty())
-            throw new ArrayIndexOutOfBoundsException();
-        
+        if (i > getUnalignedSystemsSize()) {
+            throw new ArrayIndexOutOfBoundsException("Invalid option");
+        }
+
         return unalignedSystems.get(i);
     }
 
     public boolean checkUnalignedDistantSystems(SystemType sysType) {
-        for (SystemCard a:unalignedSystems) {
-            if(a.getSystemType() == sysType)
+        for (SystemCard a : unalignedSystems) {
+            if (a.getSystemType() == sysType) {
                 return true;
-	}
+            }
+        }
         return false;
     }
 

@@ -53,12 +53,12 @@ public class Game {
         setState(getState().pass());
     }
    
-   public void conquer(SystemCard s, int militaryForce) {
-       setState(getState().conquer(s, militaryForce));
+   public void conquer(int i) {
+       setState(getState().conquer(i));
    }
    
-   public void exploreAttack(SystemCard s, int militaryForce) {
-       setState(getState().exploreAttack(s, militaryForce));
+   public void exploreAttack(SystemCard s) {
+       setState(getState().exploreAttack(s));
    }
   
    public void change(int o) {
@@ -108,10 +108,6 @@ public class Game {
     
     public DistantSystem getDistantSystem() throws EmptyException {
         return getDataGame().getDistantSystems(0);
-    }
-
-    public int getDiceNumber() {
-        return (int)(Math.random() * 6) + 1;
     }
 
     public int getActualForce() {
