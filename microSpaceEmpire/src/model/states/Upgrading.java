@@ -34,6 +34,23 @@ public class Upgrading extends StateAdapter{
     //Estados Seguintes
     @Override
     public IStates buildMilitary(){
+        getDataGame().setMetalStorage(getDataGame().getMetalStorage() - 1);
+        getDataGame().setWealthStorage(getDataGame().getWealthStorage() - 1);
+        
+        int limit;
+        
+        if(getDataGame().isTechnologyPurchased("Capital ships"))
+            limit = getDataGame().MILITARY_STRENGTH_UPGRADED_LIMIT;
+        else
+            limit = getDataGame().MILITARY_STRENGTH_LIMIT;
+        
+        System.out.println("Limit : " + limit);
+        System.out.println("MS: " + getDataGame().getMilitaryStrenght());
+        
+        if(getDataGame().getMilitaryStrenght() < limit ){
+            getDataGame().setMilitaryStrenght(getDataGame().getMilitaryStrenght() + 1);
+        }
+        
         return this;
     }
     

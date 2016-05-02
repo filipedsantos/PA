@@ -245,7 +245,8 @@ public class TextUserInterface {
 
         if (opt == 1 && m == true) {
             u.setMilitary(false);
-            this.upgradeMilitary();
+            //this.upgradeMilitary();
+            game.buildMilitary();
         } else if (opt == 2 && t == true) {
             u.setTechnology(false);
             showTechnologies();
@@ -290,9 +291,9 @@ public class TextUserInterface {
         System.out.println(game.getDataGame().getEvents().get(0));
     }
 
-    private void upgradeMilitary() {
-        game.getDataGame().swapResourcesForMilitary();
-        game.buildMilitary();    
-    }
+//    private void upgradeMilitary() {
+//        game.getDataGame().swapResourcesForMilitary();
+//        game.buildMilitary();    
+//    }
 
 }

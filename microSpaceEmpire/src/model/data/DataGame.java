@@ -28,11 +28,15 @@ import model.data.Cards.SystemCard.SystemType;
 public class DataGame implements Constants {
 
     //Board Game iNFO
-    int metalStorage;
-    int wealthStorage;
-    int militaryStrenght;
-    int metalProduction;
-    int wealthProduction;
+    private int metalStorage;
+    private int wealthStorage;
+    private int militaryStrenght;
+    private int metalProduction;
+    private int wealthProduction;
+    
+    private String log; // String to save information processed in states
+    
+    
 
     //Technologies
     Technology [][] technology;
@@ -51,14 +55,12 @@ public class DataGame implements Constants {
         this.empire = new ArrayList<>();
         this.unalignedSystems = new ArrayList<>();
         this.events = new ArrayList<>();
+        this.log = "";
         
         // Read System Cards from files
         buildStartingSystemFromFile(this, STARTING_SYSTEM_FILE);
         buildNearSystemsFromFile(this, NEAR_SYSTEMS_FILE);
         buildDistantSystemsFromFile(this, DISTANT_SYSTEMS_FILE);
-        
-        // Read Event Cards 
-        createEventCards(this);
         
         // Shuffle cards
         Collections.shuffle(nearSystems);
@@ -72,13 +74,24 @@ public class DataGame implements Constants {
         this.wealthStorage=0;
         this.militaryStrenght=0;
         
+        // Create technologies
         this.technology = createTechnologies();
+        // Create Event Cards 
+        createEventCards(this);
     }
  
 
     /**
      * Gets and Sets
      */
+    
+    public String getLog() {
+        return log;
+    }
+
+    public void setLog(String log) {
+        this.log = log;
+    }
     
     public Technology[][] getTechnology() {
         return technology;
