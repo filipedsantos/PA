@@ -141,5 +141,13 @@ public class Game {
     public SystemType getUnalignedSystemCardType(int i) {
         return getDataGame().getUnalignedSystems().get(i).getSystemType();
     }
+
+    public String getLog() {
+        return getDataGame().getLog();
+    }
+
+    public void refreshlog() {
+        getDataGame().refreshLog();
+    }
  
 }

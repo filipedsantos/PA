@@ -107,6 +107,7 @@ public class TextUserInterface {
     /*
      *     
      **/
+    
     private void uiExploreAttack(SystemType s) {
 
         if (s == SystemType.NEAR_SYSTEM) {
@@ -117,7 +118,7 @@ public class TextUserInterface {
             if (game.verifyNearSystemsOnUnalignedSystems() && game.isTechnologyPurchased("Forward Starbases")) {
                 game.exploreAttack(s);
             } else {
-                System.out.println("Not possible explore Distant Systems yet!\n\n");
+                System.err.println("YOU CAN'T EXPLORE DISTANT SYSTEMS YET!\n\n");
             }
 
         } else {
@@ -155,8 +156,11 @@ public class TextUserInterface {
 
         game.collectResources();
 
+        System.out.println(game.getLog());
+        game.refreshlog();
+        
         if (game.isTechnologyPurchased("Interspecies Commerce")) {
-
+            
             showGame();
 
             System.out.println("Exchange 2 units for 1 of: ");
@@ -181,10 +185,10 @@ public class TextUserInterface {
 
     public void WhileUpgrading(Upgrading u) {
         int opt;
-
+        
         boolean m = u.getMilitary();
         boolean t = u.getTechnology();
-
+ 
         System.out.println("");
         System.out.println("Build Military e Discover Technology phase");
         System.out.println("");

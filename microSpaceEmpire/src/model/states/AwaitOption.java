@@ -57,11 +57,17 @@ public class AwaitOption extends StateAdapter {
                 if (conquer) {
                     getDataGame().getUnalignedSystems().remove(s);
                 }
+                //iNFOS to Log
+                getDataGame().setLog("You win this fight! this planet now belongs to your empire!\n");
             } else {
                 getDataGame().reduceMilitaryForceOneunit(); // Reduce MilitaryForce 1 unit because achievement attempt failed
                 if (!conquer) {
                     getDataGame().getNearSystems().remove(0); // Remove NearSystem from arraylist because was added to unalignedSystems
                     getDataGame().addUnalignedSystems(s);
+                    //iNFOS to Log
+                    getDataGame().setLog("You lost the fight! this planet is now unaligned system!\n");
+                } else {
+                    getDataGame().setLog("You lost the fight! this planet will remain on unaligned system!\n");
                 }
             }
         } else if (s instanceof DistantSystem) {
@@ -72,11 +78,16 @@ public class AwaitOption extends StateAdapter {
                 if (conquer) {
                     getDataGame().getUnalignedSystems().remove(s);
                 }
+                //iNFOS to Log
+                getDataGame().setLog("You win this fight! this planet now belongs to your empire!\n");
             } else {
                 getDataGame().addUnalignedSystems(s);
                 if (!conquer) {
-                    getDataGame().getNearSystems().remove(0); // Remove NearSystem from arraylist because was added to unalignedSystems
+                    getDataGame().getDistantSystems().remove(0); // Remove NearSystem from arraylist because was added to unalignedSystems
                     getDataGame().addUnalignedSystems(s);
+                    getDataGame().setLog("You lost the fight! this planet is now unaligned system!\n");
+                } else {
+                    getDataGame().setLog("You lost the fight! this planet will remain on unaligned system!\n");
                 }
             }
         } else {

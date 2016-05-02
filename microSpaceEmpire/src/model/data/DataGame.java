@@ -449,4 +449,8 @@ public class DataGame implements Constants {
         return false;
     }
 
+    public void refreshLog() {
+        this.log="";
+    }
+
 }
