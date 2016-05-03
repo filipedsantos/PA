@@ -22,13 +22,17 @@ public class Upgrading extends StateAdapter {
         return this.technology;
     }
 
+    public void setMilitary(boolean q) {
+        this.military = q;
+    }
+
+    public void setTechnology(boolean q) {
+        this.technology = q;
+    }
+
     //Estados Seguintes
     @Override
     public IStates buildMilitary() {
-
-        getDataGame().setMetalStorage(getDataGame().getMetalStorage() - 1);
-        getDataGame().setWealthStorage(getDataGame().getWealthStorage() - 1);
-
         int limit;
 
         if (getDataGame().isTechnologyPurchased("Capital ships")) {
@@ -37,11 +41,17 @@ public class Upgrading extends StateAdapter {
             limit = getDataGame().MILITARY_STRENGTH_LIMIT;
         }
 
+        this.military = false;
+        
+        System.out.println("Limit : " + limit);
+        System.out.println("MS: " + getDataGame().getMilitaryStrenght());
+
         if (getDataGame().getMilitaryStrenght() < limit) {
+            getDataGame().setMetalStorage(getDataGame().getMetalStorage() - 1);
+            getDataGame().setWealthStorage(getDataGame().getWealthStorage() - 1);
             getDataGame().setMilitaryStrenght(getDataGame().getMilitaryStrenght() + 1);
         }
 
-        this.military = false;
         return this;
     }
 
@@ -63,6 +73,7 @@ public class Upgrading extends StateAdapter {
             this.technology = false;
             return this;
         }
+
     }
 
     @Override
