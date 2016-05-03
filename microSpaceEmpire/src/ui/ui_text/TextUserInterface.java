@@ -57,6 +57,9 @@ public class TextUserInterface {
     public void WhileAwaitingOption() {
         int opt;
         this.showGame();
+        
+        System.out.print(game.getLog());
+        game.refreshlog();
 
         System.out.println("");
         System.out.println("Explore-Attack/ Bide Time/ Conquer phase");
@@ -80,9 +83,9 @@ public class TextUserInterface {
 
             if (sc == 1) //game.exploreAttack(SystemType.NEAR_SYSTEM);
             {
-                this.uiExploreAttack(SystemType.NEAR_SYSTEM);
+                game.exploreAttack(SystemType.NEAR_SYSTEM);
             } else {
-                this.uiExploreAttack(SystemType.DISTANT_SYSTEM);
+                game.exploreAttack(SystemType.DISTANT_SYSTEM);
             }
         }
         if (opt == 2) {
@@ -108,23 +111,23 @@ public class TextUserInterface {
      *     
      **/
     
-    private void uiExploreAttack(SystemType s) {
-
-        if (s == SystemType.NEAR_SYSTEM) {
-
-            game.exploreAttack(s);
-
-        } else if (s == SystemType.DISTANT_SYSTEM) {
-            if (game.verifyNearSystemsOnUnalignedSystems() && game.isTechnologyPurchased("Forward Starbases")) {
-                game.exploreAttack(s);
-            } else {
-                System.err.println("YOU CAN'T EXPLORE DISTANT SYSTEMS YET!\n\n");
-            }
-
-        } else {
-            System.out.println("[ERROR]: Type of system."); // Never should happen.
-        }
-    }
+//    private void uiExploreAttack(SystemType s) {
+//
+//        if (s == SystemType.NEAR_SYSTEM) {
+//
+//            game.exploreAttack(s);
+//
+//        } else if (s == SystemType.DISTANT_SYSTEM) {
+//            if (game.verifyNearSystemsOnUnalignedSystems() && game.isTechnologyPurchased("Forward Starbases")) {
+//                game.exploreAttack(s);
+//            } else {
+//                System.err.println("YOU CAN'T EXPLORE DISTANT SYSTEMS YET!\n\n");
+//            }
+//
+//        } else {
+//            System.out.println("[ERROR]: Type of system."); // Never should happen.
+//        }
+//    }
 
     private void uiConquer() {
 
@@ -134,13 +137,11 @@ public class TextUserInterface {
         }
 
         System.out.println("What is the planet you want to conquer?");
-        System.out.println(">> ");
+        System.out.print(">> ");
 
         int opt = this.s.nextInt() - 1;
 
         try {
-            System.out.println("\nActual militar stregth: " + game.getActualForce());
-
             game.conquer(opt);
         } catch (ArrayIndexOutOfBoundsException e) {
             clearScreen();
@@ -252,9 +253,8 @@ public class TextUserInterface {
     //processamento da fase de eventos
     private void eventphase() {
         //rever
-        System.out.println(game.getDataGame().getEvents().get(0));
+        //System.out.println(game.getDataGame().getEvents().get(0));
 
-        System.out.println("cenas cenas cenas -- ");
 
     }
 }

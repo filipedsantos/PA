@@ -21,6 +21,9 @@ public class AwaitOption extends StateAdapter {
 
     @Override
     public IStates conquer(int opt) {
+        
+        if(opt == 0)
+            return new Collecting(getDataGame());
 
         attacking(getDataGame().getUnalignedSystemsCard(opt), true);
         return new Collecting(getDataGame());
@@ -28,9 +31,13 @@ public class AwaitOption extends StateAdapter {
 
     @Override
     public IStates exploreAttack(SystemType s) {
+        NearSystem card = null;
+        
+        if(!getDataGame().canAttackPlanets(s))  // Verify if game can attack planets of certain type (if array is not empty)
+            return this;
 
         try {
-            NearSystem card = getDataGame().getNearSystems(0);
+             card = getDataGame().getNearSystems(0);
             attacking(card, false);
         } catch (EmptyException e) {
             System.err.println("Near System");
@@ -45,9 +52,13 @@ public class AwaitOption extends StateAdapter {
     }
 
     private void attacking(SystemCard s, boolean conquer) {
+        String log = "";
 
         int militaryForce = getDataGame().getDiceNumber() + getDataGame().getMilitaryStrenght();
-
+        
+        log = "Attacking planet: " + s.getName() + "\nPlanet resistance: " + s.getResistance();
+        log += "\nActual Military force: " + militaryForce;
+        
         if (s instanceof NearSystem) {
             if (militaryForce >= s.getResistance()) {
                 getDataGame().addEmpire(s);
@@ -58,16 +69,16 @@ public class AwaitOption extends StateAdapter {
                     getDataGame().getUnalignedSystems().remove(s);
                 }
                 //iNFOS to Log
-                getDataGame().setLog("You win this fight! this planet now belongs to your empire!\n");
+                getDataGame().setLog(log + "\n\nYou win this fight! this planet now belongs to your empire!\n");
             } else {
                 getDataGame().reduceMilitaryForceOneunit(); // Reduce MilitaryForce 1 unit because achievement attempt failed
                 if (!conquer) {
                     getDataGame().getNearSystems().remove(0); // Remove NearSystem from arraylist because was added to unalignedSystems
                     getDataGame().addUnalignedSystems(s);
                     //iNFOS to Log
-                    getDataGame().setLog("You lost the fight! this planet is now unaligned system!\n");
+                    getDataGame().setLog(log + "\n\nYou lost the fight! this planet is now unaligned system!\n");
                 } else {
-                    getDataGame().setLog("You lost the fight! this planet will remain on unaligned system!\n");
+                    getDataGame().setLog(log + "\n\nYou lost the fight! this planet will remain on unaligned system!\n");
                 }
             }
         } else if (s instanceof DistantSystem) {
@@ -79,15 +90,15 @@ public class AwaitOption extends StateAdapter {
                     getDataGame().getUnalignedSystems().remove(s);
                 }
                 //iNFOS to Log
-                getDataGame().setLog("You win this fight! this planet now belongs to your empire!\n");
+                getDataGame().setLog(log + "\n\nYou win this fight! this planet now belongs to your empire!\n");
             } else {
                 getDataGame().addUnalignedSystems(s);
                 if (!conquer) {
                     getDataGame().getDistantSystems().remove(0); // Remove NearSystem from arraylist because was added to unalignedSystems
                     getDataGame().addUnalignedSystems(s);
-                    getDataGame().setLog("You lost the fight! this planet is now unaligned system!\n");
+                    getDataGame().setLog(log + "\n\nYou lost the fight! this planet is now unaligned system!\n");
                 } else {
-                    getDataGame().setLog("You lost the fight! this planet will remain on unaligned system!\n");
+                    getDataGame().setLog(log + "\n\nYou lost the fight! this planet will remain on unaligned system!\n");
                 }
             }
         } else {
