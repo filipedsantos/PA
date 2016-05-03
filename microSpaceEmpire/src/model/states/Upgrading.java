@@ -35,7 +35,7 @@ public class Upgrading extends StateAdapter {
     public IStates buildMilitary() {
         int limit;
 
-        if (getDataGame().isTechnologyPurchased("Capital ships")) {
+        if (getDataGame().isTechnologyPurchased("Capital Ships")) {
             limit = getDataGame().MILITARY_STRENGTH_UPGRADED_LIMIT;
         } else {
             limit = getDataGame().MILITARY_STRENGTH_LIMIT;
@@ -58,9 +58,9 @@ public class Upgrading extends StateAdapter {
     @Override
     public IStates discoverTechnology(String TecName) {
 
-        if (!getDataGame().validateTecName(TecName)) 
+        if (!getDataGame().validateTecName(TecName))  // if tecName not recogniced, return this
             return this;
-        else if(getDataGame().getTechnologyByName(TecName).getCost() > getDataGame().getWealthStorage()){
+        else if(getDataGame().getTechnologyByName(TecName).getCost() > getDataGame().getWealthStorage()){ // if not enought wealth to buy tec, return this
             return this;
             //LOG
         } else {
