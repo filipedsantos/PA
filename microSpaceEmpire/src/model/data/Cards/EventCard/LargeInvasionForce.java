@@ -1,30 +1,48 @@
 package model.data.Cards.EventCard;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.data.DataGame;
+import model.data.EmptyException;
+import model.states.AwaitOption;
+import model.states.IStates;
 
-public class LargeInvasionForce extends EventCard{
+public class LargeInvasionForce extends EventCard {
+
     private static final String name = "Large Invasion Force";
-    
+
     public LargeInvasionForce(DataGame d) {
         super(d);
     }
 
     @Override
-    public void makeEventActionYear1() {
-        
+    public IStates makeEventActionYear1() {
+        try {
+            getDataGame().fightAgainstSystem(0, 2, "Planetary Defenses");
+        } catch (EmptyException ex) {
+            return new AwaitOption(getDataGame());
+        }
+
+        return new AwaitOption(getDataGame());
     }
-    
+
     @Override
-    public void makeEventActionYear2() {
-        
+    public IStates makeEventActionYear2() {
+        try {
+            getDataGame().fightAgainstSystem(0, 3, "Planetary Defenses");
+        } catch (EmptyException ex) {
+            return new AwaitOption(getDataGame());
+        }
+
+        return new AwaitOption(getDataGame());
     }
-    
+
     @Override
     public String toString() {
         return name;
     }
-    
-    public String getNameEvent(){
+
+    public String getNameEvent() {
         return this.name;
     }
 }

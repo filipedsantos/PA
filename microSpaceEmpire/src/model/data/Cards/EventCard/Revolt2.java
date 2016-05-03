@@ -5,21 +5,29 @@ import java.util.logging.Logger;
 import model.data.DataGame;
 import model.data.EmptyException;
 import model.states.AwaitOption;
+import model.states.Ending;
 import model.states.IStates;
 
-public class SmallInvasionForce extends EventCard{
-private static final String name = "Small Invasion Force";
+public class Revolt2 extends EventCard{
+private static final String name = "Revolt";
 
-    public SmallInvasionForce(DataGame d) {
+    public Revolt2(DataGame d) {
         super(d);
     }
+    
+    // 1st Parameter: type of system to attack - (0) Least Resistance, (1) Last Empire added
+    // 2nd parameter: Force
+    // 3rd parameter: String techology used
 
     @Override
     public IStates makeEventActionYear1() {
+        
+        if(getDataGame().getEmpireSize() == 1)
+            return new AwaitOption(getDataGame());
+      
     try {
-        getDataGame().fightAgainstSystem(0, 1, "Planetary Defenses");
+        getDataGame().fightAgainstSystem(0, 1, "Hyper Televison");
     } catch (EmptyException ex) {
-        return new AwaitOption(getDataGame());
     }
         
         return new AwaitOption(getDataGame());
@@ -27,10 +35,13 @@ private static final String name = "Small Invasion Force";
     
     @Override
     public IStates makeEventActionYear2() {
+        
+        if(getDataGame().getEmpireSize() == 1)
+            return new Ending(getDataGame());
+        
     try {
-        getDataGame().fightAgainstSystem(0, 2, "Planetary Defenses");
+        getDataGame().fightAgainstSystem(0, 2, "Hyper Televison");
     } catch (EmptyException ex) {
-        return new AwaitOption(getDataGame());
     }
         
         return new AwaitOption(getDataGame());
@@ -44,5 +55,4 @@ private static final String name = "Small Invasion Force";
     public String getNameEvent(){
         return this.name;
     }
-
 }

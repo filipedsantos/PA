@@ -1,6 +1,11 @@
 package model.states;
 
+import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.data.Cards.EventCard.EventCard;
 import model.data.DataGame;
+import model.data.EmptyException;
 
 public class Upgrading extends StateAdapter {
 
@@ -87,6 +92,46 @@ public class Upgrading extends StateAdapter {
 
     @Override
     public IStates newTurn() {
+        EventCard event = null;
+        String log = "";
+        
+        
+            
+        
+        try {
+            event = getDataGame().getEvent(0);                  // Get top card of events deck
+            makeEventAction(event, getDataGame().getYear());    // Make event action
+            getDataGame().getEvents().remove(0);
+        } catch (EmptyException ex) {
+            System.err.println("Events");
+        }
+        
+        // If the last event card was used during 1s year
+        // shuffle all event cards
+        // Remove 2 event cards to side
+        // If the last event card was used during 1s year
+        // Inc game year
+        // Next phase: explore/attack
+        if(getDataGame().getEvents().isEmpty() && getDataGame().getYear() == 1){
+            getDataGame().createEventCards(getDataGame());
+            Collections.shuffle(getDataGame().getEvents());
+            getDataGame().getEvents().remove(0);
+            getDataGame().getEvents().remove(0);
+            getDataGame().setYear(2);
+            getDataGame().setLog("Passei para o 2 ano..");
+            return new AwaitOption(getDataGame());
+        }                                                                           
+                                                                                    
+        if(getDataGame().getEvents().isEmpty() && getDataGame().getYear() == 2){
+            return new Ending(getDataGame());
+        }
         return new AwaitOption(getDataGame());
+    }
+
+    private void makeEventAction(EventCard event, int year) {
+        if(year == 1)
+            event.makeEventActionYear1();
+        else
+            event.makeEventActionYear2();
     }
 }

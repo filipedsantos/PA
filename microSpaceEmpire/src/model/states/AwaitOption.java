@@ -37,7 +37,7 @@ public class AwaitOption extends StateAdapter {
             return this;
 
         try {
-             card = getDataGame().getNearSystems(0);
+            card = getDataGame().getNearSystems(0);
             attacking(card, false);
         } catch (EmptyException e) {
             System.err.println("Near System");

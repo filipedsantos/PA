@@ -1,6 +1,8 @@
 package model.data.Cards.EventCard;
 
 import model.data.DataGame;
+import model.states.AwaitOption;
+import model.states.IStates;
 
 public class DerelictShip extends EventCard{
     private static final String name = "Derelict Ship";
@@ -10,13 +12,15 @@ public class DerelictShip extends EventCard{
     }
 
     @Override
-    public void makeEventActionYear1() {
-        
+    public IStates makeEventActionYear1() {
+        getDataGame().addMetalFromEvent(1);
+        return new AwaitOption(getDataGame());
     }
     
     @Override
-    public void makeEventActionYear2() {
-        
+    public IStates makeEventActionYear2() {
+        getDataGame().addMetalFromEvent(1);
+        return new AwaitOption(getDataGame());
     }
     
     @Override

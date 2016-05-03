@@ -45,6 +45,9 @@ public class DataGame implements Constants {
     private List<SystemCard> empire;
     private List<SystemCard> unalignedSystems;
     private List<EventCard> events;
+    //private List<EventCard> discardedEvents;
+    
+    private int year; // save the actual year of the game
 
     public DataGame() throws IOException {
         this.nearSystems = new ArrayList<>();
@@ -58,6 +61,11 @@ public class DataGame implements Constants {
         buildStartingSystemFromFile(this, STARTING_SYSTEM_FILE);
         buildNearSystemsFromFile(this, NEAR_SYSTEMS_FILE);
         buildDistantSystemsFromFile(this, DISTANT_SYSTEMS_FILE);
+        
+         // Create technologies
+        this.technology = createTechnologies();
+        // Create Event Cards 
+        createEventCards(this);
 
         // Shuffle cards
         Collections.shuffle(nearSystems);
@@ -71,15 +79,24 @@ public class DataGame implements Constants {
         this.wealthStorage = 5;
         this.militaryStrenght = 5;
 
-        // Create technologies
-        this.technology = createTechnologies();
-        // Create Event Cards 
-        createEventCards(this);
+       
+        
+        this.year = 1; // start the game in 1s year
     }
+
 
     /**
      * Gets and Sets
      */
+    
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+    
     public String getLog() {
         return log;
     }
@@ -337,7 +354,7 @@ public class DataGame implements Constants {
         return tec;
     }
 
-    private void createEventCards(DataGame dataGame) {
+    public void createEventCards(DataGame dataGame) {
         this.addEvent(new Asteroid(dataGame));
         this.addEvent(new DerelictShip(dataGame));
         this.addEvent(new LargeInvasionForce(dataGame));
@@ -507,6 +524,117 @@ public class DataGame implements Constants {
                 break;    
         }
         return true;
+    }
+
+    public EventCard getEvent(int i) throws EmptyException {
+        if(this.events.isEmpty())
+            throw new EmptyException("Events");
+        
+        return this.events.get(i);
+    }
+
+    public void addWealthFromEvent(int i) {
+        int wLimit;
+        
+        if (this.isTechnologyPurchased("Interstellar Banking")) {
+            wLimit = WEALTH_STOCK_UPGRADED_LIMIT;
+        }
+        else{
+            wLimit = WEALTH_STOCK_LIMIT;
+        }
+        
+        int wStorage = wealthStorage + i;
+        
+        if(wStorage < wLimit){
+            wealthStorage = wStorage;
+        }
+        else{
+            wealthStorage = wLimit;
+        }
+            
+        setLog("Event Card Asteroid!\n you got plus 1 wealth");
+    }
+
+    public void addMetalFromEvent(int i) {
+        int mLimit;
+        
+        if (this.isTechnologyPurchased("Interstellar Banking")) {
+            mLimit = METAL_STOCk_UPGRADED_LIMIT;
+        }
+        else{
+            mLimit = METAL_STOCK_LIMIT;
+        }
+        
+        int mStorage = metalStorage + i;
+        
+        if(mStorage < mLimit){
+            metalStorage = mStorage;
+        }
+        else{
+            metalStorage = mLimit;
+        }
+        
+        setLog("Event Card Asteroid!\n you got plus 1 wealth");
+    }
+
+    public void fightAgainstSystem(int i, int force, String tec) throws EmptyException {
+        
+        SystemCard c = null;        
+        
+        switch(i){
+            case 0:
+                c = getSystemWithLowerResistance();
+                break;
+            case 1:
+                c = this.getEmpire().get(getEmpire().size()-1);
+                break;
+            default:
+                break;
+        }
+        
+        int actualResistance = c.getResistance();
+        
+        if(isTechnologyPurchased(tec)){
+            actualResistance++;
+        }
+        
+        int actualForce = getDiceNumber() + force;
+        
+        if(actualForce > actualResistance){
+            unalignedSystems.add(c);
+            empire.remove(c);
+            adjustResources(c);
+            if(i == 1)
+                setLog("Event Card Revolt!\n you lose the fight against people");
+            else
+                setLog("Event Card Invasion!\n you lose the fight against an unknwon enemy");
+        }else{
+            if(i == 1)
+                setLog("Event Card Revolt!\n you win the fight against people");
+            else
+                setLog("Event Card Invasion!\n you lose the fight against an unknwon enemy");
+        }
+            
+    }
+
+    private SystemCard getSystemWithLowerResistance() throws EmptyException {
+        
+        if(empire.isEmpty())
+            throw new EmptyException("Empire");
+        
+        
+        int resistance = getEmpire().get(0).getResistance();
+        int planet = 0;
+        
+        for (int i = 0; i < empire.size(); i++) {
+            if(getEmpire().get(i).getResistance() < resistance){
+                resistance = getEmpire().get(i).getResistance();
+                planet = i;
+            }
+            
+        }
+        
+        return empire.get(planet);
     }
 
     

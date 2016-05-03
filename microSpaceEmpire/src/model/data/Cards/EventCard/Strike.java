@@ -1,6 +1,8 @@
 package model.data.Cards.EventCard;
 
 import model.data.DataGame;
+import model.states.AwaitOption;
+import model.states.IStates;
 
 public class Strike extends EventCard{
 private static final String name = "Strike";
@@ -10,13 +12,13 @@ private static final String name = "Strike";
     }
 
     @Override
-    public void makeEventActionYear1() {
-        
+    public IStates makeEventActionYear1() { 
+        return new AwaitOption(getDataGame());
     }
     
     @Override
-    public void makeEventActionYear2() {
-        
+    public IStates makeEventActionYear2() {
+        return new AwaitOption(getDataGame());
     }
     
     @Override

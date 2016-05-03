@@ -56,11 +56,12 @@ public class TextUserInterface {
     //incompleto
     public void WhileAwaitingOption() {
         int opt;
-        this.showGame();
 
         System.out.println(game.getLog());
         game.refreshlog();
 
+        this.showGame();
+        
         System.out.println("");
         System.out.println("Explore-Attack/ Bide Time/ Conquer phase");
         System.out.println("");
