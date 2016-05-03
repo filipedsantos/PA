@@ -241,7 +241,7 @@ public class TextUserInterface {
         System.out.println("Technologies:\n");
 
         do {
-            clearScreen();
+            //clearScreen();
             for (int i = 0; i < 4; i++) {
                 for (int j = 0; j < 2; j++) {
                     if (j == 0 || j == 1 && game.getTechnology(i, j - 1).isBought() == true) {
@@ -250,14 +250,14 @@ public class TextUserInterface {
                     }
                 }
             }
-
-            System.out.println("\ninsert the name of the technology");
+            
+            System.out.println("\nType the name of the technology");
             System.out.print(">> ");
             
             tecName = s.nextLine();
             
-            if (game.validateTecName(tecName) == true) {
-                game.discoverTechnology();
+            if (game.validateTecName(tecName)) {
+                game.discoverTechnology(tecName);
             }else if(tecName == "0")
                 break;
 

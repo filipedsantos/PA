@@ -397,10 +397,11 @@ public class DataGame implements Constants {
 
     public boolean validateTecName(String tecName) {
         
-        for (int i=0; i<technology.length; i++){
-            for(int j = 0; j<technology[i].length; j++){
-                if(technology[i][j].getName().contains(tecName))
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 2; j++) {
+                if(this.technology[i][j].getName().equalsIgnoreCase(tecName)){
                     return true;
+                }    
             }
         }
         return false; 

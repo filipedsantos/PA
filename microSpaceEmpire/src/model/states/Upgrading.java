@@ -20,8 +20,6 @@ public class Upgrading extends StateAdapter{
     }
     
     public boolean getTechnology(){
-        
-        System.out.println("És verdad!");
         return this.technology;
     }
     
@@ -57,7 +55,9 @@ public class Upgrading extends StateAdapter{
     }
     
     @Override
-    public IStates discoverTechnology(){
+    public IStates discoverTechnology(String TecName){
+        
+        
         return this;
     }
     

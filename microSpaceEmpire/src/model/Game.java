@@ -71,7 +71,7 @@ public class Game {
    }
    
    public void discoverTechnology() {
-       setState(getState().discoverTechnology());
+       setState(getState().discoverTechnology(String ));
    }
    
    public void newTurn() {

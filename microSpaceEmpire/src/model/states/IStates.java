@@ -12,7 +12,7 @@ public interface IStates {
     IStates exploreAttack(SystemType s);
     IStates change(int o);
     IStates buildMilitary();
-    IStates discoverTechnology();
+    IStates discoverTechnology(String TecName);
     IStates newTurn();
     IStates gameOver();    
 }

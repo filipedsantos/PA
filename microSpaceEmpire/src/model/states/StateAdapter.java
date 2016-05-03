@@ -58,7 +58,7 @@ public class StateAdapter implements IStates{
    }
    
    @Override
-   public IStates discoverTechnology() {
+   public IStates discoverTechnology(String TecName) {
        return this;
    }
    
