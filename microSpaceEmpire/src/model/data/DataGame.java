@@ -407,6 +407,18 @@ public class DataGame implements Constants {
         return false; 
     }    
     
+    public Technology getTechnologyByName(String tecName) {
+        
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 2; j++) {
+                if(this.technology[i][j].getName().equalsIgnoreCase(tecName)){
+                    return technology[i][j];
+                }    
+            }
+        }
+        return null;
+    }  
+    
     public void upgradeStocklimits() {
         this.setMetalStorage(METAL_STOCk_UPGRADED_LIMIT);
         this.setWealthStorage(WEALTH_STOCK_UPGRADED_LIMIT);

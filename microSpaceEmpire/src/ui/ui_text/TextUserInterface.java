@@ -206,29 +206,20 @@ public class TextUserInterface {
         System.out.println("0 - Exit");
         System.out.print("\n>> ");
 
+        
         opt = s.nextInt();
         clearScreen();
-
+        
         if (opt == 1 && m == true) {
-            u.setMilitary(false);
             game.buildMilitary();
         } else if (opt == 2 && t == true) {
-            u.setTechnology(false);
             showTechnologies();
-            uiTechnology();
         } else if (opt == 3) {
-            u.setMilitary(true);
-            u.setTechnology(true);
             eventphase();
             game.newTurn();
         } else {
             game.gameOver();
         }
-    }
-
-    private void uiTechnology() {
-
-        game.discoverTechnology();
     }
 
     /**
@@ -240,31 +231,26 @@ public class TextUserInterface {
 
     public void showTechnologies() {
         String tecName = "";
+        s.nextLine();
         
         System.out.println("Technologies:\n");
-
-        do {
-            //clearScreen();
+        
             for (int i = 0; i < 4; i++) {
                 for (int j = 0; j < 2; j++) {
-                    if (j == 0 || j == 1 && game.getTechnology(i, j - 1).isBought() == true) {
+                    if (j == 0 && game.getTechnology(i, j).isBought() == false|| j == 1 && game.getTechnology(i, j - 1).isBought() == true) {
                         System.out.print("Wealth - " + game.getTechnology(i, j).getCost()
                                 + " " + game.getTechnology(i, j) + "\n");
                     }
                 }
             }
             
+            
             System.out.println("\nType the name of the technology");
             System.out.print(">> ");
             
             tecName = s.nextLine();
-            
-            if (game.validateTecName(tecName)) {
-                game.discoverTechnology(tecName);
-            }else if(tecName == "0")
-                break;
-
-        } while (1 == 1);
+            game.discoverTechnology(tecName);
+                    
     }
 
     public void clearScreen() {

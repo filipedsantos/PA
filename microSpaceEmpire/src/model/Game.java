@@ -70,8 +70,8 @@ public class Game {
        setState(getState().buildMilitary());
    }
    
-   public void discoverTechnology() {
-       setState(getState().discoverTechnology(String ));
+   public void discoverTechnology(String tecName) {
+       setState(getState().discoverTechnology(tecName));
    }
    
    public void newTurn() {
@@ -154,9 +154,4 @@ public class Game {
     public void refreshlog() {
         getDataGame().refreshLog();
     }
-
-    public boolean validateTecName(String tecName) {
-        return getDataGame().validateTecName(tecName);
-    }
- 
 }
