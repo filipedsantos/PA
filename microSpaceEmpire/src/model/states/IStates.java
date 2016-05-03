@@ -11,6 +11,7 @@ public interface IStates {
     IStates conquer(int opt);
     IStates exploreAttack(SystemType s);
     IStates change(int o);
+    IStates collect();
     IStates buildMilitary();
     IStates discoverTechnology(String TecName);
     IStates newTurn();

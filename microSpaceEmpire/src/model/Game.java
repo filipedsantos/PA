@@ -81,6 +81,10 @@ public class Game {
    public void gameOver() {
        setState(getState().gameOver());
    }
+   
+   public void collect(){
+       setState(getState().collect());
+   }
     
    //-------------------------------------
    //Metodos de acesso aos dados de jogo |

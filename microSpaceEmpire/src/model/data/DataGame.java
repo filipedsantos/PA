@@ -67,9 +67,9 @@ public class DataGame implements Constants {
         //Board info
         this.metalProduction = 1;
         this.wealthProduction = 1;
-        this.metalStorage = 0;
-        this.wealthStorage = 0;
-        this.militaryStrenght = 0;
+        this.metalStorage = 5;
+        this.wealthStorage = 5;
+        this.militaryStrenght = 5;
 
         // Create technologies
         this.technology = createTechnologies();
@@ -437,8 +437,8 @@ public class DataGame implements Constants {
     }
 
     public void swapResources(int i) {
-        if (i == 1) {
-            this.metalStorage += 2;
+        if (i == 2) {
+            this.metalStorage +=2;
             this.wealthStorage--;
         } else {
             this.metalStorage--;

@@ -161,26 +161,28 @@ public class TextUserInterface {
         game.refreshlog();
 
         if (game.isTechnologyPurchased("Interspecies Commerce")) {
-
+            
             showGame();
-
+            System.out.println("\n\nCollecting Phase: ");
             System.out.println("Exchange 2 units for 1 of: ");
             System.out.println("1 - Metal for wealth");
             System.out.println("2 - Wealth for metal");
             System.out.println("3 - Pass");
+            System.out.print(">> ");
 
-            while (s.hasNextInt()) {
+            while (!s.hasNextInt()) 
                 s.next();
-            }
+            
             int opt = s.nextInt();
 
-            if (opt == 3) {
+            if (opt == 3) 
                 game.pass();
-            }
-
+            
             game.change(opt);
         }
-        game.pass();
+        else{
+            game.pass();
+        }
 
     }
 
@@ -190,6 +192,9 @@ public class TextUserInterface {
         boolean m = u.getMilitary();
         boolean t = u.getTechnology();
 
+        System.out.print(game.getLog());
+        game.refreshlog();
+        
         System.out.println("");
         System.out.println("Build Military e Discover Technology phase");
         System.out.println("");
@@ -263,10 +268,6 @@ public class TextUserInterface {
 
     //processamento da fase de eventos
     private void eventphase() {
-        //rever
-        System.out.println(game.getDataGame().getEvents().get(0));
-
-        System.out.println("cenas cenas cenas -- ");
 
     }
 

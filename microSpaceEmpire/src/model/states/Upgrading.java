@@ -58,21 +58,25 @@ public class Upgrading extends StateAdapter {
     @Override
     public IStates discoverTechnology(String TecName) {
 
-        if (!getDataGame().validateTecName(TecName))  // if tecName not recogniced, return this
+        if (!getDataGame().validateTecName(TecName)){  // if tecName not recogniced, return this
+            getDataGame().setLog("\n\nThat technology does not exist!\n");
             return this;
-        else if(getDataGame().getTechnologyByName(TecName).getCost() > getDataGame().getWealthStorage()){ // if not enought wealth to buy tec, return this
+        }else if(getDataGame().getTechnologyByName(TecName).getCost() > getDataGame().getWealthStorage()){ // if not enought wealth to buy tec, return this
+            getDataGame().setLog("\n\nYou haven't enough wealth to buy this technology\n");
             return this;
-            //LOG
-        } else {
-        
+        } else if(!getDataGame().getTechnologyByName(TecName).isBought()){
+            
             getDataGame().getTechnologyByName(TecName).setBought(true);
             int newWealth = getDataGame().getWealthStorage() - getDataGame().getTechnologyByName(TecName).getCost();
             
             getDataGame().setWealthStorage(newWealth);
             
             this.technology = false;
+            
+            getDataGame().setLog("you purchase " + TecName + " with success!");
             return this;
         }
+        return this;
 
     }
 

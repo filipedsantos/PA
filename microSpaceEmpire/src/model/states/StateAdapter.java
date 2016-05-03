@@ -71,5 +71,10 @@ public class StateAdapter implements IStates{
    public IStates gameOver() {
        return this;
    }   
+
+    @Override
+    public IStates collect() {
+        return this;
+    }
     
 }
