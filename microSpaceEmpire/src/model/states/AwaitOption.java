@@ -87,7 +87,7 @@ public class AwaitOption extends StateAdapter {
                 if (militaryForce >= s.getResistance()) {
                     getDataGame().addEmpire(s);
                     getDataGame().adjustResources(s); // Update metal and wealth production with planet s
-                    getDataGame().getNearSystems().remove(0); // Remove NearSystem from arraylist because was added to empire
+                    getDataGame().getNearSystems().remove(0); // Remove NearSystem from arraylist because was added to empire // ERRO
                     getDataGame().setLog("");
                     if (conquer) {
                         getDataGame().getUnalignedSystems().remove(s);

@@ -18,6 +18,7 @@ import model.data.Cards.EventCard.EventCard;
 import model.data.Cards.EventCard.LargeInvasionForce;
 import model.data.Cards.EventCard.PeaceAndQuiet;
 import model.data.Cards.EventCard.Revolt;
+import model.data.Cards.EventCard.Revolt2;
 import model.data.Cards.EventCard.SmallInvasionForce;
 import model.data.Cards.EventCard.Strike;
 import model.data.Cards.SystemCard.DistantSystem;
@@ -360,6 +361,7 @@ public class DataGame implements Constants {
         this.addEvent(new LargeInvasionForce(dataGame));
         this.addEvent(new PeaceAndQuiet(dataGame));
         this.addEvent(new Revolt(dataGame));
+        this.addEvent(new Revolt2(dataGame));
         this.addEvent(new SmallInvasionForce(dataGame));
         this.addEvent(new Strike(dataGame));
     }
@@ -435,24 +437,7 @@ public class DataGame implements Constants {
         }
         return null;
     }  
-    
-//    public void upgradeStocklimits() {
-//        this.setMetalStorage(METAL_STOCk_UPGRADED_LIMIT);
-//        this.setWealthStorage(WEALTH_STOCK_UPGRADED_LIMIT);
-//    }
-//
-//    public void addProductionToStock() {
-//        this.metalStorage += getMetalProduction();
-//        this.wealthStorage += getWealthProduction();
-//    }
-//
-//    public void collectResources() {
-//        if (isTechnologyPurchased("Interstellar Banking")) {
-//            upgradeStocklimits();
-//        }
-//        addProductionToStock();
-//    }
-//
+
     public void swapResources(int i) {
         
         switch(i){
@@ -636,7 +621,4 @@ public class DataGame implements Constants {
         
         return empire.get(planet);
     }
-
-    
-
 }
