@@ -444,7 +444,7 @@ public class DataGame implements Constants {
     }
 
     public SystemCard getUnalignedSystemsCard(int i) throws ArrayIndexOutOfBoundsException {
-        if (i > getUnalignedSystemsSize()) {
+        if (i > getUnalignedSystemsSize() || i < 0) {
             throw new ArrayIndexOutOfBoundsException("Invalid option");
         }
 
@@ -461,7 +461,33 @@ public class DataGame implements Constants {
     }
 
     public void refreshLog() {
-        this.log="";
+        this.log = "";
+    }
+
+    public boolean canAttackPlanets(SystemType s) {
+        switch (s) {
+            case NEAR_SYSTEM:
+                if (this.nearSystems.isEmpty()) {
+                    this.log = "\n\nNo near systems to attack!\n\n";
+                    return false;
+                }
+                break;
+            case DISTANT_SYSTEM:
+                if (this.distantSystems.isEmpty()) {
+                    this.log = "\n\nNo distant systems to attack!\n\n";
+                    return false;
+                }
+                if(!this.isTechnologyPurchased("Forward Starbases")){
+                    this.log = "\n\nYou need to buy Forward Starbases technology first!\n\n";
+                    return false;
+                }
+                if(this.verifyNearSystemsOnUnalignedSystems()){
+                    this.log = "\n\nYou need to conquer all near systems first!\n\n";
+                    return false;
+                }
+                break;    
+        }
+        return true;
     }
 
     
