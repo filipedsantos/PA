@@ -57,6 +57,9 @@ public class TextUserInterface {
     public void WhileAwaitingOption() {
         int opt;
         this.showGame();
+        
+        System.out.println(game.getLog());
+        game.refreshlog();
 
         System.out.println("");
         System.out.println("Explore-Attack/ Bide Time/ Conquer phase");
@@ -80,9 +83,9 @@ public class TextUserInterface {
 
             if (sc == 1) //game.exploreAttack(SystemType.NEAR_SYSTEM);
             {
-                this.uiExploreAttack(SystemType.NEAR_SYSTEM);
+                game.exploreAttack(SystemType.NEAR_SYSTEM);
             } else {
-                this.uiExploreAttack(SystemType.DISTANT_SYSTEM);
+                game.exploreAttack(SystemType.DISTANT_SYSTEM);
             }
         }
         if (opt == 2) {
@@ -90,7 +93,7 @@ public class TextUserInterface {
             if (game.getDataGame().getUnalignedSystems().size() != 0) {
                 this.uiConquer();
             } else {
-                System.err.println("NOTHING TO CONQUER!!!\n");
+                System.out.println("NOTHING TO CONQUER!!!\n");
             }
         }
 
@@ -107,23 +110,23 @@ public class TextUserInterface {
     /*
      *     
      **/
-    private void uiExploreAttack(SystemType s) {
-
-        if (s == SystemType.NEAR_SYSTEM) {
-
-            game.exploreAttack(s);
-
-        } else if (s == SystemType.DISTANT_SYSTEM) {
-            if (game.verifyNearSystemsOnUnalignedSystems() && game.isTechnologyPurchased("Forward Starbases")) {
-                game.exploreAttack(s);
-            } else {
-                System.err.println("YOU CAN'T EXPLORE DISTANT SYSTEMS YET!\n\n");
-            }
-
-        } else {
-            System.out.println("[ERROR]: Type of system."); // Never should happen.
-        }
-    }
+//    private void uiExploreAttack(SystemType s) {
+//
+//        if (s == SystemType.NEAR_SYSTEM) {
+//
+//            game.exploreAttack(s);
+//
+//        } else if (s == SystemType.DISTANT_SYSTEM) {
+//            if (game.verifyNearSystemsOnUnalignedSystems() && game.isTechnologyPurchased("Forward Starbases")) {
+//                game.exploreAttack(s);
+//            } else {
+//                System.err.println("YOU CAN'T EXPLORE DISTANT SYSTEMS YET!\n\n");
+//            }
+//
+//        } else {
+//            System.out.println("[ERROR]: Type of system."); // Never should happen.
+//        }
+//    }
 
     private void uiConquer() {
 
