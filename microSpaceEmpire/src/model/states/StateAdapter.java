@@ -76,5 +76,6 @@ public class StateAdapter implements IStates{
     public IStates collect() {
         return this;
     }
+
     
 }

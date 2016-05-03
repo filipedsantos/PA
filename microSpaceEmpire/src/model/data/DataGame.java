@@ -419,30 +419,36 @@ public class DataGame implements Constants {
         return null;
     }  
     
-    public void upgradeStocklimits() {
-        this.setMetalStorage(METAL_STOCk_UPGRADED_LIMIT);
-        this.setWealthStorage(WEALTH_STOCK_UPGRADED_LIMIT);
-    }
-
-    public void addProductionToStock() {
-        this.metalStorage += getMetalProduction();
-        this.wealthStorage += getWealthProduction();
-    }
-
-    public void collectResources() {
-        if (isTechnologyPurchased("Interstellar Banking")) {
-            upgradeStocklimits();
-        }
-        addProductionToStock();
-    }
-
+//    public void upgradeStocklimits() {
+//        this.setMetalStorage(METAL_STOCk_UPGRADED_LIMIT);
+//        this.setWealthStorage(WEALTH_STOCK_UPGRADED_LIMIT);
+//    }
+//
+//    public void addProductionToStock() {
+//        this.metalStorage += getMetalProduction();
+//        this.wealthStorage += getWealthProduction();
+//    }
+//
+//    public void collectResources() {
+//        if (isTechnologyPurchased("Interstellar Banking")) {
+//            upgradeStocklimits();
+//        }
+//        addProductionToStock();
+//    }
+//
     public void swapResources(int i) {
-        if (i == 2) {
-            this.metalStorage +=2;
-            this.wealthStorage--;
-        } else {
-            this.metalStorage--;
-            this.wealthStorage += 2;
+        
+        switch(i){
+            case 1:
+                this.metalStorage -= 2;
+                this.wealthStorage++;
+                break;
+            case 2:
+                this.metalStorage++;
+                this.wealthStorage -= 2;
+                break;
+            default:
+                break;
         }
     }
 

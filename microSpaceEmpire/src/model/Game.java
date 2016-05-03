@@ -83,7 +83,7 @@ public class Game {
    }
    
    public void collect(){
-       setState(getState().collect());
+       setState((getState().collect()));
    }
     
    //-------------------------------------
@@ -135,17 +135,17 @@ public class Game {
         return getDataGame().isTechnologyPurchased(name);
     }
 
-    public void upgradeStocklimits() {
-        getDataGame().upgradeStocklimits();
-    }
-
-    public void addProductionToStock() {
-        getDataGame().addProductionToStock();
-    }
-
-    public void collectResources() {
-        getDataGame().collectResources();
-    }
+//    public void upgradeStocklimits() {
+//        getDataGame().upgradeStocklimits();
+//    }
+//
+//    public void addProductionToStock() {
+//        getDataGame().addProductionToStock();
+//    }
+//
+//    public void collectResources() {
+//        getDataGame().collectResources();
+//    }
 
     public SystemType getUnalignedSystemCardType(int i) {
         return getDataGame().getUnalignedSystems().get(i).getSystemType();

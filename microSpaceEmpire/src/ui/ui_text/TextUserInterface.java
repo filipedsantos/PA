@@ -154,9 +154,8 @@ public class TextUserInterface {
      *
      */
     public void WhileCollecting() {
-
-        game.collectResources();
-
+        
+        game.collect();
         System.out.println(game.getLog());
         game.refreshlog();
 
@@ -174,9 +173,6 @@ public class TextUserInterface {
                 s.next();
             
             int opt = s.nextInt();
-
-            if (opt == 3) 
-                game.pass();
             
             game.change(opt);
         }
