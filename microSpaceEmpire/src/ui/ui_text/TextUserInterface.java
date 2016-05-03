@@ -107,42 +107,20 @@ public class TextUserInterface {
         }
 
     }
-
-    /*
-     *     
-     **/
-//    private void uiExploreAttack(SystemType s) {
-//
-//        if (s == SystemType.NEAR_SYSTEM) {
-//
-//            game.exploreAttack(s);
-//
-//        } else if (s == SystemType.DISTANT_SYSTEM) {
-//            if (game.verifyNearSystemsOnUnalignedSystems() && game.isTechnologyPurchased("Forward Starbases")) {
-//                game.exploreAttack(s);
-//            } else {
-//                System.err.println("YOU CAN'T EXPLORE DISTANT SYSTEMS YET!\n\n");
-//            }
-//
-//        } else {
-//            System.out.println("[ERROR]: Type of system."); // Never should happen.
-//        }
-//    }
+    
     private void uiConquer() {
-
+        
         for (int i = 0; i < game.getDataGame().getUnalignedSystemsSize(); i++) {
             System.out.println(i + 1 + " - " + game.getDataGame().getUnalignedSystems().get(i).getName()
                     + ", Resistence: " + game.getDataGame().getUnalignedSystems().get(i).getResistance());
         }
 
         System.out.println("What is the planet you want to conquer?");
-        System.out.println(">> ");
+        System.out.print(">> ");
 
         int opt = this.s.nextInt() - 1;
 
         try {
-            System.out.println("\nActual militar stregth: " + game.getActualForce());
-
             game.conquer(opt);
         } catch (ArrayIndexOutOfBoundsException e) {
             clearScreen();

@@ -95,12 +95,9 @@ public class Upgrading extends StateAdapter {
         EventCard event = null;
         String log = "";
         
-        
-            
-        
         try {
             event = getDataGame().getEvent(0);                  // Get top card of events deck
-            makeEventAction(event, getDataGame().getYear());    // Make event action
+            //makeEventAction(event, getDataGame().getYear());    // Make event action
             getDataGame().getEvents().remove(0);
         } catch (EmptyException ex) {
             System.err.println("Events");
