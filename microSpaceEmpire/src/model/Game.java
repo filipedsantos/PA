@@ -8,6 +8,7 @@ import model.data.Cards.SystemCard.SystemCard;
 import model.data.Cards.SystemCard.SystemType;
 import model.data.DataGame;
 import model.data.EmptyException;
+import model.data.Technology;
 import model.states.AwaitBeginning;
 import model.states.IStates;
 
@@ -122,6 +123,10 @@ public class Game {
         return getDataGame().verifyNearSystemsOnUnalignedSystems();
     }
 
+    public Technology getTechnology(int i, int j) {
+        return getDataGame().getTechnology()[i][j];
+    }
+    
     public boolean isTechnologyPurchased(String name) {
         return getDataGame().isTechnologyPurchased(name);
     }
@@ -148,6 +153,10 @@ public class Game {
 
     public void refreshlog() {
         getDataGame().refreshLog();
+    }
+
+    public boolean validateTecName(String tecName) {
+        return getDataGame().validateTecName(tecName);
     }
  
 }

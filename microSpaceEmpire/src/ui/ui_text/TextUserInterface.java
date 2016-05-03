@@ -107,7 +107,6 @@ public class TextUserInterface {
     /*
      *     
      **/
-    
     private void uiExploreAttack(SystemType s) {
 
         if (s == SystemType.NEAR_SYSTEM) {
@@ -158,9 +157,9 @@ public class TextUserInterface {
 
         System.out.println(game.getLog());
         game.refreshlog();
-        
+
         if (game.isTechnologyPurchased("Interspecies Commerce")) {
-            
+
             showGame();
 
             System.out.println("Exchange 2 units for 1 of: ");
@@ -185,10 +184,10 @@ public class TextUserInterface {
 
     public void WhileUpgrading(Upgrading u) {
         int opt;
-        
+
         boolean m = u.getMilitary();
         boolean t = u.getTechnology();
- 
+
         System.out.println("");
         System.out.println("Build Military e Discover Technology phase");
         System.out.println("");
@@ -209,12 +208,11 @@ public class TextUserInterface {
 
         if (opt == 1 && m == true) {
             u.setMilitary(false);
-            //this.upgradeMilitary();
             game.buildMilitary();
         } else if (opt == 2 && t == true) {
             u.setTechnology(false);
             showTechnologies();
-            game.discoverTechnology();
+            uiTechnology();
         } else if (opt == 3) {
             u.setMilitary(true);
             u.setTechnology(true);
@@ -225,6 +223,11 @@ public class TextUserInterface {
         }
     }
 
+    private void uiTechnology() {
+
+        game.discoverTechnology();
+    }
+
     /**
      * functions
      */
@@ -233,14 +236,32 @@ public class TextUserInterface {
     }
 
     public void showTechnologies() {
-
+        String tecName = "";
+        
         System.out.println("Technologies:\n");
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 2; j++) {
-                System.out.println(game.getDataGame().getTechnology()[i][j]);
 
+        do {
+            clearScreen();
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 2; j++) {
+                    if (j == 0 || j == 1 && game.getTechnology(i, j - 1).isBought() == true) {
+                        System.out.print("Wealth - " + game.getTechnology(i, j).getCost()
+                                + " " + game.getTechnology(i, j) + "\n");
+                    }
+                }
             }
-        }
+
+            System.out.println("\ninsert the name of the technology");
+            System.out.print(">> ");
+            
+            tecName = s.nextLine();
+            
+            if (game.validateTecName(tecName) == true) {
+                game.discoverTechnology();
+            }else if(tecName == "0")
+                break;
+
+        } while (1 == 1);
     }
 
     public void clearScreen() {
@@ -257,4 +278,5 @@ public class TextUserInterface {
         System.out.println("cenas cenas cenas -- ");
 
     }
+
 }

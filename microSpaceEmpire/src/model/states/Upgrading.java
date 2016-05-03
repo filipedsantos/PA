@@ -20,6 +20,8 @@ public class Upgrading extends StateAdapter{
     }
     
     public boolean getTechnology(){
+        
+        System.out.println("És verdad!");
         return this.technology;
     }
     
