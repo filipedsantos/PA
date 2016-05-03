@@ -56,6 +56,10 @@ public class Upgrading extends StateAdapter {
         } else {
         
             getDataGame().getTechnologyByName(TecName).setBought(true);
+            int newWealth = getDataGame().getWealthStorage() - getDataGame().getTechnologyByName(TecName).getCost();
+            
+            getDataGame().setWealthStorage(newWealth);
+            
             this.technology = false;
             return this;
         }
