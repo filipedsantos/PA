@@ -77,7 +77,7 @@ public class DataGame implements Constants {
         this.wealthProduction = 1;
         this.metalStorage = 5;
         this.wealthStorage = 5;
-        this.militaryStrenght = 5;
+        this.militaryStrenght = 0;
 
        
         
@@ -347,7 +347,7 @@ public class DataGame implements Constants {
         tec[1][0] = new Technology("Robot Workers", 2, "Recive 1/2 production during strike.");
         tec[1][1] = new Technology("Planetary Defenses", 4, "+1 to resistance during invasion.");
         tec[2][0] = new Technology("Hyper Television", 3, "+1 resistence during revolt.");
-        tec[2][1] = new Technology("Interstaller Diplomacy", 5, "Next planet is conquered for free.");
+        tec[2][1] = new Technology("Interstellar Diplomacy", 5, "Next planet is conquered for free.");
         tec[3][0] = new Technology("Interspecies Commerce", 2, "Exchange 2 of one resource for 1 of the other.");
         tec[3][1] = new Technology("Interstellar Banking", 3, "Advance beyond storage value 3.");
 
