@@ -353,13 +353,13 @@ public class DataGame implements Constants {
 
     public void createEventCards(DataGame dataGame) {
         this.addEvent(new Asteroid(dataGame));
-        //this.addEvent(new DerelictShip(dataGame));
-        //this.addEvent(new LargeInvasionForce(dataGame));
+        this.addEvent(new DerelictShip(dataGame));
+        this.addEvent(new LargeInvasionForce(dataGame));
         this.addEvent(new PeaceAndQuiet(dataGame));
         this.addEvent(new Revolt(dataGame));
         this.addEvent(new Revolt2(dataGame));
-        //this.addEvent(new SmallInvasionForce(dataGame));
-        //this.addEvent(new Strike(dataGame));
+        this.addEvent(new SmallInvasionForce(dataGame));
+        this.addEvent(new Strike(dataGame));
     }
 
     public NearSystem getNearSystems(int i) throws EmptyException {

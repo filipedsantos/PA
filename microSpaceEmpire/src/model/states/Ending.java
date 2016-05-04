@@ -9,4 +9,5 @@ public class Ending extends StateAdapter{
         super(dataGame);
     }
     
+    
 }

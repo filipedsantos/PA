@@ -1,8 +1,6 @@
 package model.states;
 
 import java.util.Collections;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.data.Cards.EventCard.EventCard;
 import model.data.DataGame;
 import model.data.EmptyException;
@@ -97,7 +95,7 @@ public class Upgrading extends StateAdapter {
         
         try {
             event = getDataGame().getEvent(0);                  // Get top card of events deck
-            makeEventAction(event, getDataGame().getYear());    // Make event action
+            //makeEventAction(event, getDataGame().getYear());    // Make event action
             getDataGame().getEvents().remove(0);
         } catch (EmptyException ex) {
             System.err.println("Events");
@@ -113,8 +111,8 @@ public class Upgrading extends StateAdapter {
         if(getDataGame().getEvents().isEmpty() && getDataGame().getYear() == 1){
             getDataGame().createEventCards(getDataGame());
             Collections.shuffle(getDataGame().getEvents());
-            //getDataGame().getEvents().remove(0);
-            //getDataGame().getEvents().remove(0);
+            getDataGame().getEvents().remove(0);
+            getDataGame().getEvents().remove(0);
             getDataGame().setYear(2);
             getDataGame().setLog("\n\nHappy 2nd Year!");
             return new AwaitOption(getDataGame());
@@ -124,13 +122,13 @@ public class Upgrading extends StateAdapter {
             return new Ending(getDataGame());
         }
         
-        return new AwaitOption(getDataGame());
+        return makeEventAction(event, getDataGame().getYear());
     }
 
-    private void makeEventAction(EventCard event, int year) {
+    private IStates makeEventAction(EventCard event, int year) {
         if(year == 1)
-            event.makeEventActionYear1();
+            return event.makeEventActionYear1();
         else
-            event.makeEventActionYear2();
+            return event.makeEventActionYear2();
     }
 }
