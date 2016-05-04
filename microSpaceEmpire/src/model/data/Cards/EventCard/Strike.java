@@ -14,12 +14,14 @@ private static final String name = "Strike";
     @Override
     public IStates makeEventActionYear1() { 
         getDataGame().setLog("'Strike'");
+        getDataGame().setStrikeEvent(true);
         return new AwaitOption(getDataGame());
     }
     
     @Override
     public IStates makeEventActionYear2() {
         getDataGame().setLog("'Strike'");
+        getDataGame().setStrikeEvent(true);
         return new AwaitOption(getDataGame());
     }
     
