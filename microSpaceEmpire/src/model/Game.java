@@ -106,11 +106,7 @@ public class Game {
     public NearSystem getNearSystem() throws EmptyException{
         return getDataGame().getNearSystems(0);
     }
-    
-    public SystemCard getUnaligedNearSystemCard(int i) throws ArrayIndexOutOfBoundsException{
-        return getDataGame().getUnalignedSystemsCard(i);
-    }
-    
+
     public DistantSystem getDistantSystem() throws EmptyException {
         return getDataGame().getDistantSystems(0);
     }

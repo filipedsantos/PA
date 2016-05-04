@@ -22,11 +22,8 @@ public class AwaitOption extends StateAdapter {
     @Override
     public IStates conquer(int opt) {
 
-        conquering(opt);
-        
         if (getDataGame().getTechnologyByName("Interstellar Diplomacy").isBought()) {
-            conquerForFree(getDataGame().getUnalignedSystemsCard(opt));
-            System.out.println("aqui1");
+            conquerForFree(getDataGame().getUnalignedSystems().get(opt));
 
         } else 
             conquering(opt);
@@ -129,10 +126,11 @@ public class AwaitOption extends StateAdapter {
 
     private void conquering(int index) {
         String log = "\n";
-        SystemCard card = getDataGame().getUnalignedSystemsCard(index);
+        
+        System.out.println("this is my index "+ index);
+        SystemCard card = getDataGame().getUnalignedSystems().get(index);
 
         int militaryForce = getDataGame().getDiceNumber() + getDataGame().getMilitaryStrenght();
-        System.out.println("SOU FORTEE :" + militaryForce);
 
         log = "Attacking planet: " + card.getName() + "\nPlanet resistance: " + card.getResistance();
         log += "\nActual Military force: " + militaryForce;

@@ -13,11 +13,13 @@ private static final String name = "Peace & Quiet";
 
     @Override
     public IStates makeEventActionYear1() {
+        getDataGame().setLog("'Peace & Quiet', Nothing Happens");
         return new AwaitOption(getDataGame());
     }
     
     @Override
     public IStates makeEventActionYear2() {
+        getDataGame().setLog("'Peace & Quiet', Nothing Happens");
         return new AwaitOption(getDataGame());
     }
     

@@ -97,7 +97,7 @@ public class Upgrading extends StateAdapter {
         
         try {
             event = getDataGame().getEvent(0);                  // Get top card of events deck
-            //makeEventAction(event, getDataGame().getYear());    // Make event action
+            makeEventAction(event, getDataGame().getYear());    // Make event action
             getDataGame().getEvents().remove(0);
         } catch (EmptyException ex) {
             System.err.println("Events");
@@ -109,19 +109,21 @@ public class Upgrading extends StateAdapter {
         // If the last event card was used during 1s year
         // Inc game year
         // Next phase: explore/attack
+
         if(getDataGame().getEvents().isEmpty() && getDataGame().getYear() == 1){
             getDataGame().createEventCards(getDataGame());
             Collections.shuffle(getDataGame().getEvents());
-            getDataGame().getEvents().remove(0);
-            getDataGame().getEvents().remove(0);
+            //getDataGame().getEvents().remove(0);
+            //getDataGame().getEvents().remove(0);
             getDataGame().setYear(2);
-            getDataGame().setLog("Passei para o 2 ano..");
+            getDataGame().setLog("\n\nHappy 2nd Year!");
             return new AwaitOption(getDataGame());
         }                                                                           
                                                                                     
         if(getDataGame().getEvents().isEmpty() && getDataGame().getYear() == 2){
             return new Ending(getDataGame());
         }
+        
         return new AwaitOption(getDataGame());
     }
 

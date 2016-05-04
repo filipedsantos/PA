@@ -17,9 +17,12 @@ public class LargeInvasionForce extends EventCard {
 
     @Override
     public IStates makeEventActionYear1() {
+        getDataGame().setLog("'Large Invasion Force'");
         try {
+            
             getDataGame().fightAgainstSystem(0, 2, "Planetary Defenses");
         } catch (EmptyException ex) {
+            System.out.println("nothing was done");
             return new AwaitOption(getDataGame());
         }
 
@@ -28,9 +31,11 @@ public class LargeInvasionForce extends EventCard {
 
     @Override
     public IStates makeEventActionYear2() {
+        getDataGame().setLog("'Large Invasion Force'");
         try {
             getDataGame().fightAgainstSystem(0, 3, "Planetary Defenses");
         } catch (EmptyException ex) {
+            System.out.println("nothing was done");
             return new AwaitOption(getDataGame());
         }
 

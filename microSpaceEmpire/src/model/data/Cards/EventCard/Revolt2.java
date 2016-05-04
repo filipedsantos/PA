@@ -21,12 +21,13 @@ private static final String name = "Revolt";
 
     @Override
     public IStates makeEventActionYear1() {
-        
-        if(getDataGame().getEmpireSize() == 1)
+        getDataGame().setLog("'Revolt2'");
+        if(getDataGame().getEmpireSize() == 1){
+            getDataGame().setLog("You only have Home World, nothing to do!");
             return new AwaitOption(getDataGame());
-      
+    }
     try {
-        getDataGame().fightAgainstSystem(0, 1, "Hyper Televison");
+        getDataGame().fightAgainstSystem(1, 1, "Hyper Televison");
     } catch (EmptyException ex) {
     }
         
@@ -35,12 +36,14 @@ private static final String name = "Revolt";
     
     @Override
     public IStates makeEventActionYear2() {
+        getDataGame().setLog("'Revolt2'");
         
-        if(getDataGame().getEmpireSize() == 1)
+        if(getDataGame().getEmpireSize() == 1){
+            getDataGame().setLog("You only have Home World, GAME OVER!");
             return new Ending(getDataGame());
-        
+        }
     try {
-        getDataGame().fightAgainstSystem(0, 2, "Hyper Televison");
+        getDataGame().fightAgainstSystem(1, 2, "Hyper Televison");
     } catch (EmptyException ex) {
     }
         

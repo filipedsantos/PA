@@ -7,8 +7,9 @@ import model.data.EmptyException;
 import model.states.AwaitOption;
 import model.states.IStates;
 
-public class SmallInvasionForce extends EventCard{
-private static final String name = "Small Invasion Force";
+public class SmallInvasionForce extends EventCard {
+
+    private static final String name = "Small Invasion Force";
 
     public SmallInvasionForce(DataGame d) {
         super(d);
@@ -16,32 +17,34 @@ private static final String name = "Small Invasion Force";
 
     @Override
     public IStates makeEventActionYear1() {
-    try {
-        getDataGame().fightAgainstSystem(0, 1, "Planetary Defenses");
-    } catch (EmptyException ex) {
+        getDataGame().setLog("'Small Invasion Force'");
+        try {
+            getDataGame().fightAgainstSystem(0, 1, "Planetary Defenses");
+        } catch (EmptyException ex) {
+            return new AwaitOption(getDataGame());
+        }
+
         return new AwaitOption(getDataGame());
     }
-        
-        return new AwaitOption(getDataGame());
-    }
-    
+
     @Override
     public IStates makeEventActionYear2() {
-    try {
-        getDataGame().fightAgainstSystem(0, 2, "Planetary Defenses");
-    } catch (EmptyException ex) {
+        getDataGame().setLog("'Small Invasion Force'");
+        try {
+            getDataGame().fightAgainstSystem(0, 2, "Planetary Defenses");
+        } catch (EmptyException ex) {
+            return new AwaitOption(getDataGame());
+        }
+
         return new AwaitOption(getDataGame());
     }
-        
-        return new AwaitOption(getDataGame());
-    }
-    
+
     @Override
     public String toString() {
         return name;
     }
-    
-    public String getNameEvent(){
+
+    public String getNameEvent() {
         return this.name;
     }
 

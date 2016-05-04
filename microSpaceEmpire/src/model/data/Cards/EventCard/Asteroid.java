@@ -13,12 +13,14 @@ public class Asteroid extends EventCard{
 
     @Override
     public IStates makeEventActionYear1() {
+        getDataGame().setLog("'Asteroid'");
         getDataGame().addWealthFromEvent(1);
         return new AwaitOption(getDataGame());
     }
     
     @Override
     public IStates makeEventActionYear2() {
+        getDataGame().setLog("'Asteroid'");
         getDataGame().addWealthFromEvent(1);
         return new AwaitOption(getDataGame());
     }

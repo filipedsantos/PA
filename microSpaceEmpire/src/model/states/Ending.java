@@ -8,4 +8,5 @@ public class Ending extends StateAdapter{
     public Ending(DataGame dataGame){
         super(dataGame);
     }
+    
 }
