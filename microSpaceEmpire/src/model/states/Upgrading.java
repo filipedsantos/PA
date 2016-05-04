@@ -45,7 +45,7 @@ public class Upgrading extends StateAdapter {
         }
 
         this.military = false;
-        
+
         System.out.println("Limit : " + limit);
         System.out.println("MS: " + getDataGame().getMilitaryStrenght());
 
@@ -61,21 +61,21 @@ public class Upgrading extends StateAdapter {
     @Override
     public IStates discoverTechnology(String TecName) {
 
-        if (!getDataGame().validateTecName(TecName)){  // if tecName not recogniced, return this
+        if (!getDataGame().validateTecName(TecName)) {  // if tecName not recogniced, return this
             getDataGame().setLog("\n\nThat technology does not exist!\n");
             return this;
-        }else if(getDataGame().getTechnologyByName(TecName).getCost() > getDataGame().getWealthStorage()){ // if not enought wealth to buy tec, return this
+        } else if (getDataGame().getTechnologyByName(TecName).getCost() > getDataGame().getWealthStorage()) { // if not enought wealth to buy tec, return this
             getDataGame().setLog("\n\nYou haven't enough wealth to buy this technology\n");
             return this;
-        } else if(!getDataGame().getTechnologyByName(TecName).isBought()){
-            
+        } else if (!getDataGame().getTechnologyByName(TecName).isBought()) {
+
             getDataGame().getTechnologyByName(TecName).setBought(true);
             int newWealth = getDataGame().getWealthStorage() - getDataGame().getTechnologyByName(TecName).getCost();
-            
+
             getDataGame().setWealthStorage(newWealth);
-            
+
             this.technology = false;
-            
+
             getDataGame().setLog("you purchase " + TecName + " with success!");
             return this;
         }
@@ -92,7 +92,7 @@ public class Upgrading extends StateAdapter {
     public IStates newTurn() {
         EventCard event = null;
         String log = "";
-        
+
         try {
             event = getDataGame().getEvent(0);                  // Get top card of events deck
             //makeEventAction(event, getDataGame().getYear());    // Make event action
@@ -100,15 +100,14 @@ public class Upgrading extends StateAdapter {
         } catch (EmptyException ex) {
             System.err.println("Events");
         }
-        
+
         // If the last event card was used during 1s year
         // shuffle all event cards
         // Remove 2 event cards to side
         // If the last event card was used during 1s year
         // Inc game year
         // Next phase: explore/attack
-
-        if(getDataGame().getEvents().isEmpty() && getDataGame().getYear() == 1){
+        if (getDataGame().getEvents().isEmpty() && getDataGame().getYear() == 1) {
             getDataGame().createEventCards(getDataGame());
             Collections.shuffle(getDataGame().getEvents());
             getDataGame().getEvents().remove(0);
@@ -116,19 +115,20 @@ public class Upgrading extends StateAdapter {
             getDataGame().setYear(2);
             getDataGame().setLog("\n\nHappy 2nd Year!");
             return new AwaitOption(getDataGame());
-        }                                                                           
-                                                                                    
-        if(getDataGame().getEvents().isEmpty() && getDataGame().getYear() == 2){
+        }
+
+        if (getDataGame().getEvents().isEmpty() && getDataGame().getYear() == 2) {
             return new Ending(getDataGame());
         }
-        
+
         return makeEventAction(event, getDataGame().getYear());
     }
 
     private IStates makeEventAction(EventCard event, int year) {
-        if(year == 1)
+        if (year == 1) {
             return event.makeEventActionYear1();
-        else
+        } else {
             return event.makeEventActionYear2();
+        }
     }
 }

@@ -34,7 +34,8 @@ public class DataGame implements Constants {
     private int militaryStrenght;
     private int metalProduction;
     private int wealthProduction;
-
+    static int Score;
+            
     private String log; // String to save information processed in states
 
     //Technologies
@@ -61,6 +62,8 @@ public class DataGame implements Constants {
         this.strikeEvent = false;
         this.log = "";
 
+        this.Score=0;
+        
         // Read System Cards from files
         buildStartingSystemFromFile(this, STARTING_SYSTEM_FILE);
         buildNearSystemsFromFile(this, NEAR_SYSTEMS_FILE);
@@ -79,9 +82,9 @@ public class DataGame implements Constants {
         //Board info
         this.metalProduction = 1;
         this.wealthProduction = 1;
-        this.metalStorage = 5;
-        this.wealthStorage = 5;
-        this.militaryStrenght = 6;
+        this.metalStorage = 0;
+        this.wealthStorage = 0;
+        this.militaryStrenght = 0;
 
         this.year = 1; // start the game in 1s year
     }
@@ -628,5 +631,65 @@ public class DataGame implements Constants {
         }
 
         return empire.get(planet);
+    }
+
+    public static int getScore() {
+        return Score;
+    }
+
+    public static void setScore(int Score) {
+        DataGame.Score += Score;
+    }
+
+    public void generateScore() {
+        int score = 0;
+        int pointsOfThischeck = 0;
+        setLog("SCOREBOARD: \n");
+        
+        //1 point for every card on system
+        for(int i = 0; i< getEmpire().size(); i++)
+            score += getEmpire().get(i).getPoints();
+        
+        setLog("\n"+score+" points for sum victory point of all cards in your Empire.");
+        
+        //1 point for every technologies purchased
+        for(int i = 0; i<4; i++){
+            for(int j=0; j<2; j++){
+                if(getTechnology()[i][j].isBought())
+                    pointsOfThischeck++;
+            }
+        }
+        score += pointsOfThischeck;
+        setLog("\n"+pointsOfThischeck+" points for sum of technologies purchased.");
+        
+        pointsOfThischeck=0;
+        
+        //1 point if 0 systems near & distant cards 
+        if(getNearSystems().size()==0 && getDistantSystemsSize()==0){
+            score+=1;
+            setLog("\n"+1+" points for having all card turned up.");
+        }
+        
+        //3 points if every card are on Empire
+        if(getNearSystems().size()==0 && getDistantSystemsSize()==0 && getUnalignedSystemsSize()==0){
+            score+=3;
+            setLog("\n"+3+" for having all system cards on your Empire!");
+        }
+        
+        //1 point if every technology purchased
+        for(int i = 0; i<4; i++){
+            for(int j=0; j<2; j++){
+                if(getTechnology()[i][j].isBought())
+                    pointsOfThischeck++;
+            }
+        }
+        if(pointsOfThischeck == 8){
+            score+=1;
+            setLog("\n" + 1 +" point for having all technologies discovered.");
+        }
+            
+        
+        setScore(score);
+        setLog("\n\nThe final Score is: "+getScore());
     }
 }

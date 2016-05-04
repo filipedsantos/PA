@@ -42,14 +42,14 @@ public class TextUserInterface {
                 WhileUpgrading(u);
             }
         }
-
+        
+        System.out.println(game.getDataGame().getLog());
+        
         System.out.println("");
         System.out.println("Game Over");
     }
 
-    //incompleto 
-    public void WhileAwaitingBeginning() {
-        //showGame();
+    public void WhileAwaitingBeginning() {;
         game.start();
     }
 
