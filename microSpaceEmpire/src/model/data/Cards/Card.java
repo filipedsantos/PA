@@ -1,9 +1,10 @@
 
 package model.data.Cards;
 
+import java.io.Serializable;
 import model.data.DataGame;
 
-public abstract class Card {
+public abstract class Card implements Serializable{
     
     private DataGame dataGame;
     private CardType cardType;

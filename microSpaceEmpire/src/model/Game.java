@@ -1,10 +1,12 @@
-
 package model;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import model.data.Cards.SystemCard.DistantSystem;
 import model.data.Cards.SystemCard.NearSystem;
-import model.data.Cards.SystemCard.SystemCard;
 import model.data.Cards.SystemCard.SystemType;
 import model.data.DataGame;
 import model.data.EmptyException;
@@ -13,14 +15,15 @@ import model.states.AwaitBeginning;
 import model.states.IStates;
 
 public class Game {
+
     private DataGame dataGame;
     private IStates state;
-    
+
     public Game() throws IOException {
         dataGame = new DataGame();
         state = new AwaitBeginning(dataGame);
     }
-    
+
     //uso geral dos dados de jogo
     public DataGame getDataGame() {
         return dataGame;
@@ -29,7 +32,7 @@ public class Game {
     public void setDataGame(DataGame dataGame) {
         this.dataGame = dataGame;
     }
-    
+
     //Uso geral dos estados
     public IStates getState() {
         return state;
@@ -38,72 +41,69 @@ public class Game {
     public void setState(IStates state) {
         this.state = state;
     }
-    
+
     //----------------------------------------------------
     //Metodos que disparam as ações na maquina de estados|
     //----------------------------------------------------
     public void start() {
         setState(getState().start());
     }
-    
+
     public void end() {
-       setState(getState().end());
+        setState(getState().end());
     }
-   
+
     public void pass() {
         setState(getState().pass());
     }
-   
-   public void conquer(int i) {
-       setState(getState().conquer(i));
-   }
-   
-   public void exploreAttack(SystemType s) {
-       setState(getState().exploreAttack(s));
-   }
-  
-   public void change(int o) {
-       setState(getState().change(o));
-   }
-   
-   public void buildMilitary() {
-       setState(getState().buildMilitary());
-   }
-   
-   public void discoverTechnology(String tecName) {
-       setState(getState().discoverTechnology(tecName));
-   }
-   
-   public void newTurn() {
-       setState(getState().newTurn());
-   }
-   
-   public void gameOver() {
-       setState(getState().gameOver());
-   }
-   
-   public void collect(){
-       setState((getState().collect()));
-   }
-    
+
+    public void conquer(int i) {
+        setState(getState().conquer(i));
+    }
+
+    public void exploreAttack(SystemType s) {
+        setState(getState().exploreAttack(s));
+    }
+
+    public void change(int o) {
+        setState(getState().change(o));
+    }
+
+    public void buildMilitary() {
+        setState(getState().buildMilitary());
+    }
+
+    public void discoverTechnology(String tecName) {
+        setState(getState().discoverTechnology(tecName));
+    }
+
+    public void newTurn() {
+        setState(getState().newTurn());
+    }
+
+    public void gameOver() {
+        setState(getState().gameOver());
+    }
+
+    public void collect() {
+        setState((getState().collect()));
+    }
+
    //-------------------------------------
-   //Metodos de acesso aos dados de jogo |
-   //-------------------------------------
-   
-   /*
-        ...
-   */
-   
-   /**
-    * ToString
-    */
-   
-   @Override
+    //Metodos de acesso aos dados de jogo |
+    //-------------------------------------
+    /*
+     ...
+     */
+    /**
+     * ToString
+     */
+    @Override
     public String toString() {
         return dataGame.toString();
     }
 
-    public NearSystem getNearSystem() throws EmptyException{
+    public NearSystem getNearSystem() throws EmptyException {
         return getDataGame().getNearSystems(0);
     }
 
@@ -126,22 +126,10 @@ public class Game {
     public Technology getTechnology(int i, int j) {
         return getDataGame().getTechnology()[i][j];
     }
-    
+
     public boolean isTechnologyPurchased(String name) {
         return getDataGame().isTechnologyPurchased(name);
     }
-
-//    public void upgradeStocklimits() {
-//        getDataGame().upgradeStocklimits();
-//    }
-//
-//    public void addProductionToStock() {
-//        getDataGame().addProductionToStock();
-//    }
-//
-//    public void collectResources() {
-//        getDataGame().collectResources();
-//    }
 
     public SystemType getUnalignedSystemCardType(int i) {
         return getDataGame().getUnalignedSystems().get(i).getSystemType();
@@ -153,5 +141,42 @@ public class Game {
 
     public void refreshlog() {
         getDataGame().refreshLog();
+    }
+
+    public void saveThisGame() {
+        try {
+            FileOutputStream file = new FileOutputStream("sgame.ser");
+            ObjectOutputStream output = new ObjectOutputStream(file);
+            try {
+                output.writeObject(this);
+                output.close();
+            } catch (IOException e) {
+                System.err.println("ERROR! WRITE ON FILE!\n");
+                System.err.println(e);
+            }
+        } catch (IOException e) {
+            System.err.println("FILE ERROR!");
+        }
+
+    }
+
+    public Game loadGame() {
+        try {
+            FileInputStream file = new FileInputStream("sgame.ser");
+            ObjectInputStream input = new ObjectInputStream(file);
+            try {
+                Game result = (Game) input.readObject();
+                file.close();
+                return result;
+            } catch (IOException e) {
+                System.err.println("ERROR READING FILE");
+            }
+        } catch (ClassNotFoundException e) {
+            // TODO handle me
+        } catch (IOException e) {
+            System.err.println("FILE ERROR!");
+        }
+
+        return null;
     }
 }

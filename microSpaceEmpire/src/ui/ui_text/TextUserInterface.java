@@ -3,11 +3,7 @@ package ui.ui_text;
 import java.io.IOException;
 import java.util.Scanner;
 import model.Game;
-import model.data.Cards.SystemCard.DistantSystem;
-import model.data.Cards.SystemCard.NearSystem;
-import model.data.Cards.SystemCard.SystemCard;
 import model.data.Cards.SystemCard.SystemType;
-import model.data.EmptyException;
 import model.states.AwaitBeginning;
 import model.states.AwaitOption;
 import model.states.Collecting;
@@ -26,34 +22,54 @@ public class TextUserInterface {
 
     public void run() {
 
-        clearScreen();
         while (!(game.getState() instanceof Ending)) {
             if (game.getState() instanceof AwaitBeginning) {
+                clearScreen();
                 WhileAwaitingBeginning();
             }
             if (game.getState() instanceof AwaitOption) {
+                clearScreen();
                 WhileAwaitingOption();
             }
             if (game.getState() instanceof Collecting) {
+                clearScreen();
                 WhileCollecting();
             }
             if (game.getState() instanceof Upgrading) {
+                clearScreen();
                 Upgrading u = (Upgrading) game.getState();
                 WhileUpgrading(u);
             }
         }
-        
+
         System.out.println(game.getDataGame().getLog());
-        
+
         System.out.println("");
         System.out.println("Game Over");
     }
 
     public void WhileAwaitingBeginning() {;
-        game.start();
+
+        System.out.println("MICRO SPACE EMPIRE");
+        System.out.println("1-NEW GAME");
+        System.out.println("2-LOAD GAME");
+        System.out.print("\n>> ");
+        while (!s.hasNextInt()) {
+            s.hasNext();
+        }
+
+        int opt = s.nextInt();
+
+        if (opt == 1) 
+            game.start();
+        if (opt == 2) {
+            game.setDataGame(game.getDataGame().loadGame());
+            game.start();
+            //game.setState(game.loadGame().getState());
+        }
+
     }
 
-    //incompleto
     public void WhileAwaitingOption() {
         int opt;
 
@@ -61,7 +77,7 @@ public class TextUserInterface {
         game.refreshlog();
 
         this.showGame();
-        
+
         System.out.println("");
         System.out.println("Explore-Attack/ Bide Time/ Conquer phase");
         System.out.println("");
@@ -69,8 +85,13 @@ public class TextUserInterface {
         System.out.println("1 - Explore-Attack");
         System.out.println("2 - Conquer");
         System.out.println("3 - Pass");
+        System.out.println("\n\n4 - SaveGame");
         System.out.println("0 - Quit");
         System.out.print("\n>> ");
+
+        while (!s.hasNextInt()) {
+            s.next();
+        }
 
         opt = s.nextInt();
         clearScreen();
@@ -78,6 +99,10 @@ public class TextUserInterface {
         if (opt == 1) {
             System.out.println("Explore near system (1) or distant system (2) ?");
             System.out.print("\n>> ");
+
+            while (!s.hasNextInt()) {
+                s.next();
+            }
 
             int sc = s.nextInt();
             this.clearScreen();
@@ -91,7 +116,7 @@ public class TextUserInterface {
         }
         if (opt == 2) {
 
-            if (game.getDataGame().getUnalignedSystems().size() != 0) {
+            if (game.getDataGame().getUnalignedSystems().isEmpty()) {
                 this.uiConquer();
             } else {
                 System.out.println("NOTHING TO CONQUER!!!\n");
@@ -101,15 +126,17 @@ public class TextUserInterface {
         if (opt == 3) {
             game.pass();
         }
-
+        if (opt == 4) {
+            game.getDataGame().saveThisGame();
+        }
         if (opt == 0) {
             game.gameOver();
         }
 
     }
-    
+
     private void uiConquer() {
-        
+
         for (int i = 0; i < game.getDataGame().getUnalignedSystemsSize(); i++) {
             System.out.println(i + 1 + " - " + game.getDataGame().getUnalignedSystems().get(i).getName()
                     + ", Resistence: " + game.getDataGame().getUnalignedSystems().get(i).getResistance());
@@ -118,6 +145,9 @@ public class TextUserInterface {
         System.out.println("What is the planet you want to conquer?");
         System.out.print(">> ");
 
+        while (!s.hasNextInt()) {
+            s.next();
+        }
         int opt = this.s.nextInt() - 1;
 
         try {
@@ -133,29 +163,38 @@ public class TextUserInterface {
      *
      */
     public void WhileCollecting() {
-        
+
         game.collect();
         System.out.println(game.getLog());
         game.refreshlog();
 
         if (game.isTechnologyPurchased("Interspecies Commerce")) {
-            
+
             showGame();
             System.out.println("\n\nCollecting Phase: ");
             System.out.println("Exchange 2 units for 1 of: ");
             System.out.println("1 - Metal for wealth");
             System.out.println("2 - Wealth for metal");
             System.out.println("3 - Pass");
+            System.out.println("\n\n4 - SaveGame");
+            System.out.println("0 - Exit");
             System.out.print(">> ");
 
-            while (!s.hasNextInt()) 
+            while (!s.hasNextInt()) {
                 s.next();
-            
+            }
+
             int opt = s.nextInt();
-            
+
             game.change(opt);
-        }
-        else{
+            if (opt == 4) {
+                game.getDataGame().saveThisGame();
+            }
+            if (opt == 0) {
+                game.end();
+            }
+
+        } else {
             game.pass();
         }
 
@@ -169,13 +208,12 @@ public class TextUserInterface {
 
         System.out.print(game.getLog());
         game.refreshlog();
-        
+
         System.out.println("");
         System.out.println("Build Military e Discover Technology phase");
         System.out.println("");
 
         if (m == false && t == false) {
-            eventphase();
             game.newTurn();
         }
 
@@ -187,8 +225,13 @@ public class TextUserInterface {
         }
 
         System.out.println("3 - Pass");
+        System.out.println("\n\n4 - SaveGame");
         System.out.println("0 - Exit");
         System.out.print("\n>> ");
+
+        while (!s.hasNextInt()) {
+            s.next();
+        }
 
         opt = s.nextInt();
         clearScreen();
@@ -198,8 +241,9 @@ public class TextUserInterface {
         } else if (opt == 2 && t == true) {
             showTechnologies();
         } else if (opt == 3) {
-            eventphase();
             game.newTurn();
+        } else if (opt == 4) {
+            game.getDataGame().saveThisGame();
         } else {
             game.gameOver();
         }
@@ -239,11 +283,6 @@ public class TextUserInterface {
         for (int i = 0; i < 50; i++) {
             System.out.println();
         }
-    }
-
-    //processamento da fase de eventos
-    private void eventphase() {
-
     }
 
 }

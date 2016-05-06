@@ -1,32 +1,13 @@
 package model.data;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 import model.data.Cards.Card;
 import model.data.Cards.CardFactory;
-import model.data.Cards.EventCard.Asteroid;
-import model.data.Cards.EventCard.DerelictShip;
-import model.data.Cards.EventCard.EventCard;
-import model.data.Cards.EventCard.LargeInvasionForce;
-import model.data.Cards.EventCard.PeaceAndQuiet;
-import model.data.Cards.EventCard.Revolt;
-import model.data.Cards.EventCard.Revolt2;
-import model.data.Cards.EventCard.SmallInvasionForce;
-import model.data.Cards.EventCard.Strike;
-import model.data.Cards.SystemCard.DistantSystem;
-import model.data.Cards.SystemCard.NearSystem;
-import model.data.Cards.SystemCard.SystemCard;
-import model.data.Cards.SystemCard.SystemType;
+import model.data.Cards.EventCard.*;
+import model.data.Cards.SystemCard.*;
 
-public class DataGame implements Constants {
+public class DataGame implements Constants, Serializable {
 
     //Board Game iNFO
     private int metalStorage;
@@ -35,7 +16,7 @@ public class DataGame implements Constants {
     private int metalProduction;
     private int wealthProduction;
     static int Score;
-            
+
     private String log; // String to save information processed in states
 
     //Technologies
@@ -62,8 +43,8 @@ public class DataGame implements Constants {
         this.strikeEvent = false;
         this.log = "";
 
-        this.Score=0;
-        
+        this.Score = 0;
+
         // Read System Cards from files
         buildStartingSystemFromFile(this, STARTING_SYSTEM_FILE);
         buildNearSystemsFromFile(this, NEAR_SYSTEMS_FILE);
@@ -645,51 +626,91 @@ public class DataGame implements Constants {
         int score = 0;
         int pointsOfThischeck = 0;
         setLog("SCOREBOARD: \n");
-        
+
         //1 point for every card on system
-        for(int i = 0; i< getEmpire().size(); i++)
+        for (int i = 0; i < getEmpire().size(); i++) {
             score += getEmpire().get(i).getPoints();
-        
-        setLog("\n"+score+" points for sum victory point of all cards in your Empire.");
-        
+        }
+
+        setLog("\n" + score + " points for sum victory point of all cards in your Empire.");
+
         //1 point for every technologies purchased
-        for(int i = 0; i<4; i++){
-            for(int j=0; j<2; j++){
-                if(getTechnology()[i][j].isBought())
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 2; j++) {
+                if (getTechnology()[i][j].isBought()) {
                     pointsOfThischeck++;
+                }
             }
         }
         score += pointsOfThischeck;
-        setLog("\n"+pointsOfThischeck+" points for sum of technologies purchased.");
-        
-        pointsOfThischeck=0;
-        
+        setLog("\n" + pointsOfThischeck + " points for sum of technologies purchased.");
+
+        pointsOfThischeck = 0;
+
         //1 point if 0 systems near & distant cards 
-        if(getNearSystems().size()==0 && getDistantSystemsSize()==0){
-            score+=1;
-            setLog("\n"+1+" points for having all card turned up.");
+        if (getNearSystems().size() == 0 && getDistantSystemsSize() == 0) {
+            score += 1;
+            setLog("\n" + 1 + " points for having all card turned up.");
         }
-        
+
         //3 points if every card are on Empire
-        if(getNearSystems().size()==0 && getDistantSystemsSize()==0 && getUnalignedSystemsSize()==0){
-            score+=3;
-            setLog("\n"+3+" for having all system cards on your Empire!");
+        if (getNearSystems().size() == 0 && getDistantSystemsSize() == 0 && getUnalignedSystemsSize() == 0) {
+            score += 3;
+            setLog("\n" + 3 + " for having all system cards on your Empire!");
         }
-        
+
         //1 point if every technology purchased
-        for(int i = 0; i<4; i++){
-            for(int j=0; j<2; j++){
-                if(getTechnology()[i][j].isBought())
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 2; j++) {
+                if (getTechnology()[i][j].isBought()) {
                     pointsOfThischeck++;
+                }
             }
         }
-        if(pointsOfThischeck == 8){
-            score+=1;
-            setLog("\n" + 1 +" point for having all technologies discovered.");
+        if (pointsOfThischeck == 8) {
+            score += 1;
+            setLog("\n" + 1 + " point for having all technologies discovered.");
         }
-            
-        
+
         setScore(score);
-        setLog("\n\nThe final Score is: "+getScore());
+        setLog("\n\nThe final Score is: " + getScore());
+    }
+
+    public void saveThisGame() {
+        try {
+            FileOutputStream file = new FileOutputStream("sgame.ser");
+            ObjectOutputStream output = new ObjectOutputStream(file);
+            try{
+                output.writeObject(this);
+                output.close();
+            }catch(IOException e){
+                System.err.println("ERROR! WRITE ON FILE!\n");
+                System.err.println(e);
+            }
+        } catch (IOException e) {
+            System.err.println("FILE ERROR!");
+        }
+
+    }
+
+    public DataGame loadGame() {
+        try {
+            FileInputStream file = new FileInputStream("sgame.ser");
+            ObjectInputStream input = new ObjectInputStream(file);
+            try {
+                DataGame result = (DataGame) input.readObject();
+                file.close();
+                System.out.println("file text: " + result.getMetalStorage());
+                return result;
+                } catch (IOException e) {
+                    System.err.println("ERROR READING FILE");
+                }
+            } catch (ClassNotFoundException e) {
+                // TODO handle me
+        } catch (IOException e) {
+            System.err.println("FILE ERROR!");
+        }
+        
+        return null;
     }
 }

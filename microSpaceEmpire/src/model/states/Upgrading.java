@@ -59,6 +59,12 @@ public class Upgrading extends StateAdapter {
     }
 
     @Override
+    public IStates saveGame(){
+        getDataGame().saveThisGame();
+        return this;
+    }
+    
+    @Override
     public IStates discoverTechnology(String TecName) {
 
         if (!getDataGame().validateTecName(TecName)) {  // if tecName not recogniced, return this

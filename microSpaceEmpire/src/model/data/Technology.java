@@ -1,6 +1,8 @@
 package model.data;
 
-public class Technology {
+import java.io.Serializable;
+
+public class Technology implements Serializable{
     private boolean bought;
     String name;
     int cost;

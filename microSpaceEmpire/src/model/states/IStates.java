@@ -1,8 +1,7 @@
-
 package model.states;
 
-import model.data.Cards.SystemCard.SystemCard;
 import model.data.Cards.SystemCard.SystemType;
+import model.data.DataGame;
 
 public interface IStates {
     IStates start();
@@ -15,5 +14,6 @@ public interface IStates {
     IStates buildMilitary();
     IStates discoverTechnology(String TecName);
     IStates newTurn();
-    IStates gameOver();    
+    IStates gameOver(); 
+    IStates saveGame();
 }

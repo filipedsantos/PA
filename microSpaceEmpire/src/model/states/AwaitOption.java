@@ -18,6 +18,12 @@ public class AwaitOption extends StateAdapter {
     public IStates pass() {
         return new Collecting(getDataGame());
     }
+    
+    @Override
+    public IStates saveGame(){
+        getDataGame().saveThisGame();
+        return this;
+    }
 
     @Override
     public IStates conquer(int opt) {

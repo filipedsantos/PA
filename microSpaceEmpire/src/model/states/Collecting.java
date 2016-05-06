@@ -21,6 +21,12 @@ public class Collecting extends StateAdapter {
     }
 
     @Override
+    public IStates saveGame(){
+        getDataGame().saveThisGame();
+        return this;
+    }
+    
+    @Override
     public IStates collect() {
         int mLimit, wLimit;
 
