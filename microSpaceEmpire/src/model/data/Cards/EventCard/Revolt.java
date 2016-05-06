@@ -1,5 +1,6 @@
 package model.data.Cards.EventCard;
 
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.data.DataGame;
@@ -8,8 +9,8 @@ import model.states.AwaitOption;
 import model.states.Ending;
 import model.states.IStates;
 
-public class Revolt extends EventCard {
-
+public class Revolt extends EventCard implements Serializable{
+    static final long serialVersionUID = 1l;
     private static final String name = "Revolt";
 
     public Revolt(DataGame d) {

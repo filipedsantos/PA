@@ -58,11 +58,11 @@ public class Upgrading extends StateAdapter {
         return this;
     }
 
-    @Override
-    public IStates saveGame(){
-        getDataGame().saveThisGame();
-        return this;
-    }
+//    @Override
+//    public IStates saveGame(){
+//        getDataGame().saveThisGame();
+//        return this;
+//    }
     
     @Override
     public IStates discoverTechnology(String TecName) {

@@ -3,6 +3,9 @@ package model.data;
 import java.io.Serializable;
 
 public class Technology implements Serializable{
+    
+    static final long serialVersionUID = 1l;
+    
     private boolean bought;
     String name;
     int cost;

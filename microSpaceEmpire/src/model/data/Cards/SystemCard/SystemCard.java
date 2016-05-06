@@ -1,11 +1,14 @@
 
 package model.data.Cards.SystemCard;
 
+import java.io.Serializable;
 import model.data.Cards.Card;
 import model.data.Cards.CardType;
 import model.data.DataGame;
 
-public abstract class SystemCard extends Card{
+public abstract class SystemCard extends Card implements Serializable{
+    
+    static final long serialVersionUID = 1l;
     
     private int resistance;
     private int metalProdution;

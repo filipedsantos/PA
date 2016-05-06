@@ -1,6 +1,7 @@
 
 package model.data.Cards;
 
+import java.io.Serializable;
 import model.data.Cards.EventCard.EventCard;
 import model.data.Cards.SystemCard.DistantSystem;
 import model.data.Cards.SystemCard.NearSystem;
@@ -11,8 +12,10 @@ import static model.data.Cards.SystemCard.SystemType.NEAR_SYSTEM;
 import static model.data.Cards.SystemCard.SystemType.STARTING_SYSTEM;
 import model.data.DataGame;
 
-public class CardFactory {
+public class CardFactory implements Serializable{
     
+    static final long serialVersionUID = 1l;
+        
 //    public static EventCard buildCardEvent() {
 //        return new EventCard();
 //    }

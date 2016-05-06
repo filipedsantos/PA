@@ -1,5 +1,6 @@
 package model.data.Cards.EventCard;
 
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.data.DataGame;
@@ -7,8 +8,8 @@ import model.data.EmptyException;
 import model.states.AwaitOption;
 import model.states.IStates;
 
-public class SmallInvasionForce extends EventCard {
-
+public class SmallInvasionForce extends EventCard implements Serializable{
+    static final long serialVersionUID = 1l;
     private static final String name = "Small Invasion Force";
 
     public SmallInvasionForce(DataGame d) {

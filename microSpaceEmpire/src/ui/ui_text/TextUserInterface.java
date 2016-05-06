@@ -1,16 +1,21 @@
 package ui.ui_text;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 import model.Game;
 import model.data.Cards.SystemCard.SystemType;
+import model.data.Constants;
 import model.states.AwaitBeginning;
 import model.states.AwaitOption;
 import model.states.Collecting;
 import model.states.Ending;
 import model.states.Upgrading;
 
-public class TextUserInterface {
+public class TextUserInterface implements Constants {
+    
+        static final long serialVersionUID = 1l;
 
     private Game game;
     private Scanner s;
@@ -60,11 +65,12 @@ public class TextUserInterface {
 
         int opt = s.nextInt();
 
-        if (opt == 1) 
+        if (opt == 1) {
             game.start();
+        }
         if (opt == 2) {
-            game.setDataGame(game.getDataGame().loadGame());
-            game.start();
+            this.loadGame();
+            //return;
             //game.setState(game.loadGame().getState());
         }
 
@@ -127,7 +133,7 @@ public class TextUserInterface {
             game.pass();
         }
         if (opt == 4) {
-            game.getDataGame().saveThisGame();
+            this.saveGame();
         }
         if (opt == 0) {
             game.gameOver();
@@ -188,7 +194,7 @@ public class TextUserInterface {
 
             game.change(opt);
             if (opt == 4) {
-                game.getDataGame().saveThisGame();
+                this.saveGame();
             }
             if (opt == 0) {
                 game.end();
@@ -243,7 +249,7 @@ public class TextUserInterface {
         } else if (opt == 3) {
             game.newTurn();
         } else if (opt == 4) {
-            game.getDataGame().saveThisGame();
+            this.saveGame();
         } else {
             game.gameOver();
         }
@@ -285,4 +291,70 @@ public class TextUserInterface {
         }
     }
 
+    /**
+     * Functions to save and load game on file
+     */
+    boolean loadGame() {
+        BufferedReader bin = new BufferedReader(new InputStreamReader(System.in));
+        String opt, name = FILE_SAVE_GAME;
+
+        System.out.println("Default file name: (\"" + name + "\")");
+
+        try {
+            opt = bin.readLine();
+
+            if (opt.length() >= 1) {
+                if (!new java.io.File(opt).exists()) {
+                    System.out.println(" File \"" + opt + "\" does not exist!");
+                    return false;
+                }
+                name = opt;
+            }
+
+        } catch (Exception e) {
+        }
+
+        try {
+            game = Game.loadGame(name);
+            System.out.println("Load complete.");
+            System.out.println();
+            return true;
+        } catch (Exception e) {
+            System.err.println("Error trying loading game from: \"" + name + "\"!");
+            System.err.println(e);
+            System.out.println();
+            return false;
+        }
+
+    }
+
+    boolean saveGame() {
+        BufferedReader bin = new BufferedReader(new InputStreamReader(System.in));
+        String opt, name = FILE_SAVE_GAME;
+
+        System.out.println("Default file name: (\"" + name + "\")");
+
+        try {
+            opt = bin.readLine();
+
+            if (opt.length() >= 1) {
+                name = opt;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        
+        try {
+            game.saveGame(name);
+            System.out.println("Game saved.");
+            System.out.println();
+            return true;
+        } catch (Exception e) {
+            System.out.println("Error trying loading game from: \"" + name + "\"!");
+            System.out.println(e);
+            System.out.println();
+            return false;
+        }
+
+    }
 }

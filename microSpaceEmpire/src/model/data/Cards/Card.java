@@ -6,6 +6,8 @@ import model.data.DataGame;
 
 public abstract class Card implements Serializable{
     
+    static final long serialVersionUID = 1l;
+    
     private DataGame dataGame;
     private CardType cardType;
     private String name;

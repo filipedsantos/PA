@@ -8,6 +8,8 @@ import model.data.Cards.EventCard.*;
 import model.data.Cards.SystemCard.*;
 
 public class DataGame implements Constants, Serializable {
+    
+    static final long serialVersionUID = 1l;
 
     //Board Game iNFO
     private int metalStorage;
@@ -676,41 +678,4 @@ public class DataGame implements Constants, Serializable {
         setLog("\n\nThe final Score is: " + getScore());
     }
 
-    public void saveThisGame() {
-        try {
-            FileOutputStream file = new FileOutputStream("sgame.ser");
-            ObjectOutputStream output = new ObjectOutputStream(file);
-            try{
-                output.writeObject(this);
-                output.close();
-            }catch(IOException e){
-                System.err.println("ERROR! WRITE ON FILE!\n");
-                System.err.println(e);
-            }
-        } catch (IOException e) {
-            System.err.println("FILE ERROR!");
-        }
-
-    }
-
-    public DataGame loadGame() {
-        try {
-            FileInputStream file = new FileInputStream("sgame.ser");
-            ObjectInputStream input = new ObjectInputStream(file);
-            try {
-                DataGame result = (DataGame) input.readObject();
-                file.close();
-                System.out.println("file text: " + result.getMetalStorage());
-                return result;
-                } catch (IOException e) {
-                    System.err.println("ERROR READING FILE");
-                }
-            } catch (ClassNotFoundException e) {
-                // TODO handle me
-        } catch (IOException e) {
-            System.err.println("FILE ERROR!");
-        }
-        
-        return null;
-    }
 }

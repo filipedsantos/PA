@@ -1,9 +1,12 @@
 
 package model.data.Cards.SystemCard;
 
+import java.io.Serializable;
 import model.data.DataGame;
 
-public class StartingSystem extends SystemCard{
+public class StartingSystem extends SystemCard implements Serializable{
+    
+    static final long serialVersionUID = 1l;
 
     public StartingSystem(DataGame d) {
         super(SystemType.STARTING_SYSTEM, d);

@@ -19,11 +19,11 @@ public class AwaitOption extends StateAdapter {
         return new Collecting(getDataGame());
     }
     
-    @Override
-    public IStates saveGame(){
-        getDataGame().saveThisGame();
-        return this;
-    }
+//    @Override
+//    public IStates saveGame(){
+//        
+//        return this;
+//    }
 
     @Override
     public IStates conquer(int opt) {

@@ -7,6 +7,8 @@ import model.data.DataGame;
 import model.states.IStates;
 
 public abstract class EventCard extends Card{
+    
+    static final long serialVersionUID = 1l;
 
     public EventCard(DataGame d) {
         super(CardType.EVENT, d);

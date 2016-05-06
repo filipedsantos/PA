@@ -1,9 +1,11 @@
 package model.states;
 
+import java.io.Serializable;
 import model.data.Cards.SystemCard.SystemType;
-import model.data.DataGame;
 
-public interface IStates {
+public interface IStates extends Serializable{
+    static final long serialVersionUID = 1l;
+    
     IStates start();
     IStates end();
     IStates pass();
@@ -14,6 +16,5 @@ public interface IStates {
     IStates buildMilitary();
     IStates discoverTechnology(String TecName);
     IStates newTurn();
-    IStates gameOver(); 
-    IStates saveGame();
+    IStates gameOver();
 }

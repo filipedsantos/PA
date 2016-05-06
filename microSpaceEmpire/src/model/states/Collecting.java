@@ -20,11 +20,11 @@ public class Collecting extends StateAdapter {
         this.change = q;
     }
 
-    @Override
-    public IStates saveGame(){
-        getDataGame().saveThisGame();
-        return this;
-    }
+//    @Override
+//    public IStates saveGame(){
+//        getDataGame().saveThisGame();
+//        return this;
+//    }
     
     @Override
     public IStates collect() {

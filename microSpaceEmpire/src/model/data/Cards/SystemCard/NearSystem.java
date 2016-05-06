@@ -1,9 +1,12 @@
 
 package model.data.Cards.SystemCard;
 
+import java.io.Serializable;
 import model.data.DataGame;
 
-public class NearSystem extends SystemCard{
+public class NearSystem extends SystemCard implements Serializable{
+    
+    static final long serialVersionUID = 1l;
 
     public NearSystem(DataGame d) {
         super(SystemType.NEAR_SYSTEM, d);

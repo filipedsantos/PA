@@ -1,5 +1,6 @@
 
 package model.states;
+import model.Game;
 import model.data.Cards.SystemCard.SystemCard;
 import model.data.Cards.SystemCard.SystemType;
 import model.data.DataGame;
@@ -74,11 +75,6 @@ public class StateAdapter implements IStates{
 
     @Override
     public IStates collect() {
-        return this;
-    }
-    
-    @Override
-    public IStates saveGame(){
         return this;
     }
     

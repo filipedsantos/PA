@@ -1,21 +1,26 @@
 package model;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import model.data.Cards.SystemCard.DistantSystem;
 import model.data.Cards.SystemCard.NearSystem;
 import model.data.Cards.SystemCard.SystemType;
+import model.data.Constants;
 import model.data.DataGame;
 import model.data.EmptyException;
 import model.data.Technology;
 import model.states.AwaitBeginning;
 import model.states.IStates;
 
-public class Game {
+public class Game implements Constants, Serializable{
 
+    static final long serialVersionUID = 1l;
+    
     private DataGame dataGame;
     private IStates state;
 
@@ -142,41 +147,34 @@ public class Game {
     public void refreshlog() {
         getDataGame().refreshLog();
     }
-
-    public void saveThisGame() {
+    
+    /**
+     * Functions to save and load game on file
+     */
+    
+    public static Game loadGame(String name) throws FileNotFoundException, IOException, ClassNotFoundException {
+        ObjectInputStream oin = null;
+        Game g;
+        
         try {
-            FileOutputStream file = new FileOutputStream("sgame.ser");
-            ObjectOutputStream output = new ObjectOutputStream(file);
-            try {
-                output.writeObject(this);
-                output.close();
-            } catch (IOException e) {
-                System.err.println("ERROR! WRITE ON FILE!\n");
-                System.err.println(e);
-            }
-        } catch (IOException e) {
-            System.err.println("FILE ERROR!");
+            oin = new ObjectInputStream(new FileInputStream(name));
+            g = (Game) oin.readObject();
+            return g;
+        } finally{
+            if(oin != null)
+                oin.close();
         }
-
     }
 
-    public Game loadGame() {
+    public void saveGame(String name) throws FileNotFoundException, IOException {
+        ObjectOutputStream oout = null;
+        
         try {
-            FileInputStream file = new FileInputStream("sgame.ser");
-            ObjectInputStream input = new ObjectInputStream(file);
-            try {
-                Game result = (Game) input.readObject();
-                file.close();
-                return result;
-            } catch (IOException e) {
-                System.err.println("ERROR READING FILE");
-            }
-        } catch (ClassNotFoundException e) {
-            // TODO handle me
-        } catch (IOException e) {
-            System.err.println("FILE ERROR!");
+            oout = new ObjectOutputStream(new FileOutputStream(name));
+            oout.writeObject(this);
+        } finally{
+          if(oout != null)
+              oout.close();
         }
-
-        return null;
     }
 }

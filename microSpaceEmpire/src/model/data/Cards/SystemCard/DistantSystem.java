@@ -1,9 +1,12 @@
 
 package model.data.Cards.SystemCard;
 
+import java.io.Serializable;
 import model.data.DataGame;
 
-public class DistantSystem extends SystemCard{
+public class DistantSystem extends SystemCard implements Serializable{
+    
+    static final long serialVersionUID = 1l;
 
     public DistantSystem(DataGame d) {
         super(SystemType.DISTANT_SYSTEM, d);

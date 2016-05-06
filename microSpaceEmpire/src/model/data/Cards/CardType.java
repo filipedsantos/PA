@@ -1,6 +1,8 @@
 
 package model.data.Cards;
 
-public enum CardType {
-    SYSTEM, EVENT    
+import java.io.Serializable;
+
+public enum CardType implements Serializable{
+    SYSTEM, EVENT;
 }
