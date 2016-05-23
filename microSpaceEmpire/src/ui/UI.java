@@ -2,6 +2,7 @@ package ui;
 
 import java.io.IOException;
 import java.util.Scanner;
+import ui.ui_graphic.MicroSpaceEmpireView;
 import ui.ui_text.TextUserInterface;
 
 public class UI {
@@ -92,9 +93,8 @@ public class UI {
         this.ui_text.run();
     }
 
-    private void graphicMode() {
-//        this.ui_graphic = new GraphicUserInterface();
-//        this.ui_graphic.run();
+    private void graphicMode() throws IOException {
+        MicroSpaceEmpireView GUI = new MicroSpaceEmpireView();
     }
 
 }
