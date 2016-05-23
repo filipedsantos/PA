@@ -8,7 +8,7 @@ public class Collecting extends StateAdapter {
 
     public Collecting(DataGame gameData) {
         super(gameData);
-
+        collect();
         change = false;
     }
 

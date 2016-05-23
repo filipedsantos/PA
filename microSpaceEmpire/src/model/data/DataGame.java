@@ -541,7 +541,7 @@ public class DataGame implements Constants, Serializable {
             metalStorage = mLimit;
         }
 
-        setLog("Event Card Asteroid!\n you got plus 1 wealth");
+        setLog("Event Card Derelict Ship!\n you got plus 1 metal");
     }
 
     // 1st Parameter: type of system to attack - (0) Least Resistance, (1) Last Empire added
@@ -676,6 +676,10 @@ public class DataGame implements Constants, Serializable {
 
         setScore(score);
         setLog("\n\nThe final Score is: " + getScore());
+    }
+
+    public void collect() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

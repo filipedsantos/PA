@@ -170,7 +170,7 @@ public class TextUserInterface implements Constants {
      */
     public void WhileCollecting() {
 
-        game.collect();
+        //game.collect();
         System.out.println(game.getLog());
         game.refreshlog();
 
@@ -195,6 +195,9 @@ public class TextUserInterface implements Constants {
             game.change(opt);
             if (opt == 4) {
                 this.saveGame();
+            }
+            if(opt == 3){
+                game.pass();
             }
             if (opt == 0) {
                 game.end();

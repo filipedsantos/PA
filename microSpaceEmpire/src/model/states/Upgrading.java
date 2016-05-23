@@ -37,6 +37,12 @@ public class Upgrading extends StateAdapter {
     @Override
     public IStates buildMilitary() {
         int limit;
+        
+        if(getDataGame().getMetalStorage() < 1 || getDataGame().getWealthStorage() < 1)
+        {
+            getDataGame().setLog("You haven't metal/wealth enought to upgrade!");
+            return this;
+        }
 
         if (getDataGame().isTechnologyPurchased("Capital Ships")) {
             limit = getDataGame().MILITARY_STRENGTH_UPGRADED_LIMIT;
