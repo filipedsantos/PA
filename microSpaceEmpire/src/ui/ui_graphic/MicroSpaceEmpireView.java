@@ -3,8 +3,10 @@ package ui.ui_graphic;
 
 import model.ObservableGame;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class MicroSpaceEmpireView extends JFrame implements Observer{
@@ -15,21 +17,21 @@ public class MicroSpaceEmpireView extends JFrame implements Observer{
         super("Micro Space Empire");
         this.game = new ObservableGame();
         
-        game.addObserver(this);
         
+        game.addObserver(this);
         addComponents();
+        
         setVisible(true);
         this.setSize(700, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         validate();
     }
-
-    private void addComponents(){
+    
+    private void addComponents() throws IOException{
         Container cp = getContentPane();
         
         cp.setLayout(new BorderLayout());
-        //cp.add(panel, BorderLayout.CENTER);
-        cp.add(new Label("ola mundo"));
+        
     }
     
 
