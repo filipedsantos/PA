@@ -3,9 +3,14 @@ package ui.ui_graphic;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -17,7 +22,23 @@ class CardCell extends JPanel implements Constants {
 
     ObservableGame game = null;
     int col;
-
+    
+    static Map<String, Image>images; 
+    static{    
+        images = new HashMap<>();
+        
+        try{
+            images.put(HOME_WORLD, ImageIO.read(Resources.getResourceFile(PATH_IMG_HOME_WORLD)));
+            images.put(CANOPUS, ImageIO.read(Resources.getResourceFile(PATH_IMG_CANOPUS)));
+            images.put(GALAXYSEDGE, ImageIO.read(Resources.getResourceFile(PATH_IMG_GALAXYSEDGE)));
+            images.put(POLARIS, ImageIO.read(Resources.getResourceFile(PATH_IMG_POLARIS)));
+            images.put(HOME_WORLD, ImageIO.read(Resources.getResourceFile(PATH_IMG_HOME_WORLD)));
+            images.put(HOME_WORLD, ImageIO.read(Resources.getResourceFile(PATH_IMG_HOME_WORLD)));
+            images.put(HOME_WORLD, ImageIO.read(Resources.getResourceFile(PATH_IMG_HOME_WORLD)));
+        }catch(IOException e){}
+    }
+    
+    
     CardCell(final ObservableGame game, int c) {
         this.col = c;
         this.game = game;
@@ -25,14 +46,15 @@ class CardCell extends JPanel implements Constants {
 
         addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent ev) {
+            public void mousePressed(MouseEvent e) {
+                game.start();
                 game.exploreAttack(SystemType.NEAR_SYSTEM);
             }
         });
     }
 
-    public String r() {
-        return game.getGameData().getEmpire().get(col).getName();
+    public String getNameCard() {
+        return game.getGameData().getEmpire().get(col).getName().toUpperCase();
     }
 
     @Override
@@ -46,15 +68,16 @@ class CardCell extends JPanel implements Constants {
         super.paintComponent(g);
 
         setBackground(Color.LIGHT_GRAY);
-
+        
+        
         try {
-            g.drawImage(ImageIO.read(Resources.getResourceFile(PATH_IMG_BACK_CARD)), 0, 0, getWidth() - 1, getHeight() - 1, null);
-            g.setColor(Color.black);
-        } catch (IOException ex) {
-            Logger.getLogger(CardCell.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(getNameCard());
+            g.drawImage(images.get(getNameCard()), 0, 0, getWidth() - 1, getHeight() - 1, null);
+        } catch (IndexOutOfBoundsException e) {
         }
         
 
     }
+
 
 }

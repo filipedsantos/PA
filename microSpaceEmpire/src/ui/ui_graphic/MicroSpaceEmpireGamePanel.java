@@ -3,12 +3,16 @@ package ui.ui_graphic;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import model.ObservableGame;
+import model.states.AwaitBeginning;
+import model.states.AwaitOption;
 
-class MicroSpaceEmpireGamePanel extends JPanel{
+class MicroSpaceEmpireGamePanel extends JPanel implements Observer{
     ObservableGame game;
     
     // Panels of the game to be created
@@ -18,9 +22,11 @@ class MicroSpaceEmpireGamePanel extends JPanel{
 
     public MicroSpaceEmpireGamePanel(ObservableGame game) {
         this.game = game;
+        game.addObserver(this);
         
         setupComponents();
         setupLayout();
+        setVisible(!(game.getState() instanceof AwaitBeginning));
     }
 
     private void setupComponents() {
@@ -49,6 +55,11 @@ class MicroSpaceEmpireGamePanel extends JPanel{
         
         
         validate();
+    }
+
+    @Override
+    public void update(Observable o, Object o1) {
+        setVisible(!(game.getState() instanceof AwaitBeginning));
     }
    
     

@@ -11,12 +11,14 @@ public class MicroSpaceEmpireView extends JFrame implements Observer{
     
     ObservableGame game;
     MicroSpaceEmpireGamePanel panel;
+    Starting start;
     
     public MicroSpaceEmpireView() throws IOException{
         super("Micro Space Empire");
         this.game = new ObservableGame();
         game.addObserver(this);
         
+        start = new Starting(game);
         panel = new MicroSpaceEmpireGamePanel(game);
        
         addComponents();
@@ -24,8 +26,8 @@ public class MicroSpaceEmpireView extends JFrame implements Observer{
 
         
         setVisible(true);
-        this.setSize(1000, 500);
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setSize(1500, 600);
+        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         validate();
     }
@@ -36,6 +38,7 @@ public class MicroSpaceEmpireView extends JFrame implements Observer{
         cp.setLayout(new BorderLayout());
         cp.setBackground(Color.DARK_GRAY);
         cp.add(panel, BorderLayout.CENTER);
+        cp.add(start, BorderLayout.SOUTH);
         
     }
     
