@@ -1,6 +1,5 @@
 package model;
 
-
 import java.io.IOException;
 import java.util.Observable;
 import model.Game;
@@ -12,17 +11,15 @@ import model.data.EmptyException;
 import model.data.Technology;
 import model.states.IStates;
 
-public class ObservableGame extends Observable{
+public class ObservableGame extends Observable {
 
     Game game;
-    
-     public ObservableGame() throws IOException
-    {
+
+    public ObservableGame() throws IOException {
         this.game = new Game();
     }
 
-    public Game getGame()
-    {
+    public Game getGame() {
         return game;
     }
 
@@ -30,77 +27,73 @@ public class ObservableGame extends Observable{
         return game.getDataGame();
     }
 
-    public IStates getState()
-    {
+    public IStates getState() {
         return game.getState();
-    }  
-    
-    
-    
-    /*
-    *
-    */
-    
-    public void setGame(Game game){
-        this.game=game;
-        
-        setChanged();
-        notifyObservers();
     }
-    
+
+    /*
+     *
+     */
+    public void setGame(Game game) {
+        this.game = game;
+
+//        setChanged();
+//        notifyObservers();
+    }
+
     public void start() {
         game.start();
-        
+
         setChanged();
         notifyObservers();
     }
 
     public void end() {
         game.end();
-        
+
         setChanged();
         notifyObservers();
     }
 
     public void pass() {
         game.pass();
-        
+
         setChanged();
         notifyObservers();
     }
 
     public void conquer(int i) {
         game.conquer(i);
-        
+
         setChanged();
         notifyObservers();
     }
 
     public void exploreAttack(SystemType s) {
         game.exploreAttack(s);
-        
+
         setChanged();
         notifyObservers();
     }
 
     public void change(int o) {
         game.change(o);
-        
+
         setChanged();
         notifyObservers();
     }
 
     public void buildMilitary() {
         game.buildMilitary();
-        
+
         setChanged();
         notifyObservers();
     }
 
     public void discoverTechnology(String tecName) {
-       game.discoverTechnology(tecName);
-       setChanged();
-       notifyObservers();
+        game.discoverTechnology(tecName);
+        setChanged();
+        notifyObservers();
     }
 
     public void newTurn() {
@@ -111,21 +104,20 @@ public class ObservableGame extends Observable{
 
     public void gameOver() {
         game.gameOver();
-        
+
         setChanged();
         notifyObservers();
-        
+
     }
 
     public void collect() {
         game.collect();
     }
-    
-   /**
-    *
-    */
-    
-     @Override
+
+    /**
+     *
+     */
+    @Override
     public String toString() {
         return game.toString();
     }
@@ -151,7 +143,7 @@ public class ObservableGame extends Observable{
     }
 
     public Technology getTechnology(int i, int j) {
-        return game.getTechnology(i,j);
+        return game.getTechnology(i, j);
     }
 
     public boolean isTechnologyPurchased(String name) {
@@ -169,11 +161,14 @@ public class ObservableGame extends Observable{
     public void refreshlog() {
         game.refreshlog();
     }
-    
+
+    public int getNearSystemsSize() {
+        return game.getDataGame().getNearSystemsSize();
+    }
+
     /**
      * Functions to save and load game on file
      */
-    
 //    public static Game loadGame(String name) throws FileNotFoundException, IOException, ClassNotFoundException {
 //        ObjectInputStream oin = null;
 //        Game g;

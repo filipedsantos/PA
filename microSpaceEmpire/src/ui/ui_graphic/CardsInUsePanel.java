@@ -11,6 +11,11 @@ public class CardsInUsePanel extends JPanel {
 
     ObservableGame game;
     JLabel l;
+    JLabel lEmpire;
+    JLabel lUnalignedSystems;
+    
+    CardsList empire;
+    CardsList unalignedSystems;
 
     CardsInUsePanel(ObservableGame game) {
         this.game = game;
@@ -24,12 +29,20 @@ public class CardsInUsePanel extends JPanel {
         setBorder(BorderFactory.createLineBorder(Color.black));
 
         add(l);
+        add(lEmpire);
+        add(empire);
+        add(lUnalignedSystems);
+        add(unalignedSystems);
 
         validate();
     }
 
     private void setupComponents() {
         l = new JLabel("North panel");
+        lEmpire = new JLabel("Your Empire:");
+        empire = new CardsList(game);
+        lUnalignedSystems = new JLabel("Unaligned Systems:");
+        unalignedSystems = new CardsList(game);
     }
 
 }

@@ -9,6 +9,8 @@ import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JPanel;
 import model.ObservableGame;
+import model.data.Cards.CardType;
+import model.data.Cards.SystemCard.SystemType;
 
 /**
  *
@@ -25,10 +27,7 @@ public class DeckPanel extends JPanel implements Observer{
         this.game = game;
         this.game.addObserver(this);
         
-        /**
-         * Painel que apresenta o conteudo dos baralhos do player E' definido como um
-         * classe interna anonima (redefinindo paintComponent).
-         */
+        
     }
     
     

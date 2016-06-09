@@ -24,7 +24,8 @@ public class MicroSpaceEmpireView extends JFrame implements Observer{
 
         
         setVisible(true);
-        this.setSize(700, 500);
+        this.setSize(1000, 500);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         validate();
     }
