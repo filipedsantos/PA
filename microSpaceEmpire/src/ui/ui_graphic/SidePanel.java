@@ -13,6 +13,8 @@ public class SidePanel extends JPanel {
     
     ObservableGame game;
     JLabel l;
+    
+    DeckPanel panel;
 
     public SidePanel(ObservableGame game) {
         this.game = game;
@@ -26,12 +28,14 @@ public class SidePanel extends JPanel {
         setBorder(BorderFactory.createLineBorder(Color.black));
         
         add(l);
+        add(panel);
  
         validate();
     }
     
     private void setupComponents() {
         l = new JLabel("Side panel");
+        panel = new DeckPanel(game);
     }
 
     

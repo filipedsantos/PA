@@ -7,10 +7,9 @@ package ui.ui_graphic;
 
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import model.ObservableGame;
-import model.data.Cards.CardType;
-import model.data.Cards.SystemCard.SystemType;
 
 /**
  *
@@ -20,21 +19,30 @@ import model.data.Cards.SystemCard.SystemType;
 public class DeckPanel extends JPanel implements Observer{
     
     ObservableGame game;
-    JPanel nearSystemsInDeck;
-    JPanel distantSystemsInDeck;
+    UserInfo info;
+   
 
     public DeckPanel(ObservableGame game) {
         this.game = game;
         this.game.addObserver(this);
         
+        setupComponents();
+        setupLayout();
+    }
+
+    private void setupLayout() {
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         
+        add(info);
+    }
+
+    private void setupComponents() {
+        info = new UserInfo(game);
     }
     
-    
-
     @Override
     public void update(Observable o, Object o1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        repaint();
     }
     
 }
