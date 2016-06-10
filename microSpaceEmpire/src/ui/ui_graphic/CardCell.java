@@ -9,12 +9,8 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
+import javax.swing.*;
 import model.ObservableGame;
 import model.data.Cards.SystemCard.SystemType;
 
@@ -32,9 +28,13 @@ class CardCell extends JPanel implements Constants {
             images.put(CANOPUS, ImageIO.read(Resources.getResourceFile(PATH_IMG_CANOPUS)));
             images.put(GALAXYSEDGE, ImageIO.read(Resources.getResourceFile(PATH_IMG_GALAXYSEDGE)));
             images.put(POLARIS, ImageIO.read(Resources.getResourceFile(PATH_IMG_POLARIS)));
-            images.put(HOME_WORLD, ImageIO.read(Resources.getResourceFile(PATH_IMG_HOME_WORLD)));
-            images.put(HOME_WORLD, ImageIO.read(Resources.getResourceFile(PATH_IMG_HOME_WORLD)));
-            images.put(HOME_WORLD, ImageIO.read(Resources.getResourceFile(PATH_IMG_HOME_WORLD)));
+            images.put(SIRIUS, ImageIO.read(Resources.getResourceFile(PATH_IMG_SIRIUS)));
+            images.put(CYGNUS, ImageIO.read(Resources.getResourceFile(PATH_IMG_CYGNUS)));
+            images.put(PROCYGON, ImageIO.read(Resources.getResourceFile(PATH_IMG_PROCYGON)));
+            images.put(PROXIMA, ImageIO.read(Resources.getResourceFile(PATH_IMG_PROXIMA)));
+            images.put(TAUCETI, ImageIO.read(Resources.getResourceFile(PATH_IMG_TAUCETI)));
+            images.put(WOLF359, ImageIO.read(Resources.getResourceFile(PATH_IMG_WOLF359)));
+            images.put(EPSILONERIDANI, ImageIO.read(Resources.getResourceFile(PATH_IMG_EPSILONERIDANI)));
         }catch(IOException e){}
     }
     
@@ -42,13 +42,15 @@ class CardCell extends JPanel implements Constants {
     CardCell(final ObservableGame game, int c) {
         this.col = c;
         this.game = game;
+        
         setPreferredSize(new Dimension(100, 150));
-
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                game.start();
+                System.out.println(col);
                 game.exploreAttack(SystemType.NEAR_SYSTEM);
+                game.pass();
+                game.newTurn();
             }
         });
     }
@@ -69,9 +71,8 @@ class CardCell extends JPanel implements Constants {
 
         setBackground(Color.LIGHT_GRAY);
         
-        
         try {
-            System.out.println(getNameCard());
+            System.out.println(col);
             g.drawImage(images.get(getNameCard()), 0, 0, getWidth() - 1, getHeight() - 1, null);
         } catch (IndexOutOfBoundsException e) {
         }
