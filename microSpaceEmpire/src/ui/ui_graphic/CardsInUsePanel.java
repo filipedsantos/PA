@@ -40,9 +40,9 @@ public class CardsInUsePanel extends JPanel {
     private void setupComponents() {
         l = new JLabel("North panel");
         lEmpire = new JLabel("Your Empire:");
-        empire = new CardsList(game);
+        empire = new CardsList(game, "empire");
         lUnalignedSystems = new JLabel("Unaligned Systems:");
-        unalignedSystems = new CardsList(game);
+        unalignedSystems = new CardsList(game, "unaligned");
     }
 
 }

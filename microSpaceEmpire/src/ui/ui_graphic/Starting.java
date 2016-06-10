@@ -51,8 +51,8 @@ public class Starting extends JPanel implements Observer {
 
     private void setupLayout() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        start.setAlignmentY(Component.CENTER_ALIGNMENT);
         
-        start.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(Box.createVerticalStrut(20));
         add(Welcome);
         add(Box.createVerticalStrut(20));

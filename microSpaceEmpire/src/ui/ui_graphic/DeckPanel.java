@@ -5,27 +5,40 @@
  */
 package ui.ui_graphic;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
-import javax.swing.JPanel;
+import javax.swing.*;
 import model.ObservableGame;
+import model.data.Cards.SystemCard.SystemType;
+import static ui.ui_graphic.CardCell.images;
 
 /**
  *
  * This class contains the Systems card that will be used to explore.
  * -> Near Systems and Distant Systems.
  */
-public class DeckPanel extends JPanel implements Observer{
-    
+public class DeckPanel extends JPanel implements Observer {
+
     ObservableGame game;
-    UserInfo info;
-   
+    JLabel titleNear;
+    JLabel titleDistant;
+    JPanel nearDeck;
+    JPanel distantDeck;
 
     public DeckPanel(ObservableGame game) {
         this.game = game;
         this.game.addObserver(this);
-        
+
         setupComponents();
         setupLayout();
     }
@@ -33,16 +46,68 @@ public class DeckPanel extends JPanel implements Observer{
     private void setupLayout() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         
-        add(info);
+        add(titleNear);
+        add(nearDeck);
+
+        add(titleDistant);
+        add(distantDeck);
+        
     }
 
     private void setupComponents() {
-        info = new UserInfo(game);
+        titleDistant = new JLabel("Distant System");
+        titleNear = new JLabel("Near System");
+
+        nearDeck = new JPanel() {
+           
+            @Override
+            public void paintComponent(Graphics g) {
+                super.paintComponent(g);
+             
+                this.setBorder(BorderFactory.createLineBorder(Color.RED));
+                if(game.getGameData().getNearSystemsSize() > 0)
+                    try {
+                        g.drawImage(ImageIO.read(Resources.getResourceFile("images/Systems/systemBack.jpg")), 0, 0, getWidth()-1, getHeight()-1, null);
+                } catch (IOException ex) {
+                }
+ 
+            }
+            
+        };
+        nearDeck.addMouseListener(new MouseAdapter() {
+        @Override
+            public void mousePressed(MouseEvent e) {
+                System.out.println("near");
+                game.exploreAttack(SystemType.NEAR_SYSTEM);
+            } 
+        });
+        
+        distantDeck = new JPanel() {
+            @Override
+            public void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                
+                this.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+                if(game.getGameData().getDistantSystemsSize() > 0)
+                    try {
+                        g.drawImage(ImageIO.read(Resources.getResourceFile("images/Systems/systemBack.jpg")), 0, 0, getWidth()-1, getHeight()-1, null);
+                } catch (IOException ex) {
+                }
+            }
+        };
+        distantDeck.addMouseListener(new MouseAdapter() {
+        @Override
+            public void mousePressed(MouseEvent e) {
+                System.out.println("distant");
+
+            } 
+        });
+
     }
-    
+
     @Override
     public void update(Observable o, Object o1) {
         repaint();
     }
-    
+
 }

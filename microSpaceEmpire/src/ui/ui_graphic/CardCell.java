@@ -18,6 +18,7 @@ class CardCell extends JPanel implements Constants {
 
     ObservableGame game = null;
     int col;
+    String systemType;
     
     static Map<String, Image>images; 
     static{    
@@ -39,24 +40,22 @@ class CardCell extends JPanel implements Constants {
     }
     
     
-    CardCell(final ObservableGame game, int c) {
+    CardCell(final ObservableGame game, int c, String sT) {
         this.col = c;
         this.game = game;
+        this.systemType = sT;
         
         setPreferredSize(new Dimension(100, 150));
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                System.out.println(col);
-                game.exploreAttack(SystemType.NEAR_SYSTEM);
-                game.pass();
-                game.newTurn();
-            }
-        });
     }
 
     public String getNameCard() {
-        return game.getGameData().getEmpire().get(col).getName().toUpperCase();
+        
+        if(systemType == "empire")
+            return game.getGameData().getEmpire().get(col).getName().toUpperCase();
+        else if(systemType == "unaligned")
+            return game.getGameData().getUnalignedSystems().get(col).getName().toUpperCase();
+        else
+            return"";
     }
 
     @Override
@@ -72,7 +71,6 @@ class CardCell extends JPanel implements Constants {
         setBackground(Color.LIGHT_GRAY);
         
         try {
-            System.out.println(col);
             g.drawImage(images.get(getNameCard()), 0, 0, getWidth() - 1, getHeight() - 1, null);
         } catch (IndexOutOfBoundsException e) {
         }

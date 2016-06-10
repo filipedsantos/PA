@@ -4,6 +4,7 @@ package ui.ui_graphic;
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,6 +16,7 @@ public class SidePanel extends JPanel {
     JLabel l;
     
     DeckPanel panel;
+    UserInfo info;
 
     public SidePanel(ObservableGame game) {
         this.game = game;
@@ -28,14 +30,21 @@ public class SidePanel extends JPanel {
         setBorder(BorderFactory.createLineBorder(Color.black));
         
         add(l);
+        
+        panel.setAlignmentY(CENTER_ALIGNMENT);
         add(panel);
- 
+        add(Box.createVerticalStrut(50));
+        
+        add(info);
+    
         validate();
     }
     
     private void setupComponents() {
         l = new JLabel("Side panel");
         panel = new DeckPanel(game);
+        
+        info = new UserInfo(game);
     }
 
     
