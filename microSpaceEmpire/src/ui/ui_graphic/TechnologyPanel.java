@@ -6,7 +6,6 @@ import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Observer;
-import javafx.beans.Observable;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import model.ObservableGame;

@@ -66,13 +66,15 @@ public class BuildMilitaryDiscoverTechnologyPanel extends JPanel implements Obse
     }
 
     private void setupLayout() {
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
         add(pass);
         add(Box.createVerticalStrut(10));
         add(buildMilitary);
         add(Box.createVerticalStrut(10));
         add(discoverTechnology);
+        
+        
         add(Box.createVerticalStrut(10));
         add(tPanel);
 
@@ -81,6 +83,7 @@ public class BuildMilitaryDiscoverTechnologyPanel extends JPanel implements Obse
     @Override
     public void update(Observable o, Object o1) {
         setVisible(game.getState() instanceof Upgrading);
+        tPanel.setVisible(false);
     }
 
 }

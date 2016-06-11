@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import model.ObservableGame;
 import model.data.Cards.SystemCard.SystemType;
+import model.states.AwaitOption;
 
 class CardCell extends JPanel implements Constants {
 
@@ -46,6 +47,16 @@ class CardCell extends JPanel implements Constants {
         this.systemType = sT;
         
         setPreferredSize(new Dimension(100, 150));
+        
+        addMouseListener(new MouseAdapter(){
+            @Override
+            public void mousePressed(MouseEvent ev){
+                if(game.getState() instanceof AwaitOption){
+                    if(systemType == "unaligned")
+                        game.conquer(col);
+                }
+            }
+        });
     }
 
     public String getNameCard() {

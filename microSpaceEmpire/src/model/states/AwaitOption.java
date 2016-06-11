@@ -11,7 +11,7 @@ public class AwaitOption extends StateAdapter {
 
     public AwaitOption(DataGame dataGame) {
         super(dataGame);
-        getDataGame().setLog("AwaitOption inico");
+
     }
 
     //Estados Seguintes

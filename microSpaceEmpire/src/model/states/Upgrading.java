@@ -12,9 +12,9 @@ public class Upgrading extends StateAdapter {
 
     public Upgrading(DataGame gameData) {
         super(gameData);
-        getDataGame().setLog("HEYEYEYEYEYEYE");
         military = true;
         technology = true;
+
     }
 
     public boolean getMilitary() {

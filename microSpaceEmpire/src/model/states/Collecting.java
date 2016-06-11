@@ -8,7 +8,6 @@ public class Collecting extends StateAdapter {
 
     public Collecting(DataGame gameData) {
         super(gameData);
-        getDataGame().setLog("heyoooooo");
         collect();
         change = false;
     }
