@@ -43,7 +43,7 @@ public class ObservableGame extends Observable {
 
     public void start() {
         game.start();
-
+        
         setChanged();
         notifyObservers();
     }
