@@ -44,12 +44,13 @@ public class DeckPanel extends JPanel implements Observer {
     }
 
     private void setupLayout() {
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         
-        add(titleNear);
+        
+        //add(titleNear);
         add(nearDeck);
-
-        add(titleDistant);
+        add(Box.createHorizontalStrut(10));
+        //add(titleDistant);
         add(distantDeck);
         
     }
@@ -64,7 +65,8 @@ public class DeckPanel extends JPanel implements Observer {
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
              
-                this.setBorder(BorderFactory.createLineBorder(Color.RED));
+                setPreferredSize(new Dimension(100,150));
+                this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 if(game.getGameData().getNearSystemsSize() > 0)
                     try {
                         g.drawImage(ImageIO.read(Resources.getResourceFile("images/Systems/systemBack.jpg")), 0, 0, getWidth()-1, getHeight()-1, null);
@@ -77,8 +79,13 @@ public class DeckPanel extends JPanel implements Observer {
         nearDeck.addMouseListener(new MouseAdapter() {
         @Override
             public void mousePressed(MouseEvent e) {
-                System.out.println("near");
                 game.exploreAttack(SystemType.NEAR_SYSTEM);
+                /*
+                *
+                */
+                game.pass();
+                game.newTurn();
+                /**/
             } 
         });
         
@@ -87,7 +94,8 @@ public class DeckPanel extends JPanel implements Observer {
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 
-                this.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+                setPreferredSize(new Dimension(100,150));
+                this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 if(game.getGameData().getDistantSystemsSize() > 0)
                     try {
                         g.drawImage(ImageIO.read(Resources.getResourceFile("images/Systems/systemBack.jpg")), 0, 0, getWidth()-1, getHeight()-1, null);
@@ -98,7 +106,6 @@ public class DeckPanel extends JPanel implements Observer {
         distantDeck.addMouseListener(new MouseAdapter() {
         @Override
             public void mousePressed(MouseEvent e) {
-                System.out.println("distant");
 
             } 
         });

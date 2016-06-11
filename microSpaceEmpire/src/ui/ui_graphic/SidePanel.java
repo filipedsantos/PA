@@ -15,7 +15,6 @@ public class SidePanel extends JPanel {
     ObservableGame game;
     JLabel l;
     
-    DeckPanel panel;
     UserInfo info;
 
     public SidePanel(ObservableGame game) {
@@ -29,12 +28,7 @@ public class SidePanel extends JPanel {
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         setBorder(BorderFactory.createLineBorder(Color.black));
         
-        add(l);
-        
-        panel.setAlignmentY(CENTER_ALIGNMENT);
-        add(panel);
-        add(Box.createVerticalStrut(50));
-        
+        add(l);           
         add(info);
     
         validate();
@@ -42,7 +36,7 @@ public class SidePanel extends JPanel {
     
     private void setupComponents() {
         l = new JLabel("Side panel");
-        panel = new DeckPanel(game);
+    
         
         info = new UserInfo(game);
     }

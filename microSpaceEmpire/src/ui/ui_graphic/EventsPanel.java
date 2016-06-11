@@ -17,6 +17,7 @@ public class EventsPanel extends JPanel implements Observer {
 
     EventsPanel(ObservableGame game) {
         this.game = game;
+        game.addObserver(this);
         
         setupComponents();
         setupLayout();
@@ -33,11 +34,12 @@ public class EventsPanel extends JPanel implements Observer {
 
     private void setupComponents() {
         l = new JLabel("South Panel");
-        log = new JLabel("log: "+game.getLog());
+        log = new JLabel("log: "+ game.getLog());
     }
 
     @Override
     public void update(Observable o, Object o1) {
+        log.setText("log: "+ game.getGameData().getLog());
         repaint();
     }
 

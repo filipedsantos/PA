@@ -19,6 +19,7 @@ class MicroSpaceEmpireGamePanel extends JPanel implements Observer{
     SidePanel sidePanel;
     CardsInUsePanel cardsInUsePanel;
     EventsPanel eventsPanel;
+    StatesOptionPanel middlePanel;
 
     public MicroSpaceEmpireGamePanel(ObservableGame game) {
         this.game = game;
@@ -33,6 +34,7 @@ class MicroSpaceEmpireGamePanel extends JPanel implements Observer{
         sidePanel = new SidePanel(game);
         cardsInUsePanel = new CardsInUsePanel(game);
         eventsPanel = new EventsPanel(game);
+        middlePanel = new StatesOptionPanel(game);
     }
 
     private void setupLayout() {
@@ -49,6 +51,7 @@ class MicroSpaceEmpireGamePanel extends JPanel implements Observer{
         pCenter.setLayout(new BorderLayout());
         pCenter.add(cardsInUsePanel, BorderLayout.NORTH);
         pCenter.add(eventsPanel, BorderLayout.SOUTH);
+        pCenter.add(middlePanel, BorderLayout.CENTER);
         
         add(pCenter,BorderLayout.CENTER);
         

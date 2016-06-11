@@ -51,9 +51,9 @@ class CardCell extends JPanel implements Constants {
     public String getNameCard() {
         
         if(systemType == "empire")
-            return game.getGameData().getEmpire().get(col).getName().toUpperCase();
+            return game.getGameData().getEmpire().get(col).getName();
         else if(systemType == "unaligned")
-            return game.getGameData().getUnalignedSystems().get(col).getName().toUpperCase();
+            return game.getGameData().getUnalignedSystems().get(col).getName();
         else
             return"";
     }

@@ -11,10 +11,10 @@ public interface Constants {
     String BACK_CARD = "Back Card";
     String PATH_IMG_BACK_CARD = "images/Systems/systemBack.jpg";
     
-    String HOME_WORLD = "HOME WORLD";
+    String HOME_WORLD = "Home World";
     String PATH_IMG_HOME_WORLD = "images/Systems/homeWorld.jpg";
     
-    String EPSILONERIDANI = "EPSILON ERIDANI";
+    String EPSILONERIDANI = "Epsilon Eridani";
     String PATH_IMG_EPSILONERIDANI = "images/Systems/epsilonEridani.jpg";
     
     String CANOPUS = "CANOPUS";
@@ -29,18 +29,18 @@ public interface Constants {
     String SIRIUS = "SIRIUS";
     String PATH_IMG_SIRIUS = "images/Systems/Sirius.jpg";
     
-    String CYGNUS = "CYGNUS";
+    String CYGNUS = "Cygnus";
     String PATH_IMG_CYGNUS= "images/Systems/cygnus.jpg";
     
-    String PROCYGON = "PROCYGON";
+    String PROCYGON = "Procyon";
     String PATH_IMG_PROCYGON = "images/Systems/procygon.jpg";
     
-    String PROXIMA = "PROXIMA";
+    String PROXIMA = "Proxima";
     String PATH_IMG_PROXIMA = "images/Systems/proxima.jpg";
     
-    String TAUCETI = "TAU CETI";
+    String TAUCETI = "Tau Ceti";
     String PATH_IMG_TAUCETI = "images/Systems/tauCeti.jpg";
     
-    String WOLF359 = "WOLF359";
+    String WOLF359 = "Wolf 359";
     String PATH_IMG_WOLF359 = "images/Systems/wolf359.jpg";
 }
