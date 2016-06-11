@@ -2,6 +2,8 @@
 package ui.ui_graphic;
 
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.Box;
@@ -24,13 +26,37 @@ public class BuildMilitaryDiscoverTechnologyPanel extends JPanel implements Obse
         setupComponents();
         setupLayout();
         
+        this.game.addObserver(this);
         setVisible(game.getState() instanceof Upgrading);
     }
 
     private void setupComponents() {
         buildMilitary = new JButton("Build Military");
+        buildMilitary.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                game.buildMilitary();
+            }
+        });
+        
         discoverTechnology = new JButton("Discover Technology");
+        discoverTechnology.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                //
+            }
+        });
+        
         pass = new JButton("Pass");
+        pass.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                game.newTurn();
+            }
+        });
     }
 
     private void setupLayout() {

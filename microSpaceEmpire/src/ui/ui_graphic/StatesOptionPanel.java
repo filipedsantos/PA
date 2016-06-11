@@ -14,7 +14,9 @@ class StatesOptionPanel extends JPanel implements Observer {
 
     ObservableGame game;
     JLabel state;
-    AwaitOptionPanel panel;
+    AwaitOptionPanel awaitPanel;
+    BuildMilitaryDiscoverTechnologyPanel upgradePanel;
+    CollectingPanel collectPanel;
 
     public StatesOptionPanel(ObservableGame game) {
         this.game = game;
@@ -31,11 +33,16 @@ class StatesOptionPanel extends JPanel implements Observer {
 
     private void setupComponents() {
         
-        panel = new AwaitOptionPanel(game);
+        awaitPanel = new AwaitOptionPanel(game);
+        collectPanel = new CollectingPanel(game);
+        upgradePanel = new BuildMilitaryDiscoverTechnologyPanel(game);
+        
     }
 
     private void setupLayout() {    
-        add(panel);
+        add(awaitPanel);
+        add(upgradePanel);
+        add(collectPanel);
     }
 
 }

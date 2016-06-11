@@ -92,7 +92,7 @@ public class Collecting extends StateAdapter {
                 getDataGame().setWealthStorage(wLimit);
             }
         }
-
+        
         return this;
     }
 
