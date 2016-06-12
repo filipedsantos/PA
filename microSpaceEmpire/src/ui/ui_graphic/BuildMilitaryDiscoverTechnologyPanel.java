@@ -81,6 +81,7 @@ public class BuildMilitaryDiscoverTechnologyPanel extends JPanel implements Obse
     @Override
     public void update(Observable o, Object o1) {
         setVisible(game.getState() instanceof Upgrading);
+        tPanel.setVisible(false);
     }
 
 }
