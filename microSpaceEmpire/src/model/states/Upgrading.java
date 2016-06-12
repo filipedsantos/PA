@@ -12,6 +12,10 @@ public class Upgrading extends StateAdapter {
 
     public Upgrading(DataGame gameData) {
         super(gameData);
+<<<<<<< HEAD
+=======
+        getDataGame().refreshLog();
+>>>>>>> origin/master
         military = true;
         technology = true;
 
@@ -79,7 +83,10 @@ public class Upgrading extends StateAdapter {
         } else if (getDataGame().getTechnologyByName(TecName).getCost() > getDataGame().getWealthStorage()) { // if not enought wealth to buy tec, return this
             getDataGame().setLog("\n\nYou haven't enough wealth to buy this technology\n");
             return this;
-        } else if (!getDataGame().getTechnologyByName(TecName).isBought()) {
+        }else if(!getDataGame().getTechnology1sGenerationPurchased(TecName)){
+            getDataGame().setLog("\n\nYou have to buy the first generation technology\n");
+            return this;
+        }else if (!getDataGame().getTechnologyByName(TecName).isBought()) {
 
             getDataGame().getTechnologyByName(TecName).setBought(true);
             int newWealth = getDataGame().getWealthStorage() - getDataGame().getTechnologyByName(TecName).getCost();

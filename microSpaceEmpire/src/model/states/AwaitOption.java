@@ -11,7 +11,10 @@ public class AwaitOption extends StateAdapter {
 
     public AwaitOption(DataGame dataGame) {
         super(dataGame);
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
     }
 
     //Estados Seguintes

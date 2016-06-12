@@ -8,7 +8,7 @@ import model.data.Cards.EventCard.*;
 import model.data.Cards.SystemCard.*;
 
 public class DataGame implements Constants, Serializable {
-    
+
     static final long serialVersionUID = 1l;
 
     //Board Game iNFO
@@ -65,9 +65,15 @@ public class DataGame implements Constants, Serializable {
         //Board info
         this.metalProduction = 1;
         this.wealthProduction = 1;
+<<<<<<< HEAD
         this.metalStorage = 0;
         this.wealthStorage = 0;
         this.militaryStrenght = 10;
+=======
+        this.metalStorage = 3;
+        this.wealthStorage = 3;
+        this.militaryStrenght = 0;
+>>>>>>> origin/master
 
         this.year = 1; // start the game in 1s year
     }
@@ -431,6 +437,19 @@ public class DataGame implements Constants, Serializable {
         return null;
     }
 
+    public boolean getTechnology1sGenerationPurchased(String tecName) {
+
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 2; j++) {
+                if (this.technology[i][j].getName().equalsIgnoreCase(tecName)) {
+                    if(j == 1)
+                        return isTechnologyPurchased(technology[i][j - 1].getName());
+                }
+            }
+        }
+        return false;
+    }
+
     public void swapResources(int i) {
 
         switch (i) {
@@ -581,14 +600,12 @@ public class DataGame implements Constants, Serializable {
                     setLog("Event Card Invasion!\nYou lose the fight against an unknwon enemy (card Force: " + actualForce + ")");
                     setLog("\nPlanet: " + c.getName() + " resistance: " + c.getResistance());
                 }
+            } else if (i == 1) {
+                setLog("Event Card Revolt!\nYou win the fight against people (card Force: " + actualForce + ")");
+                setLog("\nPlanet: " + c.getName() + " resistance: " + c.getResistance());
             } else {
-                if (i == 1) {
-                    setLog("Event Card Revolt!\nYou win the fight against people (card Force: " + actualForce + ")");
-                    setLog("\nPlanet: " + c.getName() + " resistance: " + c.getResistance());
-                } else {
-                    setLog("Event Card Invasion!\nYou win the fight against an unknwon enemy (card Force: " + actualForce + ")");
-                    setLog("\nPlanet: " + c.getName() + " resistance: " + c.getResistance());
-                }
+                setLog("Event Card Invasion!\nYou win the fight against an unknwon enemy (card Force: " + actualForce + ")");
+                setLog("\nPlanet: " + c.getName() + " resistance: " + c.getResistance());
             }
         } else {
             setLog("INVASION,You only have your Home World, so nothing happen here");
