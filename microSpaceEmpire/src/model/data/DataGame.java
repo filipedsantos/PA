@@ -653,6 +653,11 @@ public class DataGame implements Constants, Serializable {
     public static int getScore() {
         return Score;
     }
+    
+    public static String getScoreToString() {
+        String stringScore = "";
+        return stringScore += Score;
+    }
 
     public static void setScore(int Score) {
         DataGame.Score += Score;

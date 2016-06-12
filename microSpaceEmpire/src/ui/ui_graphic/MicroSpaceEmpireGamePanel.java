@@ -55,8 +55,6 @@ class MicroSpaceEmpireGamePanel extends JPanel implements Observer{
         
         add(pCenter,BorderLayout.CENTER);
         
-        
-        
         validate();
     }
 
