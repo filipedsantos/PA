@@ -18,7 +18,7 @@ class MicroSpaceEmpireGamePanel extends JPanel implements Observer{
     // Panels of the game to be created
     SidePanel sidePanel;
     CardsInUsePanel cardsInUsePanel;
-    EventsPanel eventsPanel;
+    LogsPanel eventsPanel;
     StatesOptionPanel middlePanel;
 
     public MicroSpaceEmpireGamePanel(ObservableGame game) {
@@ -33,7 +33,7 @@ class MicroSpaceEmpireGamePanel extends JPanel implements Observer{
     private void setupComponents() {
         sidePanel = new SidePanel(game);
         cardsInUsePanel = new CardsInUsePanel(game);
-        eventsPanel = new EventsPanel(game);
+        eventsPanel = new LogsPanel(game);
         middlePanel = new StatesOptionPanel(game);
     }
 

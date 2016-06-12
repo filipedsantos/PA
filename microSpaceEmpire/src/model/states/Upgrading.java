@@ -12,10 +12,8 @@ public class Upgrading extends StateAdapter {
 
     public Upgrading(DataGame gameData) {
         super(gameData);
-<<<<<<< HEAD
-=======
         getDataGame().refreshLog();
->>>>>>> origin/master
+
         military = true;
         technology = true;
 
@@ -56,9 +54,6 @@ public class Upgrading extends StateAdapter {
 
         this.military = false;
 
-        System.out.println("Limit : " + limit);
-        System.out.println("MS: " + getDataGame().getMilitaryStrenght());
-
         if (getDataGame().getMilitaryStrenght() < limit) {
             getDataGame().setMetalStorage(getDataGame().getMetalStorage() - 1);
             getDataGame().setWealthStorage(getDataGame().getWealthStorage() - 1);
@@ -77,15 +72,24 @@ public class Upgrading extends StateAdapter {
     @Override
     public IStates discoverTechnology(String TecName) {
 
+        //Works only for text UI
         if (!getDataGame().validateTecName(TecName)) {  // if tecName not recogniced, return this
             getDataGame().setLog("\n\nThat technology does not exist!\n");
             return this;
+            
+ 
+        //if we dont have wealth    
         } else if (getDataGame().getTechnologyByName(TecName).getCost() > getDataGame().getWealthStorage()) { // if not enought wealth to buy tec, return this
             getDataGame().setLog("\n\nYou haven't enough wealth to buy this technology\n");
             return this;
-        }else if(!getDataGame().getTechnology1sGenerationPurchased(TecName)){
+        
+            
+        }else if(getDataGame().isTechnology1sGeneration(TecName) == false && getDataGame().getTechnology1sGenerationPurchased(TecName) == false){
             getDataGame().setLog("\n\nYou have to buy the first generation technology\n");
             return this;
+ 
+            
+        //senao está comprada    
         }else if (!getDataGame().getTechnologyByName(TecName).isBought()) {
 
             getDataGame().getTechnologyByName(TecName).setBought(true);

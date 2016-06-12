@@ -17,7 +17,7 @@ public interface Constants {
     String EPSILONERIDANI = "Epsilon Eridani";
     String PATH_IMG_EPSILONERIDANI = "images/Systems/epsilonEridani.jpg";
     
-    String CANOPUS = "CANOPUS";
+    String CANOPUS = "Canopus";
     String PATH_IMG_CANOPUS = "images/Systems/Canopus.jpg";
     
     String GALAXYSEDGE = "GALAXYS EDGE";
@@ -43,4 +43,32 @@ public interface Constants {
     
     String WOLF359 = "Wolf 359";
     String PATH_IMG_WOLF359 = "images/Systems/wolf359.jpg";
+    
+    /*
+    *EVENTS
+    */
+    
+    String ASTEROID= "Asteroid";
+    String PATH_IMG_ASTEROID = "images/Events/asteroid.jpg";
+    
+    String DERELICTSHIP= "Derelict Ship";
+    String PATH_IMG_DERELICTSHIP = "images/Events/derelictShip.jpg";
+    
+    String PEACEANDQUIET= "Peace and Quiet";
+    String PATH_IMG_PEACEANDQUIET = "images/Events/peaceAndQuiet.jpg";
+    
+    String LARGEINVASIONFORCE= "Large Invasion Force";
+    String PATH_IMG_LARGEINVASIONFORCE = "images/Events/largeInvasionForce.jpg";
+    
+    String REVOLT= "Revolt";
+    String PATH_IMG_REVOLT = "images/Events/revolt.jpg";
+    
+    String REVOLT2= "Revolt2";
+    String PATH_IMG_REVOLT2 = "images/Events/revolt2.jpg";
+    
+    String STRIKE= "Strike";
+    String PATH_IMG_STRIKE = "images/Events/strike.jpg";
+    
+    String SMALINVASIONFORCE= "Small Invasion Force";
+    String PATH_IMG_SMALINVASIONFORCE = "images/Events/smallInvasionForce.jpg";
 }

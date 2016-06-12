@@ -65,15 +65,10 @@ public class DataGame implements Constants, Serializable {
         //Board info
         this.metalProduction = 1;
         this.wealthProduction = 1;
-<<<<<<< HEAD
-        this.metalStorage = 0;
-        this.wealthStorage = 0;
-        this.militaryStrenght = 10;
-=======
+
         this.metalStorage = 3;
         this.wealthStorage = 3;
-        this.militaryStrenght = 0;
->>>>>>> origin/master
+        this.militaryStrenght = 10;
 
         this.year = 1; // start the game in 1s year
     }
@@ -437,13 +432,27 @@ public class DataGame implements Constants, Serializable {
         return null;
     }
 
+    public boolean isTechnology1sGeneration(String tecName) {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 2; j++) {
+                if (this.technology[i][j].getName().equalsIgnoreCase(tecName)) {
+                    if (j == 0) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     public boolean getTechnology1sGenerationPurchased(String tecName) {
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 2; j++) {
                 if (this.technology[i][j].getName().equalsIgnoreCase(tecName)) {
-                    if(j == 1)
-                        return isTechnologyPurchased(technology[i][j - 1].getName());
+                    if (j == 1) {
+                        return isTechnologyPurchased(technology[i][0].getName());
+                    }
                 }
             }
         }

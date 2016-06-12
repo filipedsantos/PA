@@ -1,8 +1,10 @@
 
 package ui.ui_graphic;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -15,6 +17,7 @@ public class SidePanel extends JPanel {
     ObservableGame game;
     JLabel l;
     
+    EventsPanel eventPanel;
     UserInfo info;
 
     public SidePanel(ObservableGame game) {
@@ -27,17 +30,18 @@ public class SidePanel extends JPanel {
     private void setupLayout() {
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         setBorder(BorderFactory.createLineBorder(Color.black));
+        setPreferredSize(new Dimension(150, 160));
         
         add(l);           
         add(info);
-    
+        add(eventPanel);
         validate();
     }
     
     private void setupComponents() {
         l = new JLabel("Side panel");
     
-        
+        eventPanel = new EventsPanel(game);
         info = new UserInfo(game);
     }
 
