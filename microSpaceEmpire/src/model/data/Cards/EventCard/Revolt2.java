@@ -9,7 +9,8 @@ import model.states.AwaitOption;
 import model.states.Ending;
 import model.states.IStates;
 
-public class Revolt2 extends EventCard implements Serializable{
+public class Revolt2 extends EventCard implements Serializable {
+
     static final long serialVersionUID = 1l;
     private static final String name = "Revolt";
 
@@ -23,6 +24,7 @@ public class Revolt2 extends EventCard implements Serializable{
     @Override
     public IStates makeEventActionYear1() {
         getDataGame().setLog("'Revolt2'");
+        getDataGame().setCurrentEvent("Revolt2");
         if (getDataGame().getEmpireSize() == 1) {
             getDataGame().setLog("You only have Home World, nothing to do!");
             return new AwaitOption(getDataGame());
@@ -38,7 +40,7 @@ public class Revolt2 extends EventCard implements Serializable{
     @Override
     public IStates makeEventActionYear2() {
         getDataGame().setLog("'Revolt2'");
-
+        getDataGame().setCurrentEvent("Revolt2");
         if (getDataGame().getEmpireSize() == 1) {
             getDataGame().setLog("You only have Home World, GAME OVER!");
             return new Ending(getDataGame());

@@ -19,6 +19,7 @@ public class SmallInvasionForce extends EventCard implements Serializable{
     @Override
     public IStates makeEventActionYear1() {
         getDataGame().setLog("'Small Invasion Force'");
+        getDataGame().setCurrentEvent("Small Invasion Force");
         try {
             getDataGame().fightAgainstSystem(0, 1, "Planetary Defenses");
         } catch (EmptyException ex) {
@@ -31,6 +32,7 @@ public class SmallInvasionForce extends EventCard implements Serializable{
     @Override
     public IStates makeEventActionYear2() {
         getDataGame().setLog("'Small Invasion Force'");
+        getDataGame().setCurrentEvent("Small Invasion Force");
         try {
             getDataGame().fightAgainstSystem(0, 2, "Planetary Defenses");
         } catch (EmptyException ex) {

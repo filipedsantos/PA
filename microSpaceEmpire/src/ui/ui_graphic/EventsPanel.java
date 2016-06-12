@@ -19,7 +19,6 @@ import model.data.EmptyException;
 public class EventsPanel extends JPanel implements Observer, Constants {
 
     ObservableGame game;
-    JLabel titleEvent;
     JPanel eventCard;
     static Map<String, Image> images;
 
@@ -49,7 +48,6 @@ public class EventsPanel extends JPanel implements Observer, Constants {
     }
 
     private void setupComponents() {
-
         eventCard = new JPanel() {
             @Override
             public void paintBorder(Graphics g) {
@@ -65,7 +63,6 @@ public class EventsPanel extends JPanel implements Observer, Constants {
 
                 try {
                     g.drawImage(images.get(getNameCard()), 0, 0, getWidth() - 1, getHeight() - 1, null);
-                } catch (IndexOutOfBoundsException e) {
                 } catch (EmptyException ex) {
                     Logger.getLogger(EventsPanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -80,7 +77,7 @@ public class EventsPanel extends JPanel implements Observer, Constants {
     }
 
     public String getNameCard() throws EmptyException {
-        return game.getGameData().getEvent(0).getName();
+        return game.getGameData().getCurrentEvent();
     }
 
     @Override

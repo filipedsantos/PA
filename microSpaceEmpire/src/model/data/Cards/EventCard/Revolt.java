@@ -23,12 +23,14 @@ public class Revolt extends EventCard implements Serializable{
     @Override
     public IStates makeEventActionYear1() {
         getDataGame().setLog("'Revolt'");
+        getDataGame().setCurrentEvent("Revolt");
         if (getDataGame().getEmpireSize() == 1) {
             getDataGame().setLog("You only have Home World, nothing to do!");
             return new AwaitOption(getDataGame());
         }
         try {
             getDataGame().fightAgainstSystem(1, 1, "Hyper Televison");
+            getDataGame().setCurrentEvent("Revolt");
         } catch (EmptyException ex) {
         }
 

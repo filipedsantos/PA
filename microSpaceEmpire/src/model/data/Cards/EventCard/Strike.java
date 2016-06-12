@@ -16,6 +16,7 @@ public class Strike extends EventCard implements Serializable{
     @Override
     public IStates makeEventActionYear1() { 
         getDataGame().setLog("'Strike'");
+        getDataGame().setCurrentEvent("Strike");
         getDataGame().setStrikeEvent(true);
         return new AwaitOption(getDataGame());
     }
@@ -23,6 +24,7 @@ public class Strike extends EventCard implements Serializable{
     @Override
     public IStates makeEventActionYear2() {
         getDataGame().setLog("'Strike'");
+        getDataGame().setCurrentEvent("Strike");
         getDataGame().setStrikeEvent(true);
         return new AwaitOption(getDataGame());
     }

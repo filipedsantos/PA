@@ -14,6 +14,8 @@ public class CollectingPanel extends JPanel implements Observer {
 
     ObservableGame game;
     JButton collect;
+    JButton tradeMW;
+    JButton tradeWM;
     
     public CollectingPanel(ObservableGame game) {
         this.game = game;
@@ -21,33 +23,63 @@ public class CollectingPanel extends JPanel implements Observer {
         setupComponents();
         setupLayout();
         this.game.addObserver(this);
-        
+
         setVisible(game.getState() instanceof Collecting);
-        if (!game.getGameData().isTechnologyPurchased("Interspecies Commerce"))
-        game.pass();
-        
     }
 
     private void setupLayout() {
         add(collect);
+        add(tradeWM);
+        add(tradeMW);
     }
 
     private void setupComponents() {
         collect = new JButton("Collect");
-        
-        collect.addActionListener(new ActionListener()
-         {
+        tradeWM = new JButton("Trade 2 Wealth for Metal");
+        tradeMW = new JButton("Trade 2 Metal for Wealth");
+
+        collect.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
                 game.pass();
             }
         });
+
+        tradeWM.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                game.change(0);
+                game.pass();
+            }
+        });
+
+        tradeMW.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                game.change(1);
+                game.pass();
+            }
+        });
+
     }
 
     @Override
     public void update(Observable o, Object o1) {
         setVisible(game.getState() instanceof Collecting);
+
+        if (game.getGameData().isTechnologyPurchased("Interspecies Commerce")) {
+            tradeMW.setVisible(true);
+            tradeWM.setVisible(true);
+            collect.setVisible(true);
+            collect.setText("Pass");
+        } else {
+            collect.setVisible(true);
+            tradeMW.setVisible(false);
+            tradeWM.setVisible(false);
+        }
         repaint();
     }
 

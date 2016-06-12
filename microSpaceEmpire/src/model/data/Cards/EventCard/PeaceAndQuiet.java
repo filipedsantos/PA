@@ -17,12 +17,14 @@ public class PeaceAndQuiet extends EventCard implements Serializable {
     @Override
     public IStates makeEventActionYear1() {
         getDataGame().setLog("'Peace & Quiet', Nothing Happens");
+        getDataGame().setCurrentEvent("Peace And Quiet");
         return new AwaitOption(getDataGame());
     }
 
     @Override
     public IStates makeEventActionYear2() {
         getDataGame().setLog("'Peace & Quiet', Nothing Happens");
+        getDataGame().setCurrentEvent("Peace And Quiet");
         return new AwaitOption(getDataGame());
     }
 

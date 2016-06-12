@@ -16,6 +16,7 @@ public class DerelictShip extends EventCard implements Serializable{
     @Override
     public IStates makeEventActionYear1() {
         getDataGame().setLog("'Derelict Ship'");
+        getDataGame().setCurrentEvent("Derelict Ship");
         getDataGame().addMetalFromEvent(1);
         return new AwaitOption(getDataGame());
     }
@@ -23,6 +24,7 @@ public class DerelictShip extends EventCard implements Serializable{
     @Override
     public IStates makeEventActionYear2() {
         getDataGame().setLog("'Derelict Ship'");
+        getDataGame().setCurrentEvent("Derelict Ship");
         getDataGame().addMetalFromEvent(1);
         return new AwaitOption(getDataGame());
     }

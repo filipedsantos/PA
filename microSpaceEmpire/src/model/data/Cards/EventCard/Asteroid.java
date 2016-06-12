@@ -16,6 +16,7 @@ public class Asteroid extends EventCard implements Serializable{
     @Override
     public IStates makeEventActionYear1() {
         getDataGame().setLog("'Asteroid'");
+        getDataGame().setCurrentEvent("Asteroid");
         getDataGame().addWealthFromEvent(1);
         return new AwaitOption(getDataGame());
     }
@@ -23,6 +24,7 @@ public class Asteroid extends EventCard implements Serializable{
     @Override
     public IStates makeEventActionYear2() {
         getDataGame().setLog("'Asteroid'");
+        getDataGame().setCurrentEvent("Asteroid");
         getDataGame().addWealthFromEvent(1);
         return new AwaitOption(getDataGame());
     }

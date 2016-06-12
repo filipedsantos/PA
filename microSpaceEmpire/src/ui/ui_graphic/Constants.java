@@ -54,7 +54,7 @@ public interface Constants {
     String DERELICTSHIP= "Derelict Ship";
     String PATH_IMG_DERELICTSHIP = "images/Events/derelictShip.jpg";
     
-    String PEACEANDQUIET= "Peace and Quiet";
+    String PEACEANDQUIET= "Peace And Quiet";
     String PATH_IMG_PEACEANDQUIET = "images/Events/peaceAndQuiet.jpg";
     
     String LARGEINVASIONFORCE= "Large Invasion Force";

@@ -20,7 +20,7 @@ public class DataGame implements Constants, Serializable {
     static int Score;
 
     private String log; // String to save information processed in states
-
+    private String currentEvent;
     //Technologies
     Technology[][] technology;
 
@@ -124,6 +124,14 @@ public class DataGame implements Constants, Serializable {
         this.metalStorage += m;
     }
 
+    public void setCurrentEvent(String event){
+        this.currentEvent = event;
+    }
+    
+    public String getCurrentEvent(){
+        return this.currentEvent;
+    }
+    
     public int getWealthProduction() {
         return wealthProduction;
     }
