@@ -37,8 +37,8 @@ public class ObservableGame extends Observable {
     public void setGame(Game game) {
         this.game = game;
 
-//        setChanged();
-//        notifyObservers();
+        setChanged();
+        notifyObservers();
     }
 
     public void start() {
