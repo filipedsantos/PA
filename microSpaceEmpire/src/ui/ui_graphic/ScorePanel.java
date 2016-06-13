@@ -1,5 +1,6 @@
 package ui.ui_graphic;
 
+import java.awt.Component;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.*;
@@ -27,9 +28,10 @@ public class ScorePanel extends JPanel implements Observer{
     
     private void setupLayout() {
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-        
+        score.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         add(score);
         add(Box.createVerticalStrut(10));
+        
         add(newGame);
     }
     

@@ -3,6 +3,7 @@ package ui.ui_graphic;
 
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -40,9 +41,11 @@ public class UserInfo extends JPanel implements Observer{
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         
         add(lMetalProduction);
-        add(lMetalStorage);
         add(lWealthProduction);
+        add(Box.createVerticalStrut(10));
+        add(lMetalStorage);
         add(lWealthStorage);
+        add(Box.createVerticalStrut(10));
         add(lMilitaryStrength);
         
         validate();

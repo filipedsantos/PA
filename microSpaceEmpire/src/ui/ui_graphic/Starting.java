@@ -39,6 +39,7 @@ public class Starting extends JPanel implements Observer {
         Welcome = new JLabel("MICROSPACE EMPIRE");
         start = new JButton("START");
         
+        
         start.addActionListener(new ActionListener() {
 
             @Override

@@ -20,13 +20,13 @@ public interface Constants {
     String CANOPUS = "Canopus";
     String PATH_IMG_CANOPUS = "images/Systems/Canopus.jpg";
     
-    String GALAXYSEDGE = "GALAXYS EDGE";
+    String GALAXYSEDGE = "Galaxys Edge";
     String PATH_IMG_GALAXYSEDGE = "images/Systems/GalaxysEdge.jpg";
     
-    String POLARIS = "POLARIS";
+    String POLARIS = "Polaris";
     String PATH_IMG_POLARIS = "images/Systems/Polaris.jpg";
     
-    String SIRIUS = "SIRIUS";
+    String SIRIUS = "Sirius";
     String PATH_IMG_SIRIUS = "images/Systems/Sirius.jpg";
     
     String CYGNUS = "Cygnus";
@@ -71,4 +71,6 @@ public interface Constants {
     
     String SMALINVASIONFORCE= "Small Invasion Force";
     String PATH_IMG_SMALINVASIONFORCE = "images/Events/smallInvasionForce.jpg";
+    
+    String BACKGROUND_LOGO = "images/startWallpaper.jpg";
 }

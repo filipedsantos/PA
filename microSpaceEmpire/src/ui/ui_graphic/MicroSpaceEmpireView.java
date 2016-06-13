@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.*;
 import javax.swing.*;
 import model.Game;
+import model.states.AwaitBeginning;
 
 
 public class MicroSpaceEmpireView extends JFrame implements Observer {
@@ -34,7 +35,6 @@ public class MicroSpaceEmpireView extends JFrame implements Observer {
         menus();
 
         setVisible(true);
-        //this.setSize(1200, 600);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         validate();
@@ -42,16 +42,23 @@ public class MicroSpaceEmpireView extends JFrame implements Observer {
 
     private void addComponents() throws IOException {
         Container cp = getContentPane();
-
+       
         cp.setLayout(new BorderLayout());
         cp.setBackground(Color.DARK_GRAY);
         cp.add(panel, BorderLayout.CENTER);
         cp.add(start, BorderLayout.SOUTH);
+        
 
     }
 
     @Override
     public void update(Observable o, Object o1) {
+        
+        if(game.getState() instanceof AwaitBeginning){
+            start.setVisible(true);
+            panel.setVisible(false);
+        }
+        
         //panel.setVisible(game.getState() instanceof AwaitOption);
         //start.setVisible(game.getState() instanceof AwaitBeginning);
         repaint();

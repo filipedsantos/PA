@@ -1,6 +1,7 @@
 
 package ui.ui_graphic;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
@@ -61,6 +62,7 @@ public class TechnologyCell extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        setBackground(Color.WHITE);
     }
 
 }

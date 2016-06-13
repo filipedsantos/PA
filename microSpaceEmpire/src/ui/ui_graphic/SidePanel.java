@@ -32,14 +32,16 @@ public class SidePanel extends JPanel {
         setBorder(BorderFactory.createLineBorder(Color.black));
         setPreferredSize(new Dimension(150, 160));
         
-        add(l);           
+        add(l);
+        add(Box.createVerticalStrut(10));
         add(info);
+        add(Box.createVerticalStrut(300));
         add(eventPanel);
         validate();
     }
     
     private void setupComponents() {
-        l = new JLabel("Side panel");
+        l = new JLabel("User Data");
     
         eventPanel = new EventsPanel(game);
         info = new UserInfo(game);

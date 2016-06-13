@@ -10,7 +10,6 @@ import model.ObservableGame;
 public class CardsInUsePanel extends JPanel {
 
     ObservableGame game;
-    JLabel l;
     JLabel lEmpire;
     JLabel lUnalignedSystems;
     
@@ -28,7 +27,6 @@ public class CardsInUsePanel extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(BorderFactory.createLineBorder(Color.black));
 
-        add(l);
         add(lEmpire);
         add(empire);
         add(lUnalignedSystems);
@@ -38,7 +36,6 @@ public class CardsInUsePanel extends JPanel {
     }
 
     private void setupComponents() {
-        l = new JLabel("North panel");
         lEmpire = new JLabel("Your Empire:");
         empire = new CardsList(game, "empire");
         lUnalignedSystems = new JLabel("Unaligned Systems:");

@@ -12,7 +12,6 @@ import model.ObservableGame;
 public class LogsPanel extends JPanel implements Observer {
 
     ObservableGame game;
-    JLabel l;
     JLabel log;
 
     LogsPanel(ObservableGame game) {
@@ -27,13 +26,11 @@ public class LogsPanel extends JPanel implements Observer {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(BorderFactory.createLineBorder(Color.black));
 
-        add(l);
         add(log);
         validate();
     }
 
     private void setupComponents() {
-        l = new JLabel("South Panel");
         log = new JLabel("log: "+ game.getLog());
     }
 

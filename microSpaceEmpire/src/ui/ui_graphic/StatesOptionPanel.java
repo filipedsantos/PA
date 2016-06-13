@@ -1,14 +1,21 @@
 package ui.ui_graphic;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import model.ObservableGame;
+import static ui.ui_graphic.Constants.BACKGROUND_LOGO;
 
 class StatesOptionPanel extends JPanel implements Observer {
 
@@ -46,5 +53,4 @@ class StatesOptionPanel extends JPanel implements Observer {
         add(collectPanel);
         add(scorePanel);
     }
-
 }
