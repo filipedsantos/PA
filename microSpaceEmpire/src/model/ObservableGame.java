@@ -165,33 +165,4 @@ public class ObservableGame extends Observable {
     public int getNearSystemsSize() {
         return game.getDataGame().getNearSystemsSize();
     }
-
-    /**
-     * Functions to save and load game on file
-     */
-//    public static Game loadGame(String name) throws FileNotFoundException, IOException, ClassNotFoundException {
-//        ObjectInputStream oin = null;
-//        Game g;
-//        
-//        try {
-//            oin = new ObjectInputStream(new FileInputStream(name));
-//            g = (Game) oin.readObject();
-//            return g;
-//        } finally{
-//            if(oin != null)
-//                oin.close();
-//        }
-//    }
-//
-//    public void saveGame(String name) throws FileNotFoundException, IOException {
-//        ObjectOutputStream oout = null;
-//        
-//        try {
-//            oout = new ObjectOutputStream(new FileOutputStream(name));
-//            oout.writeObject(this);
-//        } finally{
-//          if(oout != null)
-//              oout.close();
-//        }
-//    }
 }

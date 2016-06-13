@@ -9,6 +9,9 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import model.Game;
 import model.states.AwaitBeginning;
@@ -26,7 +29,7 @@ public class MicroSpaceEmpireView extends JFrame implements Observer {
         super("Micro Space Empire");
         this.game = new ObservableGame();
         game.addObserver(this);
-
+        
         start = new Starting(game);
         scorePanel = new ScorePanel(game);
         panel = new MicroSpaceEmpireGamePanel(game);
@@ -42,9 +45,9 @@ public class MicroSpaceEmpireView extends JFrame implements Observer {
 
     private void addComponents() throws IOException {
         Container cp = getContentPane();
-       
+
         cp.setLayout(new BorderLayout());
-        cp.setBackground(Color.DARK_GRAY);
+  
         cp.add(panel, BorderLayout.CENTER);
         cp.add(start, BorderLayout.SOUTH);
         
@@ -54,13 +57,6 @@ public class MicroSpaceEmpireView extends JFrame implements Observer {
     @Override
     public void update(Observable o, Object o1) {
         
-        if(game.getState() instanceof AwaitBeginning){
-            start.setVisible(true);
-            panel.setVisible(false);
-        }
-        
-        //panel.setVisible(game.getState() instanceof AwaitOption);
-        //start.setVisible(game.getState() instanceof AwaitBeginning);
         repaint();
     }
 

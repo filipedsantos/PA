@@ -52,22 +52,19 @@ public class Upgrading extends StateAdapter {
             limit = getDataGame().MILITARY_STRENGTH_LIMIT;
         }
 
-        this.military = false;
+        
 
-        if (getDataGame().getMilitaryStrenght() < limit) {
+        if (getDataGame().getMilitaryStrenght() < limit && this.military == true) {
+            
             getDataGame().setMetalStorage(getDataGame().getMetalStorage() - 1);
             getDataGame().setWealthStorage(getDataGame().getWealthStorage() - 1);
             getDataGame().setMilitaryStrenght(getDataGame().getMilitaryStrenght() + 1);
+            this.military = false;
         }
 
         return this;
     }
 
-//    @Override
-//    public IStates saveGame(){
-//        getDataGame().saveThisGame();
-//        return this;
-//    }
     
     @Override
     public IStates discoverTechnology(String TecName) {
@@ -90,7 +87,7 @@ public class Upgrading extends StateAdapter {
  
             
         //senao está comprada    
-        }else if (!getDataGame().getTechnologyByName(TecName).isBought()) {
+        }else if (!getDataGame().getTechnologyByName(TecName).isBought() && this.technology ==true ) {
 
             getDataGame().getTechnologyByName(TecName).setBought(true);
             int newWealth = getDataGame().getWealthStorage() - getDataGame().getTechnologyByName(TecName).getCost();

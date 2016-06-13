@@ -19,10 +19,14 @@ public class BuildMilitaryDiscoverTechnologyPanel extends JPanel implements Obse
     JButton discoverTechnology;
     JButton pass;
     TechnologyPanel tPanel;
+    boolean militaryUsed;
+    boolean technologyUsed;
 
     public BuildMilitaryDiscoverTechnologyPanel(ObservableGame game) {
         this.game = game;
-
+        this.militaryUsed = true;
+        this.technologyUsed = true;
+        
         setupComponents();
         setupLayout();
 

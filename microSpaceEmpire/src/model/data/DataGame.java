@@ -66,9 +66,9 @@ public class DataGame implements Constants, Serializable {
         this.metalProduction = 1;
         this.wealthProduction = 1;
 
-        this.metalStorage = 3;
-        this.wealthStorage = 3;
-        this.militaryStrenght = 10;
+        this.metalStorage = 0;
+        this.wealthStorage = 0;
+        this.militaryStrenght = 0;
 
         this.year = 1; // start the game in 1s year
     }

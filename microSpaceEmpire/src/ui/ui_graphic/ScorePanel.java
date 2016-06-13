@@ -1,6 +1,8 @@
 package ui.ui_graphic;
 
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.*;
@@ -24,6 +26,15 @@ public class ScorePanel extends JPanel implements Observer{
     private void setupComponents() {
         score = new JLabel();
         newGame = new JButton("New Game");
+        
+        newGame.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                game.start();
+            }
+
+        });
     }
     
     private void setupLayout() {
@@ -35,11 +46,12 @@ public class ScorePanel extends JPanel implements Observer{
         add(newGame);
     }
     
+    
     @Override
     public void update(Observable o, Object o1) {
         setVisible(game.getState() instanceof Ending);
         score.setText(game.getGameData().getLog());
     }
-
+        
     
 }

@@ -1,20 +1,26 @@
-
 package ui.ui_graphic;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import model.ObservableGame;
 import model.states.AwaitBeginning;
 import model.states.AwaitOption;
 
-class MicroSpaceEmpireGamePanel extends JPanel implements Observer{
+class MicroSpaceEmpireGamePanel extends JPanel implements Observer {
+
     ObservableGame game;
-    
+
     // Panels of the game to be created
     SidePanel sidePanel;
     CardsInUsePanel cardsInUsePanel;
@@ -24,7 +30,7 @@ class MicroSpaceEmpireGamePanel extends JPanel implements Observer{
     public MicroSpaceEmpireGamePanel(ObservableGame game) {
         this.game = game;
         game.addObserver(this);
-        
+
         setupComponents();
         setupLayout();
         setVisible(!(game.getState() instanceof AwaitBeginning));
@@ -39,22 +45,21 @@ class MicroSpaceEmpireGamePanel extends JPanel implements Observer{
 
     private void setupLayout() {
         JPanel pWest, pCenter;
-        this.setBorder(BorderFactory.createLineBorder(Color.red));
-        
+
         setLayout(new BorderLayout());
 
-        pWest=new JPanel();
-        pWest.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+        pWest = new JPanel();
+        pWest.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         add(sidePanel, BorderLayout.WEST);
-        
+
         pCenter = new JPanel();
         pCenter.setLayout(new BorderLayout());
         pCenter.add(cardsInUsePanel, BorderLayout.NORTH);
         pCenter.add(eventsPanel, BorderLayout.SOUTH);
         pCenter.add(middlePanel, BorderLayout.CENTER);
-        
-        add(pCenter,BorderLayout.CENTER);
-        
+
+        add(pCenter, BorderLayout.CENTER);
+
         validate();
     }
 
@@ -62,7 +67,5 @@ class MicroSpaceEmpireGamePanel extends JPanel implements Observer{
     public void update(Observable o, Object o1) {
         setVisible(!(game.getState() instanceof AwaitBeginning));
     }
-   
-    
-    
+
 }
